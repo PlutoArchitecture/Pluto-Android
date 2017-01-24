@@ -1,0 +1,55 @@
+apply plugin: 'com.android.library'
+apply plugin: 'android-apt'
+apply from: "dependencies.gradle"
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion "24.0.3"
+
+
+    defaultConfig {
+        minSdkVersion 14
+        targetSdkVersion 23
+        versionCode 1
+        versionName "1.0"
+
+
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+
+dependencies {
+
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile files('libs/commons-httpclient-3.1.jar')
+    compile files('libs/httpmime-4.5.2.jar')
+
+    //这两个要在主项目里边加
+    //compile thirdDependencies.butterKnife
+    //apt thirdDependencies.butterknifeCompiler
+    //compile thirdDependencies.autoBundle
+    //apt thirdDependencies.autoBundleProcessor
+
+    //现在的项目类似retrofit,暂时不采用
+    //compile thirdDependencies.retrofit
+    //compile thirdDependencies.converterGson
+    //compile thirdDependencies.okhttp
+
+    compile thirdDependencies.gson
+    compile thirdDependencies.commonlang
+
+    compile supportDependencies.design
+    compile supportDependencies.recyclerView
+    compile supportDependencies.cardView
+    compile supportDependencies.appCompat
+    compile thirdDependencies.materialprogressbar
+    compile supportDependencies.supportAnnotation
+
+
+}
