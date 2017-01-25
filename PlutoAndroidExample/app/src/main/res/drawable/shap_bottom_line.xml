@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <size android:height="1dp" android:width="2000dp"/>
+    <corners android:radius="40dp"/>
+    <solid
+        android:color="@color/colorPrimary"/>
+    <!--<stroke-->
+        <!--android:width="2dp"-->
+        <!--android:color="@android:color/black"-->
+        <!--android:dashWidth="1dp"/>-->
+</shape>

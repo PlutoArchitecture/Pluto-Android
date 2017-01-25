@@ -3,11 +3,10 @@ package com.minggo.pluto.common;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.os.Environment;
-import android.os.Looper;
 import android.widget.Toast;
 
 
-import com.minggo.pluto.PlutoConfig;
+import com.minggo.pluto.Pluto;
 import com.minggo.pluto.R;
 import com.minggo.pluto.util.FileUtils;
 
@@ -34,8 +33,8 @@ public class AppException extends Exception implements UncaughtExceptionHandler 
 
     private static final long serialVersionUID = -2802147109149812598L;
     private final static boolean Debug = true;//是否保存错误日志
-    public static String filepath = PlutoConfig.SDPATH + "/errlog/"; //保存到SD卡的目录 ,用于上传,上传后删除
-    private static String crashfilepath = PlutoConfig.SDPATH + "/crashlog/";//本地日志文件目录
+    public static String filepath = Pluto.SDPATH + "/errlog/"; //保存到SD卡的目录 ,用于上传,上传后删除
+    private static String crashfilepath = Pluto.SDPATH + "/crashlog/";//本地日志文件目录
     public static String filename = "err_log.txt"; //保存到SD卡的文件名
     private static AppException appException;
 

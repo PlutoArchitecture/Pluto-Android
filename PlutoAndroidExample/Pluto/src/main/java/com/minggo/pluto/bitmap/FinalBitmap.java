@@ -26,8 +26,7 @@ import android.util.DisplayMetrics;
 import android.widget.ImageView;
 
 
-import com.minggo.pluto.PlutoConfig;
-import com.minggo.pluto.util.FileUtils;
+import com.minggo.pluto.Pluto;
 import com.minggo.pluto.util.LogUtils;
 import com.minggo.pluto.util.PhotoUtil;
 
@@ -60,7 +59,7 @@ public class FinalBitmap {
 		mContext = context;
 		mConfig = new FinalBitmapConfig(context);
 
-		configDiskCachePath(BitmapCommonUtils.getDiskCacheDir(context,PlutoConfig.FINAL_BIMAP_SAVE_PATH).getAbsolutePath());// 配置缓存路径
+		configDiskCachePath(BitmapCommonUtils.getDiskCacheDir(context, Pluto.FINAL_BIMAP_SAVE_PATH).getAbsolutePath());// 配置缓存路径
 		configDisplayer(new SimpleDisplayer());// 配置显示器
 		configDownlader(new SimpleHttpDownloader());// 配置下载器
 	}
@@ -450,7 +449,7 @@ public class FinalBitmap {
 	 */
 	public void display(ImageView imageView, String uri, String bigUrl) {
 
-		String path = BitmapCommonUtils.getDiskCacheDir(mContext, PlutoConfig.FINAL_BIMAP_SAVE_PATH).getAbsolutePath() + "/" + FileNameGenerator.generator(bigUrl) + ".0";
+		String path = BitmapCommonUtils.getDiskCacheDir(mContext, Pluto.FINAL_BIMAP_SAVE_PATH).getAbsolutePath() + "/" + FileNameGenerator.generator(bigUrl) + ".0";
 
 		doDisplay(imageView, uri, null, false, false);
 

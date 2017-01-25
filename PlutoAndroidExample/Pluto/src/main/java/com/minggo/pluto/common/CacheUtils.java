@@ -1,6 +1,6 @@
 package com.minggo.pluto.common;
 
-import com.minggo.pluto.PlutoConfig;
+import com.minggo.pluto.Pluto;
 import com.minggo.pluto.util.FileUtils;
 import com.minggo.pluto.util.LogUtils;
 
@@ -46,7 +46,7 @@ public class CacheUtils {
 	public boolean isCacheDataFailure(String key, int cache_time_millis) {
 		cache_time_millis = cache_time_millis * 60000; // 把分钟转换为毫秒
 		boolean failure = false;
-		File data = new File(PlutoConfig.SDPATH + "cache/" + "cache_" + key
+		File data = new File(Pluto.SDPATH + "cache/" + "cache_" + key
 				+ ".data");
 
 		if (data.exists()
@@ -91,7 +91,7 @@ public class CacheUtils {
 	 * @throws IOException
 	 */
 	public void setDiskCache(String key, String value) throws IOException {
-		FileUtils.WriterTxtFile(PlutoConfig.SDPATH + "cache/", "cache_" + key
+		FileUtils.WriterTxtFile(Pluto.SDPATH + "cache/", "cache_" + key
 				+ ".data", value, false);
 	}
 
@@ -105,7 +105,7 @@ public class CacheUtils {
 	public String getDiskCache(String key) {
 		String content = null;
 		try {
-			content = FileUtils.ReadTxtFile(PlutoConfig.SDPATH + "cache/"
+			content = FileUtils.ReadTxtFile(Pluto.SDPATH + "cache/"
 					+ "cache_" + key + ".data");
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -123,7 +123,7 @@ public class CacheUtils {
 	public String removeDiskCache(String key) {
 		String content = null;
 		try {
-			content = FileUtils.RemoveTxtFile(PlutoConfig.SDPATH + "cache/"
+			content = FileUtils.RemoveTxtFile(Pluto.SDPATH + "cache/"
 					+ "cache_" + key + ".data");
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -138,7 +138,7 @@ public class CacheUtils {
 	 */
 	public List<File> getAllDiskCacheFile() {
 		List<File> allFiles = new ArrayList<>();
-		File cacheDir = new File(PlutoConfig.SDPATH + "cache/");
+		File cacheDir = new File(Pluto.SDPATH + "cache/");
 
 		if (cacheDir.exists()) {
 			File[] files = cacheDir.listFiles();
@@ -154,6 +154,6 @@ public class CacheUtils {
 	}
 
 	public File getDiskCacheFile(String key) {
-		return new File(PlutoConfig.SDPATH + "cache/" + "cache_" + key + ".data");
+		return new File(Pluto.SDPATH + "cache/" + "cache_" + key + ".data");
 	}
 }

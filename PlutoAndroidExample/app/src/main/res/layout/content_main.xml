@@ -11,11 +11,55 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.minggo.plutoandroidexample.MainActivity"
+    tools:context="com.minggo.plutoandroidexample.activity.MainActivity"
     tools:showIn="@layout/app_bar_main">
 
-    <TextView
+    <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"/>
+        app:srcCompat="@mipmap/pluto"
+        android:id="@+id/iv_pluto"
+        android:layout_marginTop="47dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"/>
+
+    <TextView
+        android:text="Pluto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/tv_license"
+        android:textColor="@color/colorPrimary"
+        android:textSize="24sp"/>
+
+    <TextView
+        android:text="Author：Minggo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView3"
+        android:layout_marginTop="24dp"
+        android:layout_below="@+id/tv_license"
+        android:layout_centerHorizontal="true"/>
+    <TextView
+        android:text="MIT License"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView4"
+        android:drawableBottom="@drawable/shap_bottom_line"
+        android:textColor="@color/colorPrimary"
+        android:textAlignment="center"
+        android:layout_below="@+id/textView3"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="6dp"/>
+    <TextView
+        android:text="Copyright (c) 2017 minggo "
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+
+        android:layout_centerHorizontal="true"
+        android:id="@+id/textView5"/>
+
+
 </RelativeLayout>

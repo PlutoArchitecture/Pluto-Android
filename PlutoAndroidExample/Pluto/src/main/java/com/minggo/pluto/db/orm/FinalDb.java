@@ -24,8 +24,7 @@ import android.text.TextUtils;
 import android.util.Log;
 
 
-import com.minggo.pluto.PlutoConfig;
-import com.minggo.pluto.PlutoConfig.DBConfig;
+import com.minggo.pluto.Pluto.DBConfig;
 import com.minggo.pluto.util.LogUtils;
 
 import java.io.File;
