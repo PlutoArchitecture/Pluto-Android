@@ -15,8 +15,12 @@ import android.view.MenuItem;
 import android.view.View.OnClickListener;
 import android.widget.TextView;
 
+import com.minggo.pluto.*;
 import com.minggo.pluto.activity.PlutoActivity;
+import com.minggo.pluto.dialog.*;
+import com.minggo.pluto.util.*;
 import com.minggo.plutoandroidexample.R;
+import com.minggo.plutoandroidexample.common.*;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -27,6 +31,7 @@ public class MainActivity extends PlutoActivity
 
     @BindView(R.id.tv_license)
     public TextView LicenseTv;
+    private PlutoDialog showLicenseDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +40,6 @@ public class MainActivity extends PlutoActivity
         ButterKnife.bind(this);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,6 +57,33 @@ public class MainActivity extends PlutoActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        initUI();
+    }
+
+    private void initUI(){
+        showLicenseDialog = new PlutoDialog(this, PlutoDialog.TEXT_AND_CONFIRM,"MIT License\n" +
+                "\n" +
+                "Copyright (c) 2017 minggo \n" +
+                "email <minggo8en@gmail.com>\n" +
+                "\n" +
+                "Permission is hereby granted, free of charge, to any person obtaining a copy\n" +
+                "of this software and associated documentation files (the \"Software\"), to deal\n" +
+                "in the Software without restriction, including without limitation the rights\n" +
+                "to use, copy, modify, merge, publish, distribute, sublicense, and/or sell\n" +
+                "copies of the Software, and to permit persons to whom the Software is\n" +
+                "furnished to do so, subject to the following conditions:\n" +
+                "\n" +
+                "The above copyright notice and this permission notice shall be included in all\n" +
+                "copies or substantial portions of the Software.\n" +
+                "\n" +
+                "THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\n" +
+                "IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\n" +
+                "FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\n" +
+                "AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\n" +
+                "LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\n" +
+                "OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\n" +
+                "SOFTWARE.");
     }
 
     @Override
@@ -116,6 +147,7 @@ public class MainActivity extends PlutoActivity
     @Override
     @OnClick(R.id.tv_license)
     public void onClick(View view) {
-
+        LogUtils.info(getClass().getSimpleName(),"点击进来了");
+        showLicenseDialog.show();
     }
 }

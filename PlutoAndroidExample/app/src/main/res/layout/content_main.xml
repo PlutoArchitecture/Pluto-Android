@@ -29,7 +29,7 @@
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
-        android:id="@+id/tv_license"
+        android:id="@+id/tv_project_name"
         android:textColor="@color/colorPrimary"
         android:textSize="24sp"/>
 
@@ -39,13 +39,13 @@
         android:layout_height="wrap_content"
         android:id="@+id/textView3"
         android:layout_marginTop="24dp"
-        android:layout_below="@+id/tv_license"
+        android:layout_below="@+id/tv_project_name"
         android:layout_centerHorizontal="true"/>
     <TextView
         android:text="MIT License"
         android:layout_width="80dp"
         android:layout_height="wrap_content"
-        android:id="@+id/textView4"
+        android:id="@+id/tv_license"
         android:drawableBottom="@drawable/shap_bottom_line"
         android:textColor="@color/colorPrimary"
         android:textAlignment="center"

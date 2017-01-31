@@ -5,9 +5,10 @@ import android.content.Context;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.*;
 
 import com.minggo.pluto.R;
-import com.minggo.pluto.util.DisplayUtil;
+import com.minggo.pluto.util.*;
 
 /**
  * 通过对话框
@@ -18,16 +19,28 @@ public class PlutoDialog {
 
     private Context context;
     private int type;
-    public final static int LOADING = 1;
+    public static final int LOADING = 1;//请稍等提示
+    public static final int TEXT_AND_CONFIRM = 2;// 提示信息确认
     private AlertDialog.Builder builder;
     private AlertDialog alertDialog;
     private View mainView;
     private int screenWidthPixels;
     private float _20Pixels;
+    private String content;
+
 
     public PlutoDialog(Context context,int type){
+
         this.context = context;
         this.type = type;
+        calcWidth();
+    }
+
+    public PlutoDialog(Context context,int type,String content){
+
+        this.context = context;
+        this.type = type;
+        this.content = content;
         calcWidth();
     }
 
@@ -46,12 +59,25 @@ public class PlutoDialog {
             case LOADING:
                 mainView = View.inflate(context, R.layout.dialog_progress,null);
                 break;
+            case TEXT_AND_CONFIRM:
+                mainView = View.inflate(context, R.layout.dialog_text,null);
+                break;
             default:
                 break;
         }
-        builder.setView(mainView);
 
+        initUI();
     }
+
+    private void initUI(){
+        if (type==LOADING){
+            builder.setView(mainView);
+        }else if (type==TEXT_AND_CONFIRM){
+            builder.setView(mainView);
+            ((TextView) mainView.findViewById(R.id.tv_dialog_tips)).setText(content);
+        }
+    }
+
     private void calcWidth() {
         screenWidthPixels = DisplayUtil.getScreenWidthPixels(context);
         _20Pixels = DisplayUtil.dip2pxByFloat(context, 20);
