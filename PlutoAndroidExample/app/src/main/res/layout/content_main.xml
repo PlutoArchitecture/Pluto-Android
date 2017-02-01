@@ -17,7 +17,7 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:srcCompat="@mipmap/pluto"
+        android:src="@drawable/pluto"
         android:id="@+id/iv_pluto"
         android:layout_marginTop="47dp"
         android:layout_alignParentTop="true"

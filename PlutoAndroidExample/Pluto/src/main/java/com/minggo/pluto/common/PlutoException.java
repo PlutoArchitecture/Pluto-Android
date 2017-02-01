@@ -25,18 +25,17 @@ import java.util.Date;
 /**
  * 应用程序异常类：用于捕获异常和提示错误信息
  *
- * @author liux (http://my.oschina.net/liux)
- * @version 1.0
+ * @author minggo
  * @created 2012-3-21
  */
-public class AppException extends Exception implements UncaughtExceptionHandler {
+public class PlutoException extends Exception implements UncaughtExceptionHandler {
 
     private static final long serialVersionUID = -2802147109149812598L;
     private final static boolean Debug = true;//是否保存错误日志
     public static String filepath = Pluto.SDPATH + "/errlog/"; //保存到SD卡的目录 ,用于上传,上传后删除
     private static String crashfilepath = Pluto.SDPATH + "/crashlog/";//本地日志文件目录
     public static String filename = "err_log.txt"; //保存到SD卡的文件名
-    private static AppException appException;
+    private static PlutoException appException;
 
     /**
      * 定义异常类型
@@ -57,12 +56,12 @@ public class AppException extends Exception implements UncaughtExceptionHandler 
      */
     private UncaughtExceptionHandler mDefaultHandler;
 
-    private AppException(Context context) {
+    private PlutoException(Context context) {
         this.mDefaultHandler = Thread.getDefaultUncaughtExceptionHandler();
         Thread.setDefaultUncaughtExceptionHandler(this);
     }
 
-    private AppException(byte type, int code, Exception excp) {
+    private PlutoException(byte type, int code, Exception excp) {
         super(excp);
         this.type = type;
         this.code = code;
@@ -175,34 +174,34 @@ public class AppException extends Exception implements UncaughtExceptionHandler 
 
     }
 
-    public static AppException http(int code) {
-        return new AppException(TYPE_HTTP_CODE, code, null);
+    public static PlutoException http(int code) {
+        return new PlutoException(TYPE_HTTP_CODE, code, null);
     }
 
-    public static AppException http(Exception e) {
-        return new AppException(TYPE_HTTP_ERROR, 0, e);
+    public static PlutoException http(Exception e) {
+        return new PlutoException(TYPE_HTTP_ERROR, 0, e);
     }
 
-    public static AppException socket(Exception e) {
-        return new AppException(TYPE_SOCKET, 0, e);
+    public static PlutoException socket(Exception e) {
+        return new PlutoException(TYPE_SOCKET, 0, e);
     }
 
-    public static AppException io(Exception e) {
+    public static PlutoException io(Exception e) {
         if (e instanceof UnknownHostException || e instanceof ConnectException) {
-            return new AppException(TYPE_NETWORK, 0, e);
+            return new PlutoException(TYPE_NETWORK, 0, e);
         } else if (e instanceof IOException) {
-            return new AppException(TYPE_IO, 0, e);
+            return new PlutoException(TYPE_IO, 0, e);
         }
         return run(e);
     }
 
-    public static AppException xml(Exception e) {
-        return new AppException(TYPE_XML, 0, e);
+    public static PlutoException xml(Exception e) {
+        return new PlutoException(TYPE_XML, 0, e);
     }
 
-    public static AppException network(Exception e) {
+    public static PlutoException network(Exception e) {
         if (e instanceof UnknownHostException || e instanceof ConnectException) {
-            return new AppException(TYPE_NETWORK, 0, e);
+            return new PlutoException(TYPE_NETWORK, 0, e);
         } else if (e instanceof HttpException) {
             return http(e);
         } else if (e instanceof SocketException) {
@@ -211,8 +210,8 @@ public class AppException extends Exception implements UncaughtExceptionHandler 
         return http(e);
     }
 
-    public static AppException run(Exception e) {
-        return new AppException(TYPE_RUN, 0, e);
+    public static PlutoException run(Exception e) {
+        return new PlutoException(TYPE_RUN, 0, e);
     }
 
     /**
@@ -221,9 +220,9 @@ public class AppException extends Exception implements UncaughtExceptionHandler 
      * @param context
      * @return
      */
-    public static AppException getAppExceptionHandler(Context context) {
+    public static PlutoException getAppExceptionHandler(Context context) {
         if (appException == null) {
-            appException = new AppException(context);
+            appException = new PlutoException(context);
         }
         return appException;
     }

@@ -5,9 +5,9 @@ import android.text.TextUtils;
 
 import com.google.gson.Gson;
 import com.minggo.pluto.common.AppContext;
-import com.minggo.pluto.common.AppException;
-import com.minggo.pluto.common.CacheUtils;
-import com.minggo.pluto.common.SharePreferenceUtils;
+import com.minggo.pluto.common.PlutoException;
+import com.minggo.pluto.util.CacheUtils;
+import com.minggo.pluto.util.SharePreferenceUtils;
 import com.minggo.pluto.model.Result;
 import com.minggo.pluto.util.EncryptUtils;
 import com.minggo.pluto.util.LogUtils;
@@ -191,7 +191,7 @@ public class ApiEngine {
         Result<List<T>> result = null;
         try {
             result = ApiClient.httpGetList(url, params);
-        } catch (AppException e) {
+        } catch (PlutoException e) {
             e.printStackTrace();
         }
 
@@ -294,7 +294,7 @@ public class ApiEngine {
         try {
             //网络请求
             result = ApiClient.httpGetList(url, params);
-        } catch (AppException e) {
+        } catch (PlutoException e) {
             e.printStackTrace();
         }
 
@@ -361,7 +361,7 @@ public class ApiEngine {
         Result<List<T>> result = null;
         try {
             result = ApiClient.httpGetList(url, params);
-        } catch (AppException e) {
+        } catch (PlutoException e) {
             e.printStackTrace();
         }
         //返回空列表
@@ -449,7 +449,7 @@ public class ApiEngine {
         Result<T> result = null;
         try {
             result = ApiClient.httpGetModel(url, params, true);
-        } catch (AppException e) {
+        } catch (PlutoException e) {
             e.printStackTrace();
         }
 
@@ -515,7 +515,7 @@ public class ApiEngine {
         Result<T> result = null;
         try {
             result = (Result<T>) ApiClient.httpGetModel(url, params, true);
-        } catch (AppException e) {
+        } catch (PlutoException e) {
             e.printStackTrace();
         }
 
@@ -559,7 +559,7 @@ public class ApiEngine {
         Result<T> result = null;
         try {
             result = (Result<T>) ApiClient.httpGetModel(url, params, true);
-        } catch (AppException e) {
+        } catch (PlutoException e) {
             e.printStackTrace();
         }
 
@@ -594,7 +594,7 @@ public class ApiEngine {
         try {
             result = ApiClient.httpGetModel(url, params, true);
             params = null;
-        } catch (AppException e) {
+        } catch (PlutoException e) {
             e.printStackTrace();
         }
         if (result == null) {
@@ -622,7 +622,7 @@ public class ApiEngine {
             result = ApiClient.httpPostModel(url, params, files, false);
             params = null;
             files = null;
-        } catch (AppException e) {
+        } catch (PlutoException e) {
             e.printStackTrace();
         }
         if (result == null) {
@@ -652,7 +652,7 @@ public class ApiEngine {
         try {
             result = ApiClient.httpPostModel(url, params, null, false);
             params = null;
-        } catch (AppException e) {
+        } catch (PlutoException e) {
             e.printStackTrace();
         }
         if (result == null) {
@@ -685,7 +685,7 @@ public class ApiEngine {
         Result<T> result = null;
         try {
             result = (Result<T>) ApiClient.httpPostModel(url, params,null, false);
-        } catch (AppException e) {
+        } catch (PlutoException e) {
             e.printStackTrace();
         }
 

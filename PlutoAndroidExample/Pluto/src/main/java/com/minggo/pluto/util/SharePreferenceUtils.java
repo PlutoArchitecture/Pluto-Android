@@ -1,4 +1,4 @@
-package com.minggo.pluto.common;
+package com.minggo.pluto.util;
 
 import android.content.Context;
 import android.content.SharedPreferences;

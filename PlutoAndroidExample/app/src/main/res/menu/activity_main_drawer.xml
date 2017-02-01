@@ -1,36 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <group android:checkableBehavior="single">
-        <item
-            android:id="@+id/nav_camera"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="Import"/>
-        <item
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="Gallery"/>
-        <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="Slideshow"/>
-        <item
-            android:id="@+id/nav_manage"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="Tools"/>
-    </group>
-
-    <item android:title="Communicate">
-        <menu>
-            <item
-                android:id="@+id/nav_share"
-                android:icon="@drawable/ic_menu_share"
-                android:title="Share"/>
-            <item
-                android:id="@+id/nav_send"
-                android:icon="@drawable/ic_menu_send"
-                android:title="Send"/>
-        </menu>
-    </item>
+    <item
+        android:id="@+id/nav_pluto_activity"
+        android:title="PlutoActivity"/>
+    <item
+        android:id="@+id/nav_pluto_fragment"
+        android:title="PlutoFragment"/>
+    <item
+        android:id="@+id/nav_pluto_dialog"
+        android:title="PlutoDialog"/>
+    <item
+        android:id="@+id/nav_pluto_engine"
+        android:title="PlutoAPIEngine"/>
+    <item
+        android:id="@+id/nav_pluto_image_framework"
+        android:title="PlutoImageFramework"/>
+    <item
+        android:id="@+id/nav_pluto_network"
+        android:title="PlutoNetwork"/>
+    <item
+        android:id="@+id/nav_pluto_file_cache"
+        android:title="PlutoFileCache"/>
+    <item
+        android:id="@+id/nav_pluto_db_cache"
+        android:title="PlutoORMDBFramework"/>
+    <item
+        android:id="@+id/nav_pluto_exception"
+        android:title="PlutoException"/>
+    <item
+        android:id="@+id/nav_pluto_utils"
+        android:title="PlutoSomeUtils"/>
 
 </menu>

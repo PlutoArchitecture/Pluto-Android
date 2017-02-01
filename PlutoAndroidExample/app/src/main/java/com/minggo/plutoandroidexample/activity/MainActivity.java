@@ -1,5 +1,6 @@
 package com.minggo.plutoandroidexample.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -27,7 +28,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class MainActivity extends PlutoActivity
-        implements NavigationView.OnNavigationItemSelectedListener,OnClickListener {
+        implements NavigationView.OnNavigationItemSelectedListener, OnClickListener {
 
     @BindView(R.id.tv_license)
     public TextView LicenseTv;
@@ -61,8 +62,8 @@ public class MainActivity extends PlutoActivity
         initUI();
     }
 
-    private void initUI(){
-        showLicenseDialog = new PlutoDialog(this, PlutoDialog.TEXT_AND_CONFIRM,"MIT License\n" +
+    private void initUI() {
+        showLicenseDialog = new PlutoDialog(this, PlutoDialog.TEXT_AND_CONFIRM, "MIT License\n" +
                 "\n" +
                 "Copyright (c) 2017 minggo \n" +
                 "email <minggo8en@gmail.com>\n" +
@@ -123,18 +124,13 @@ public class MainActivity extends PlutoActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
+        if (id == R.id.nav_pluto_activity) {
+            startActivity(new Intent(this,PlutoActivityExample.class));
+        } else if (id == R.id.nav_pluto_fragment) {
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        } else if (id == R.id.nav_pluto_engine) {
 
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
+        } else if (id == R.id.nav_pluto_fragment) {
 
         }
 
@@ -147,7 +143,7 @@ public class MainActivity extends PlutoActivity
     @Override
     @OnClick(R.id.tv_license)
     public void onClick(View view) {
-        LogUtils.info(getClass().getSimpleName(),"点击进来了");
+        LogUtils.info(getClass().getSimpleName(), "点击进来了");
         showLicenseDialog.show();
     }
 }

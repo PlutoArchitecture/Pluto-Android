@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.minggo.plutoandroidexample.activity.PlutoActivityExample"
+    tools:showIn="@layout/activity_pluto_example">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <TextView
+            android:id="@+id/tv_introduce"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/text_margin"
+            android:padding="10dp"
+            android:text="@string/large_text"/>
+
+        <Button
+            android:id="@+id/bt_toast"
+            android:layout_width="match_parent"
+            android:layout_height="38dp"
+            android:layout_below="@+id/tv_introduce"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:textColor="@android:color/white"
+            android:background="@color/lightgreen"
+            android:text="Toast can be simple"/>
+        <Button
+            android:id="@+id/bt_dialog"
+            android:layout_width="match_parent"
+            android:layout_height="38dp"
+            android:layout_below="@+id/bt_toast"
+            android:layout_marginTop="8dp"
+            android:textColor="@android:color/white"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@color/lightgreen"
+            android:text="Dialog can be simplely maken and showed"/>
+
+    </RelativeLayout>
+</android.support.v4.widget.NestedScrollView>

@@ -1,8 +1,6 @@
-package com.minggo.pluto.common;
+package com.minggo.pluto.util;
 
 import com.minggo.pluto.Pluto;
-import com.minggo.pluto.util.FileUtils;
-import com.minggo.pluto.util.LogUtils;
 
 import java.io.File;
 import java.io.IOException;
