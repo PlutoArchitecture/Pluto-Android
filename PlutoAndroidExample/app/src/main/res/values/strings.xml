@@ -26,8 +26,15 @@
         "2.Following under usage example.\n"
     </string>
 
+    <string name="apiengine_text">
+        "PlutoAPIEgine is the most important part of this project.Integrating the Network framework,file Cache framework,Gson Parse,Handler with application's common logic.Finally Pluto APIEngine provides simple methods using in vary logic code. \n\n"
+        "1.Simplely you can obtain flexiable data from network or cache .\n"
+        "2.Following under usage example.\n"
+    </string>
+
     <string name="title_activity_pluto_example">PlutoActivityExample</string>
 
     <string name="title_activity_pluto_fragment_example">PlutoFragmentExample</string>
-    <string name="title_activity_dialog_example">DialogExample</string>
+    <string name="title_activity_dialog_example">PlutoDialogExample</string>
+    <string name="title_activity_apiengine_example">PlutoAPIEngieExample</string>
 </resources>

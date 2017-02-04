@@ -6,6 +6,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.minggo.pluto.activity.PlutoActivity;
 import com.minggo.pluto.adapter.PlutoPagerAdapter;
 import com.minggo.plutoandroidexample.R;
 import com.minggo.plutoandroidexample.fragment.BlogFragment;
@@ -20,7 +21,7 @@ import butterknife.ButterKnife;
 /**
  * Created by minggo on 2017/2/4.
  */
-public class PlutoFragmentExample extends AppCompatActivity {
+public class PlutoFragmentExample extends PlutoActivity {
 
     @BindView(R.id.viewpager)
     public ViewPager mViewPager;

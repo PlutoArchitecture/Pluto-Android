@@ -133,7 +133,7 @@ public class MainActivity extends PlutoActivity
         } else if (id == R.id.nav_pluto_dialog) {
             startActivity(new Intent(this,PlutoDialogExample.class));
         } else if (id == R.id.nav_pluto_engine) {
-
+            startActivity(new Intent(this,PlutoAPIEngineExample.class));
         } else if (id == R.id.nav_pluto_fragment) {
 
         }

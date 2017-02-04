@@ -34,18 +34,18 @@
         <activity
             android:name=".activity.PlutoFragmentExample"
             android:label="@string/title_activity_pluto_fragment_example"
+            >
+        </activity>
+        <activity
+            android:name=".activity.PlutoDialogExample"
+            android:label="@string/title_activity_dialog_example"
             android:parentActivityName=".activity.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.minggo.plutoandroidexample.activity.MainActivity"/>
         </activity>
-
-        <activity android:name=".activity.PlutoDialogExample"
-                  android:label="@string/title_activity_dialog_example"
-                  android:parentActivityName=".activity.MainActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.minggo.plutoandroidexample.activity.MainActivity"/>
+        <activity android:name=".activity.PlutoAPIEngineExample"
+                  android:label="@string/title_activity_apiengine_example">
         </activity>
     </application>
 
