@@ -1,0 +1,112 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             tools:context="com.minggo.plutoandroidexample.fragment.ExampleFragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/tv_introduce"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/text_margin"
+                android:padding="10dp"
+                android:text="@string/fragment_text"/>
+
+            <Button
+                android:id="@+id/bt_toast"
+                android:layout_width="match_parent"
+                android:layout_height="38dp"
+                android:layout_below="@+id/tv_introduce"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:background="@color/lightgreen"
+                android:text="Toast can be simple"
+                android:textAllCaps="false"
+                android:textColor="@android:color/white"/>
+
+            <Button
+                android:id="@+id/bt_dialog"
+                android:layout_width="match_parent"
+                android:layout_height="38dp"
+                android:layout_below="@+id/bt_toast"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="8dp"
+                android:background="@color/lightgreen"
+                android:text="Dialog can be simplely maken and showed"
+                android:textAllCaps="false"
+                android:textColor="@android:color/white"/>
+
+            <Button
+                android:id="@+id/bt_softinput"
+                android:layout_width="match_parent"
+                android:layout_height="38dp"
+                android:layout_below="@+id/bt_dialog"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="8dp"
+                android:background="@color/lightgreen"
+                android:text="Show softinput easier"
+                android:textAllCaps="false"
+                android:textColor="@android:color/white"/>
+
+            <Button
+                android:id="@+id/bt_network_available"
+                android:layout_width="match_parent"
+                android:layout_height="38dp"
+                android:layout_below="@+id/bt_softinput"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="8dp"
+                android:background="@color/lightgreen"
+                android:text="Charge network whether is available or not"
+                android:textAllCaps="false"
+                android:textColor="@android:color/white"/>
+
+            <Button
+                android:id="@+id/bt_hand_message"
+                android:layout_width="match_parent"
+                android:layout_height="38dp"
+                android:layout_below="@+id/bt_network_available"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="8dp"
+                android:background="@color/lightgreen"
+                android:text="Send and handle message quickly"
+                android:textAllCaps="false"
+                android:textColor="@android:color/white"/>
+
+            <Button
+                android:id="@+id/bt_cancel_asyntask"
+                android:layout_width="match_parent"
+                android:layout_height="38dp"
+                android:layout_below="@+id/bt_hand_message"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="8dp"
+                android:background="@color/lightgreen"
+                android:text="Cancel Asynctask when you needed!"
+                android:textAllCaps="false"
+                android:textColor="@android:color/white"
+                android:layout_marginBottom="30dp"/>
+
+            <TextView
+                android:id="@+id/tv_learntime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/tv_introduce"
+                android:layout_centerHorizontal="true"
+                android:text="Learning 0s"
+                android:textColor="@android:color/holo_red_light"/>
+        </RelativeLayout>
+    </ScrollView>
+</FrameLayout>

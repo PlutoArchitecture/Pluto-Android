@@ -9,9 +9,19 @@
     <string name="title_item_detail">Item Detail</string>
     <string name="title_activity_example">ExampleActivity</string>
     <string name="large_text">
-        "PlutoActivity as a base activity extends AppCompatActivity and contains Handler,Toast,PlutoDialog,AppManager,NetworkUtil,SoftInputManager and CommonAsyncTask.\n\n"
+        "PlutoActivity as a base Activity extends AppCompatActivity and contains Handler,Toast,PlutoDialog,AppManager,NetworkUtil,SoftInputManager and CommonAsyncTask.\n\n"
         "1.Simplely you can make your all activities extends PlutoActivity.\n"
         "2.Following under usage example of components in PlutoActivity.\n"
     </string>
+
+    <string name="fragment_text">
+        "PlutoFragment as a base Fragment extends ProgressFragment which extends Fragment, and also is the same to PlutoActivity containing Handler,Toast,PlutoDialog,AppManager,NetworkUtil,SoftInputManager and CommonAsyncTask.\n\n"
+        "1.Simplely you can make your all Fragments extends PlutoFragment.\n"
+        "2.Following under usage example of components in PlutoFragment.\n"
+    </string>
+
     <string name="title_activity_pluto_example">PlutoActivityExample</string>
+
+    <string name="title_activity_pluto_fragment_example">PlutoFragmentExample</string>
+    <string name="title_activity_dialog_example">DialogExample</string>
 </resources>

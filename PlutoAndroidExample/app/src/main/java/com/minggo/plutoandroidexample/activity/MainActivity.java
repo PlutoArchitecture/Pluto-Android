@@ -126,8 +126,9 @@ public class MainActivity extends PlutoActivity
         int id = item.getItemId();
         if (id == R.id.nav_pluto_activity) {
             startActivity(new Intent(this,PlutoActivityExample.class));
-        } else if (id == R.id.nav_pluto_fragment) {
 
+        } else if (id == R.id.nav_pluto_fragment) {
+            startActivity(new Intent(this,PlutoFragmentExample.class));
         } else if (id == R.id.nav_pluto_engine) {
 
         } else if (id == R.id.nav_pluto_fragment) {

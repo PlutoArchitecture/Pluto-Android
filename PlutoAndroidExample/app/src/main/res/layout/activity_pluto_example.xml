@@ -1,48 +1,101 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    tools:context="com.minggo.plutoandroidexample.activity.PlutoActivityExample">
+    android:layout_height="match_parent">
 
-    <android.support.design.widget.AppBarLayout
-        android:id="@+id/app_bar"
+
+    <TextView
+        android:id="@+id/tv_introduce"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/app_bar_height"
-        android:fitsSystemWindows="true"
-        android:theme="@style/AppTheme.AppBarOverlay">
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/text_margin"
+        android:padding="10dp"
+        android:text="@string/large_text"/>
 
-        <android.support.design.widget.CollapsingToolbarLayout
-            android:id="@+id/toolbar_layout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:fitsSystemWindows="true"
-            app:contentScrim="?attr/colorPrimary"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+    <Button
+        android:id="@+id/bt_toast"
+        android:layout_width="match_parent"
+        android:layout_height="38dp"
+        android:layout_below="@+id/tv_introduce"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:textColor="@android:color/white"
+        android:background="@color/lightgreen"
+        android:textAllCaps="false"
+        android:text="Toast can be simple"/>
+    <Button
+        android:id="@+id/bt_dialog"
+        android:layout_width="match_parent"
+        android:layout_height="38dp"
+        android:layout_below="@+id/bt_toast"
+        android:layout_marginTop="8dp"
+        android:textColor="@android:color/white"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:textAllCaps="false"
+        android:background="@color/lightgreen"
+        android:text="Dialog can be simplely maken and showed"/>
 
-            <android.support.v7.widget.Toolbar
-                android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                app:layout_collapseMode="pin"
-                app:popupTheme="@style/AppTheme.PopupOverlay"/>
+    <Button
+        android:id="@+id/bt_softinput"
+        android:layout_width="match_parent"
+        android:layout_height="38dp"
+        android:layout_below="@+id/bt_dialog"
+        android:layout_marginTop="8dp"
+        android:textColor="@android:color/white"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:textAllCaps="false"
+        android:background="@color/lightgreen"
+        android:text="Show softinput easier"/>
+    <Button
+        android:id="@+id/bt_network_available"
+        android:layout_width="match_parent"
+        android:layout_height="38dp"
+        android:layout_below="@+id/bt_softinput"
+        android:layout_marginTop="8dp"
+        android:textColor="@android:color/white"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:textAllCaps="false"
+        android:background="@color/lightgreen"
+        android:text="Charge network whether is available or not"/>
 
-        </android.support.design.widget.CollapsingToolbarLayout>
-    </android.support.design.widget.AppBarLayout>
+    <Button
+        android:id="@+id/bt_hand_message"
+        android:layout_width="match_parent"
+        android:layout_height="38dp"
+        android:layout_below="@+id/bt_network_available"
+        android:layout_marginTop="8dp"
+        android:textColor="@android:color/white"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:textAllCaps="false"
+        android:background="@color/lightgreen"
+        android:text="Send and handle message quickly"/>
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
+    <Button
+        android:id="@+id/bt_cancel_asyntask"
+        android:layout_width="match_parent"
+        android:layout_height="38dp"
+        android:layout_below="@+id/bt_hand_message"
+        android:layout_marginTop="8dp"
+        android:textColor="@android:color/white"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:textAllCaps="false"
+        android:background="@color/lightgreen"
+        android:text="Cancel Asynctask when you needed!"/>
+
+    <TextView
+        android:text="Learning 0s"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/fab_margin"
-        app:layout_anchor="@id/app_bar"
-        app:layout_anchorGravity="bottom|end"
-        android:visibility="gone"
-        app:srcCompat="@android:drawable/ic_dialog_email"/>
+        android:textColor="@android:color/holo_red_light"
+        android:layout_alignBottom="@+id/tv_introduce"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/tv_learntime"/>
 
-    <include layout="@layout/content_pluto_activity_example"/>
-
-</android.support.design.widget.CoordinatorLayout>
+</RelativeLayout>

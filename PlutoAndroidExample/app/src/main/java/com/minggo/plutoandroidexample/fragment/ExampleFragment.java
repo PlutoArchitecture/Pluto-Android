@@ -1,32 +1,31 @@
-package com.minggo.plutoandroidexample.activity;
+package com.minggo.plutoandroidexample.fragment;
 
+import android.app.Activity;
+import android.content.Context;
+import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
 import android.os.Message;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.minggo.pluto.activity.PlutoActivity;
-import com.minggo.pluto.bitmap.AsyncTask;
 import com.minggo.pluto.common.CommonAsyncTask;
-import com.minggo.pluto.dialog.PlutoDialog;
+import com.minggo.pluto.fragment.PlutoFragment;
 import com.minggo.plutoandroidexample.R;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-/**
- * Created by minggo on 2017/2/1.
- */
-public class PlutoActivityExample extends PlutoActivity implements OnClickListener {
 
+/**
+ * Created by minggo on 2017/2/4.
+ */
+public class ExampleFragment extends PlutoFragment implements OnClickListener{
     @BindView(R.id.bt_toast)
     public Button toastBt;
     @BindView(R.id.bt_dialog)
@@ -42,17 +41,53 @@ public class PlutoActivityExample extends PlutoActivity implements OnClickListen
     @BindView(R.id.tv_learntime)
     public TextView learnTimeTv;
     private Calculator calculator;
-
-
+    private Activity activity;
+    private View mainView;
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_pluto_example);
-        ButterKnife.bind(this);
         calculator = new Calculator();
         calculator.execute();
+        
     }
 
+    @Override
+    public void onAttach(Context activity) {
+        super.onAttach(activity);
+        this.activity = ((Activity) activity);
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        activity = null;
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+        mainView = inflater.inflate(R.layout.fragment_example, container, false);
+        ButterKnife.bind(this,mainView);
+        initUI();
+
+        return super.onCreateView(inflater, container, savedInstanceState);
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        setContentView(mainView);
+    }
+
+    @Override
+    protected void showData() {
+        setContentShown(true);
+    }
+
+
+    private void initUI() {
+
+    }
 
     @OnClick({R.id.bt_toast,R.id.bt_dialog,R.id.bt_softinput,R.id.bt_network_available,R.id.bt_hand_message,R.id.bt_cancel_asyntask})
     @Override
@@ -127,12 +162,5 @@ public class PlutoActivityExample extends PlutoActivity implements OnClickListen
             mUiHandler.sendEmptyMessage(i);
         }
 
-
-    }
-
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        overridePendingTransition(R.anim.alpha_sllow_in, R.anim.push_right_out);
     }
 }
