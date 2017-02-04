@@ -5,10 +5,76 @@
     android:id="@+id/activity_dialog_example"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.minggo.plutoandroidexample.activity.DialogExample">
+    >
+
+    <TextView
+        android:id="@+id/tv_introduce"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/text_margin"
+        android:padding="10dp"
+        android:text="@string/dialog_text"/>
+
+    <Button
+        android:id="@+id/bt_system_dialog"
+        android:layout_width="match_parent"
+        android:layout_height="38dp"
+        android:layout_below="@+id/tv_introduce"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@color/lightgreen"
+        android:text="System style exit dialog show"
+        android:textAllCaps="false"
+        android:textColor="@android:color/white"/>
+
+    <Button
+        android:id="@+id/bt_system_define_dialog"
+        android:layout_width="match_parent"
+        android:layout_height="38dp"
+        android:layout_below="@+id/bt_system_dialog"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@color/lightgreen"
+        android:layout_marginTop="10dp"
+        android:text="System style defined dialog show"
+        android:textAllCaps="false"
+        android:textColor="@android:color/white"/>
+    <Button
+        android:id="@+id/bt_loading_dialog"
+        android:layout_width="match_parent"
+        android:layout_height="38dp"
+        android:layout_below="@+id/bt_system_define_dialog"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@color/lightgreen"
+        android:layout_marginTop="10dp"
+        android:text="Define style loading dialog show"
+        android:textAllCaps="false"
+        android:textColor="@android:color/white"/>
+    <Button
+        android:id="@+id/bt_text_dialog"
+        android:layout_width="match_parent"
+        android:layout_height="38dp"
+        android:layout_below="@+id/bt_loading_dialog"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@color/lightgreen"
+        android:layout_marginTop="10dp"
+        android:text="Define style only text dialog show"
+        android:textAllCaps="false"
+        android:textColor="@android:color/white"/>
+
+    <TextView
+        android:text="more dialogs will developed later,also if you are interested in my project.you can contact me and post your code"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:id="@+id/textView2"
+        android:textColor="@color/colorAccent"
+        android:layout_below="@+id/bt_text_dialog"
+        android:layout_alignLeft="@+id/bt_text_dialog"
+        android:layout_alignStart="@+id/bt_text_dialog"/>
+
 
 </RelativeLayout>

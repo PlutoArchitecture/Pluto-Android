@@ -10,4 +10,9 @@
     <string name="app_error">应用程序错误</string>
     <string name="app_error_message">很抱歉，应用程序出现错误，即将退出。\n请提交错误报告，我们会尽快修复这个问题！</string>
     <string name="waiting">请稍等...</string>
+    <string name="exit_title">退出提醒</string>
+    <string name="exit_cancel">取消</string>
+    <string name="exit_confirm">确定</string>
+    <string name="exit_content">您确定退出应用吗？</string>
+
 </resources>

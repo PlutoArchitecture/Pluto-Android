@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/text_margin"
         android:padding="10dp"
-        android:text="@string/large_text"/>
+        android:text="@string/activity_text"/>
 
     <Button
         android:id="@+id/bt_toast"

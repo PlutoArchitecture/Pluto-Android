@@ -63,7 +63,7 @@ public class MainActivity extends PlutoActivity
     }
 
     private void initUI() {
-        showLicenseDialog = new PlutoDialog(this, PlutoDialog.TEXT_AND_CONFIRM, "MIT License\n" +
+        showLicenseDialog = new PlutoDialog(this, PlutoDialog.TEXT_ONLIY, "MIT License\n" +
                 "\n" +
                 "Copyright (c) 2017 minggo \n" +
                 "email <minggo8en@gmail.com>\n" +
@@ -85,6 +85,7 @@ public class MainActivity extends PlutoActivity
                 "LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\n" +
                 "OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\n" +
                 "SOFTWARE.");
+        showLicenseDialog.setCancelable(true);
     }
 
     @Override
@@ -129,6 +130,8 @@ public class MainActivity extends PlutoActivity
 
         } else if (id == R.id.nav_pluto_fragment) {
             startActivity(new Intent(this,PlutoFragmentExample.class));
+        } else if (id == R.id.nav_pluto_dialog) {
+            startActivity(new Intent(this,PlutoDialogExample.class));
         } else if (id == R.id.nav_pluto_engine) {
 
         } else if (id == R.id.nav_pluto_fragment) {

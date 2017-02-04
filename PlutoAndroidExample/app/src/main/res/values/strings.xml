@@ -8,7 +8,7 @@
     <string name="title_item_list">Items</string>
     <string name="title_item_detail">Item Detail</string>
     <string name="title_activity_example">ExampleActivity</string>
-    <string name="large_text">
+    <string name="activity_text">
         "PlutoActivity as a base Activity extends AppCompatActivity and contains Handler,Toast,PlutoDialog,AppManager,NetworkUtil,SoftInputManager and CommonAsyncTask.\n\n"
         "1.Simplely you can make your all activities extends PlutoActivity.\n"
         "2.Following under usage example of components in PlutoActivity.\n"
@@ -18,6 +18,12 @@
         "PlutoFragment as a base Fragment extends ProgressFragment which extends Fragment, and also is the same to PlutoActivity containing Handler,Toast,PlutoDialog,AppManager,NetworkUtil,SoftInputManager and CommonAsyncTask.\n\n"
         "1.Simplely you can make your all Fragments extends PlutoFragment.\n"
         "2.Following under usage example of components in PlutoFragment.\n"
+    </string>
+
+    <string name="dialog_text">
+        "PlutoDialog as a common defined material style Dialog that it both has system default style and some other commonly used dialog.The all you can make it easy to using in project\n\n"
+        "1.Simplely you can make dialog.\n"
+        "2.Following under usage example.\n"
     </string>
 
     <string name="title_activity_pluto_example">PlutoActivityExample</string>
