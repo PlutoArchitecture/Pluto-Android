@@ -19,7 +19,7 @@
         android:text="@string/apiengine_text"/>
 
     <Button
-        android:id="@+id/bt_toast"
+        android:id="@+id/bt_data_only_network"
         android:layout_width="match_parent"
         android:layout_height="38dp"
         android:layout_below="@+id/tv_introduce"
@@ -28,12 +28,12 @@
         android:textColor="@android:color/white"
         android:background="@color/lightgreen"
         android:textAllCaps="false"
-        android:text="Toast can be simple"/>
+        android:text="Obtain java model data only from network"/>
     <Button
         android:id="@+id/bt_dialog"
         android:layout_width="match_parent"
         android:layout_height="38dp"
-        android:layout_below="@+id/bt_toast"
+        android:layout_below="@+id/bt_data_only_network"
         android:layout_marginTop="8dp"
         android:textColor="@android:color/white"
         android:layout_marginLeft="20dp"
