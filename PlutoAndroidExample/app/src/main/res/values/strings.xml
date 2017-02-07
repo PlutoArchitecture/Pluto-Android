@@ -32,8 +32,38 @@
         "2.Following under usage example.\n"
     </string>
 
-    <string name="title_activity_pluto_example">PlutoActivityExample</string>
+    <string name="imageframework_text">
+        "PlutoImageFramework is based on FinalBitmap Framework,whick is good at managing memery and deeling image async loading. \n\n"
+        "1.Following under usage example.\n"
+    </string>
 
+    <string name="netework_text">
+        "PlutoNetwork is based on Apache common-httpclient.jar developing APIClient whick integrates Http Protocal UserAgent,Cookie,Time-out,Reconnet-count,Reconnet-time,Java T to json and so on.\n\n"
+        "1.Following its method,you will just attented POST and GET of http.\n"
+        "2.Both sending text message and files.\n"
+        "3.Reponse is text default,and it deels text with java T to relative Result.\n"
+        "4.Also you can set Request recycle count while it request failed.\n"
+        "5.Flexiable Exception catch and throws it to PluyoException handling.\n\n"
+    </string>
+
+    <string name="filecache_text">
+        "PlutoFileCache is one of Pluto's Cache System.\n\n"
+        "1.PlutoFileCache is a singleton for add,modify,remove,acquire operation \n"
+        "2.Managing File whether is expired.\n"
+        "3.exposing setDiskCache and getDiskCache common methord.\n"
+        "4.Following under usage example.\n"
+    </string>
+
+    <string name="ormdb_text">
+        "PlutoImageFramework is based on FinalDb Framework,whick is good at managing Sqlite data translate to Java model exach other as ORM framework.\n\n"
+        "1.Playing attention to operate Java model to add,update,acquire and delete as JavaEE Hibernate framework \n"
+        "2.I modified FinalDb enables to define any column as primery key.\n"
+        "3.Mainly it's a Java Reflection and Annotation Technology .\n"
+        "4.Following under usage example.\n"
+    </string>
+
+
+    <string name="title_activity_pluto_example">PlutoActivityExample</string>
     <string name="title_activity_pluto_fragment_example">PlutoFragmentExample</string>
     <string name="title_activity_dialog_example">PlutoDialogExample</string>
     <string name="title_activity_apiengine_example">PlutoAPIEngieExample</string>

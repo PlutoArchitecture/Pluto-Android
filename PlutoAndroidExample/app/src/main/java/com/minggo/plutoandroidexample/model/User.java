@@ -2,6 +2,7 @@ package com.minggo.plutoandroidexample.model;
 
 
 import com.minggo.pluto.annotation.Primarykey;
+import com.minggo.pluto.db.orm.Id_A;
 
 /**
  * 用户模型
@@ -11,6 +12,7 @@ import com.minggo.pluto.annotation.Primarykey;
  */
 public class User {
 	@Primarykey
+	@Id_A
 	public int userId;
 	public String username;
 	public String password;

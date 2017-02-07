@@ -417,21 +417,11 @@ public class FinalBitmap {
 
 	public void display(ImageView imageView, String uri) {
 		// Log.i("fb", "原来图片地址-->" + uri);
-		/*
-		 * http://gocache.3g.cn/bookimage/bookpic/39/170339/
-		 * 170339_120_160.jpg[书的封面是这样的格式]
-		 * http://gocache.3g.cn/bookimage/hadpic/201405/1400134757.jpg[推荐页面的焦点图]
-		 */
+
 		if (uri != null) {
 
-			/*if (uri.contains("_") && uri.contains("http")) {// 判断是否带大小格式的
-				int i = uri.indexOf("_");
-				// Log.i("fb", "替换成大图片地址-->" + uri.replace(uri.substring(i), "_"
-				// + ReaderApplication.bigPicSize.size));
-				display(imageView, uri, uri.replace(uri.substring(i), "_" + BibiApplication.bigPicSize.size));
-			} else {*/
-				doDisplay(imageView, uri, null, false, false);
-			//}
+			doDisplay(imageView, uri, null, false, false);
+
 		}
 
 	}

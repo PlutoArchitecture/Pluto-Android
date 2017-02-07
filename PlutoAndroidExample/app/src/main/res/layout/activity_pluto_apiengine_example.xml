@@ -19,7 +19,7 @@
         android:text="@string/apiengine_text"/>
 
     <Button
-        android:id="@+id/bt_data_only_network"
+        android:id="@+id/bt_data_1"
         android:layout_width="match_parent"
         android:layout_height="38dp"
         android:layout_below="@+id/tv_introduce"
@@ -28,17 +28,51 @@
         android:textColor="@android:color/white"
         android:background="@color/lightgreen"
         android:textAllCaps="false"
-        android:text="Obtain java model data only from network"/>
+        android:text="model data from network"/>
     <Button
-        android:id="@+id/bt_dialog"
+        android:id="@+id/bt_data_2"
         android:layout_width="match_parent"
         android:layout_height="38dp"
-        android:layout_below="@+id/bt_data_only_network"
+        android:layout_below="@+id/bt_data_1"
         android:layout_marginTop="8dp"
         android:textColor="@android:color/white"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:textAllCaps="false"
         android:background="@color/lightgreen"
-        android:text="Dialog can be simplely maken and showed"/>
+        android:text="list data from cache then network"/>
+    <Button
+        android:id="@+id/bt_data_3"
+        android:layout_width="match_parent"
+        android:layout_height="38dp"
+        android:layout_below="@+id/bt_data_2"
+        android:layout_marginTop="8dp"
+        android:textColor="@android:color/white"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:textAllCaps="false"
+        android:background="@color/lightgreen"
+        android:text="list data from limited cache then network"/>
+    <Button
+        android:id="@+id/bt_data_4"
+        android:layout_width="match_parent"
+        android:layout_height="38dp"
+        android:layout_below="@+id/bt_data_3"
+        android:layout_marginTop="8dp"
+        android:textColor="@android:color/white"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:textAllCaps="false"
+        android:background="@color/lightgreen"
+        android:text="original Result model from network"/>
+
+    <TextView
+        android:text="more api method you can find in class APIEngine"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/bt_data_4"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="17dp"
+        android:id="@+id/textView4"
+        android:textColor="@color/colorAccent"/>
 </RelativeLayout>

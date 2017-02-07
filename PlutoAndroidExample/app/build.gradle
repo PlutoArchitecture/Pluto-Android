@@ -28,7 +28,7 @@ dependencies {
     })
     compile 'com.android.support:multidex:1.0.1'
     compile project(':Pluto')
-
+    compile files('libs/android_statics_3_5.jar')
     compile thirdDependencies.autoBundle
     apt thirdDependencies.autoBundleProcessor
     compile thirdDependencies.butterKnife

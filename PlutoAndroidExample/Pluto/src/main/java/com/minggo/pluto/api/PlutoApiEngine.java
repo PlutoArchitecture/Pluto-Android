@@ -6,7 +6,7 @@ import android.text.TextUtils;
 import com.google.gson.Gson;
 import com.minggo.pluto.common.AppContext;
 import com.minggo.pluto.common.PlutoException;
-import com.minggo.pluto.util.CacheUtils;
+import com.minggo.pluto.util.PlutoFileCache;
 import com.minggo.pluto.util.SharePreferenceUtils;
 import com.minggo.pluto.model.Result;
 import com.minggo.pluto.util.EncryptUtils;
@@ -32,7 +32,7 @@ import java.util.Map;
  * @author minggo
  * @time 2014-12-2下午1:41:52
  */
-public class ApiEngine {
+public class PlutoApiEngine {
 
     /**
      * /**
@@ -45,7 +45,7 @@ public class ApiEngine {
      * s_ver 系统版本号
      * versionName   包的版本名称
      * versionCode   包的版本号
-     * pass 参数验证码  (pid+imei+versionCode+timestamp+"9kus")
+     * pass 参数验证码  认证签名md5(pid+imei+versionCode+timestamp+ApiUrl.MD5KEY)
      *
      * @return params
      */
@@ -154,7 +154,7 @@ public class ApiEngine {
      */
     public static <T> List<T> getListByCacheAdvance(String url, Map<String, Object> params, String key, Handler handler, int msgWhat, Class<T> clazz) {
 
-        CacheUtils cacheUtils = CacheUtils.getInstance();
+        PlutoFileCache cacheUtils = PlutoFileCache.getInstance();
         Gson gson = new Gson();
         String cacheContent = null;
         List<T> list = new ArrayList<T>();
@@ -251,7 +251,7 @@ public class ApiEngine {
      * @return
      */
     public static <T> List<T> getListByLimitTime(String url, Map<String, Object> params, String key, Handler handler, int msgWhat, int hour, Class<T> clazz) {
-        CacheUtils cacheUtils = CacheUtils.getInstance();
+        PlutoFileCache cacheUtils = PlutoFileCache.getInstance();
         Gson gson = new Gson();
         String cacheContent = null;
         List<T> list = new ArrayList<>();
@@ -417,7 +417,7 @@ public class ApiEngine {
      */
     public static <T> T getModelByCacheAdvance(String url, Map<String, Object> params, String key, Handler handler, int msgWhat, Class<T> clazz) {
 
-        CacheUtils cacheUtils = CacheUtils.getInstance();
+        PlutoFileCache cacheUtils = PlutoFileCache.getInstance();
         Gson gson = new Gson();
         String cacheContent = null;
         T t = null;
@@ -488,7 +488,7 @@ public class ApiEngine {
      * @return
      */
     public static <T> T getModelByGetLimitTime(String url, Map<String, Object> params, String key, Handler handler, int msgWhat, int hour, Class<T> clazz) {
-        CacheUtils cacheUtils = CacheUtils.getInstance();
+        PlutoFileCache cacheUtils = PlutoFileCache.getInstance();
         Gson gson = new Gson();
         String cacheContent = null;
         T t = null;

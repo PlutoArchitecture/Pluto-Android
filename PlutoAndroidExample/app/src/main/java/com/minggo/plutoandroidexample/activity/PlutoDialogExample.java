@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 
+import com.baidu.mobstat.StatService;
 import com.minggo.pluto.activity.PlutoActivity;
 import com.minggo.pluto.dialog.PlutoDialog;
 import com.minggo.pluto.dialog.PlutoDialog.PlutoDialogListener;
@@ -100,5 +101,17 @@ public class PlutoDialogExample extends PlutoActivity implements OnClickListener
     @Override
     public void cancel() {
         showToast("cancel button is clicked");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        StatService.onResume(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        StatService.onPause(this);
     }
 }

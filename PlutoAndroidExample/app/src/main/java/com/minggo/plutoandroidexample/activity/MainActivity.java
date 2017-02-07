@@ -16,6 +16,7 @@ import android.view.MenuItem;
 import android.view.View.OnClickListener;
 import android.widget.TextView;
 
+import com.baidu.mobstat.StatService;
 import com.minggo.pluto.*;
 import com.minggo.pluto.activity.PlutoActivity;
 import com.minggo.pluto.dialog.*;
@@ -134,8 +135,14 @@ public class MainActivity extends PlutoActivity
             startActivity(new Intent(this,PlutoDialogExample.class));
         } else if (id == R.id.nav_pluto_engine) {
             startActivity(new Intent(this,PlutoAPIEngineExample.class));
-        } else if (id == R.id.nav_pluto_fragment) {
-
+        } else if (id == R.id.nav_pluto_image_framework) {
+            startActivity(new Intent(this,PlutoImageFrameworkExample.class));
+        } else if (id == R.id.nav_pluto_network){
+            startActivity(new Intent(this,PlutoNetworkExample.class));
+        } else if (id == R.id.nav_pluto_file_cache){
+            startActivity(new Intent(this,PlutoFileCacheExample.class));
+        } else if (id == R.id.nav_pluto_db_cache){
+            startActivity(new Intent(this,PlutoORMDBFrameworkExample.class));
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -149,5 +156,17 @@ public class MainActivity extends PlutoActivity
     public void onClick(View view) {
         LogUtils.info(getClass().getSimpleName(), "点击进来了");
         showLicenseDialog.show();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        StatService.onResume(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        StatService.onPause(this);
     }
 }

@@ -13,10 +13,10 @@ import java.util.List;
  * @author minggo
  * @time 2014-12-2下午1:58:22
  */
-public class CacheUtils {
-	static CacheUtils cacheUtils;
+public class PlutoFileCache {
+	static PlutoFileCache cacheUtils;
 
-	private CacheUtils() {
+	private PlutoFileCache() {
 
 	}
 
@@ -25,9 +25,9 @@ public class CacheUtils {
 	 * 
 	 * @return
 	 */
-	public static CacheUtils getInstance() {
+	public static PlutoFileCache getInstance() {
 		if (null == cacheUtils) {
-			cacheUtils = new CacheUtils();
+			cacheUtils = new PlutoFileCache();
 		}
 		return cacheUtils;
 	}
@@ -37,18 +37,18 @@ public class CacheUtils {
 	 * 
 	 * @param key
 	 *            主键
-	 * @param cache_time_millis
+	 * @param cache_time_min
 	 *            分钟
 	 * @return
 	 */
-	public boolean isCacheDataFailure(String key, int cache_time_millis) {
-		cache_time_millis = cache_time_millis * 60000; // 把分钟转换为毫秒
+	public boolean isCacheDataFailure(String key, int cache_time_min) {
+		cache_time_min = cache_time_min * 60000; // 把分钟转换为毫秒
 		boolean failure = false;
 		File data = new File(Pluto.SDPATH + "cache/" + "cache_" + key
 				+ ".data");
 
 		if (data.exists()
-				&& (System.currentTimeMillis() - data.lastModified()) > cache_time_millis) {
+				&& (System.currentTimeMillis() - data.lastModified()) > cache_time_min) {
 			failure = true;
 		} else if (!data.exists()) {
 			failure = true;
@@ -62,17 +62,17 @@ public class CacheUtils {
 	 * 
 	 * @param path
 	 *            主键
-	 * @param cache_time_millis
+	 * @param cache_time_min
 	 *            分钟
 	 * @return
 	 */
-	public boolean isCacheDataFailurePath(String path, int cache_time_millis) {
-		cache_time_millis = cache_time_millis * 60000; // 把分钟转换为毫秒
+	public boolean isCacheDataFailurePath(String path, int cache_time_min) {
+		cache_time_min = cache_time_min * 60000; // 把分钟转换为毫秒
 		boolean failure = false;
 		File data = new File(path);
 
 		if (data.exists()
-				&& (System.currentTimeMillis() - data.lastModified()) > cache_time_millis) {
+				&& (System.currentTimeMillis() - data.lastModified()) > cache_time_min) {
 			failure = true;
 		} else if (!data.exists()) {
 			failure = true;

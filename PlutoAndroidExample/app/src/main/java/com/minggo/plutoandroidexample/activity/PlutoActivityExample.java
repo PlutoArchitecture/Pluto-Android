@@ -12,6 +12,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.baidu.mobstat.StatService;
 import com.minggo.pluto.activity.PlutoActivity;
 import com.minggo.pluto.bitmap.AsyncTask;
 import com.minggo.pluto.common.CommonAsyncTask;
@@ -134,5 +135,16 @@ public class PlutoActivityExample extends PlutoActivity implements OnClickListen
     public void onBackPressed() {
         super.onBackPressed();
         overridePendingTransition(R.anim.alpha_sllow_in, R.anim.push_right_out);
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        StatService.onResume(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        StatService.onPause(this);
     }
 }

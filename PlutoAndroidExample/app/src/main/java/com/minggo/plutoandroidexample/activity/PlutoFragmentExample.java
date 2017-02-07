@@ -6,6 +6,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.baidu.mobstat.StatService;
 import com.minggo.pluto.activity.PlutoActivity;
 import com.minggo.pluto.adapter.PlutoPagerAdapter;
 import com.minggo.plutoandroidexample.R;
@@ -65,5 +66,17 @@ public class PlutoFragmentExample extends PlutoActivity {
     public void onBackPressed() {
         super.onBackPressed();
         overridePendingTransition(R.anim.alpha_sllow_in, R.anim.push_right_out);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        StatService.onResume(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        StatService.onPause(this);
     }
 }
