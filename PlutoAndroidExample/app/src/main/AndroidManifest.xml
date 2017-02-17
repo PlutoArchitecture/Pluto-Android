@@ -11,31 +11,6 @@
     <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS"/>
     <uses-permission android:name="android.permission.ACCESS_DOWNLOAD_MANAGER"/>
 
-    <meta-data
-        android:name="BaiduMobAd_CHANNEL"
-        android:value="github"/>
-    <meta-data
-        android:name="BaiduMobAd_STAT_ID"
-        android:value="1606ffcdf5"/>
-    <meta-data
-        android:name="BaiduMobAd_EXCEPTION_LOG"
-        android:value="true"/>
-    <meta-data
-        android:name="BaiduMobAd_SEND_STRATEGY"
-        android:value="APP_START"/>
-    <meta-data
-        android:name="BaiduMobAd_ONLY_WIFI"
-        android:value="false"/>
-    <meta-data
-        android:name="BaiduMobAd_CELL_LOCATION"
-        android:value="true"/>
-    <meta-data
-        android:name="BaiduMobAd_GPS_LOCATION"
-        android:value="true"/>
-    <meta-data
-        android:name="BaiduMobAd_WIFI_LOCATION"
-        android:value="true"/>
-
     <application
         android:name=".common.PlutoApplication"
         android:allowBackup="true"
@@ -43,6 +18,31 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <meta-data
+            android:name="BaiduMobAd_CHANNEL"
+            android:value="github"/>
+        <meta-data
+            android:name="BaiduMobAd_STAT_ID"
+            android:value="1606ffcdf5"/>
+        <meta-data
+            android:name="BaiduMobAd_EXCEPTION_LOG"
+            android:value="true"/>
+        <meta-data
+            android:name="BaiduMobAd_SEND_STRATEGY"
+            android:value="APP_START"/>
+        <meta-data
+            android:name="BaiduMobAd_ONLY_WIFI"
+            android:value="false"/>
+        <meta-data
+            android:name="BaiduMobAd_CELL_LOCATION"
+            android:value="true"/>
+        <meta-data
+            android:name="BaiduMobAd_GPS_LOCATION"
+            android:value="true"/>
+        <meta-data
+            android:name="BaiduMobAd_WIFI_LOCATION"
+            android:value="true"/>
+
         <activity
             android:name=".activity.MainActivity"
             android:label="@string/app_name"
@@ -89,8 +89,11 @@
             android:name=".activity.PlutoFileCacheExample"
             android:label="PlutoFileCacheExample">
         </activity>
-        <activity android:name=".activity.PlutoORMDBFrameworkExample"
-                  android:label="PlutoORMDBFrameworkExample">
+        <activity
+            android:name=".activity.PlutoORMDBFrameworkExample"
+            android:label="PlutoORMDBFrameworkExample">
+        </activity>
+        <activity android:name=".activity.PlutoExceptionExample">
         </activity>
     </application>
 

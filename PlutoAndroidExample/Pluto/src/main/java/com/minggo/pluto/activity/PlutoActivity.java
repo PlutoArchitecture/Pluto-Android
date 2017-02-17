@@ -258,7 +258,6 @@ public abstract class PlutoActivity extends AppCompatActivity implements IActivi
 		onBackPressed();
 	}
 
-
 	/**
 	 * 停止定时器
 	 */
@@ -268,4 +267,5 @@ public abstract class PlutoActivity extends AppCompatActivity implements IActivi
 			timer = null;
 		}
 	}
+
 }

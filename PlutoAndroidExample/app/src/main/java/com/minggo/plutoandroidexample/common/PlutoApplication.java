@@ -2,6 +2,7 @@ package com.minggo.plutoandroidexample.common;
 
 import android.app.Application;
 
+import com.baidu.mobstat.StatService;
 import com.minggo.pluto.Pluto;
 import com.minggo.pluto.Pluto.DBConfig;
 

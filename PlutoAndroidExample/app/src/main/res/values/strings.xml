@@ -62,6 +62,14 @@
         "4.Following under usage example.\n"
     </string>
 
+    <string name="exception_text">
+        "PlutoException is a groba on FinalDb Framework,whick is good at managing Sqlite data translate to Java model exach other as ORM framework.\n\n"
+        "1.Playing attention to operate Java model to add,update,acquire and delete as JavaEE Hibernate framework \n"
+        "2.I modified FinalDb enables to define any column as primery key.\n"
+        "3.Mainly it's a Java Reflection and Annotation Technology .\n"
+        "4.Following under usage example.\n"
+    </string>
+
 
     <string name="title_activity_pluto_example">PlutoActivityExample</string>
     <string name="title_activity_pluto_fragment_example">PlutoFragmentExample</string>

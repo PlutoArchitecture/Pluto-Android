@@ -9,6 +9,7 @@ import android.widget.Button;
 import com.baidu.mobstat.StatService;
 import com.minggo.pluto.activity.PlutoActivity;
 import com.minggo.pluto.db.orm.FinalDb;
+import com.minggo.pluto.util.LogUtils;
 import com.minggo.pluto.util.PlutoFileCache;
 import com.minggo.plutoandroidexample.R;
 import com.minggo.plutoandroidexample.model.User;
@@ -44,7 +45,7 @@ public class PlutoORMDBFrameworkExample extends PlutoActivity implements OnClick
         user.userId = 1000;
         user.username = "minggo";
         user.email = "minggo8en@gmail.com";
-        finalDb.save(user);
+        finalDb.saveOrUpdate(user);
     }
 
 
@@ -66,13 +67,21 @@ public class PlutoORMDBFrameworkExample extends PlutoActivity implements OnClick
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.bt_save_db:
-                finalDb.save(user);
+                if (user==null){
+                    LogUtils.info("finalDb","user instance is not null");
+                }
+                finalDb.saveOrUpdate(user);
                 showToast("Data has been saved");
                 break;
             case R.id.bt_acquire_db:
 
                 User user1 = finalDb.findById(1000,User.class);
-                showToast("Query username = "+user1.username);
+                if (user1!=null){
+                    showToast("Query username = "+user1.username);
+                }else {
+                    showToast("Query data is null");
+
+                }
                 break;
             case R.id.bt_modify_db:
                 user.username = "minggo8en";

@@ -32,6 +32,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * @time 2014-12-29上午10:14:21
  */
 public abstract class CommonAsyncTask<Params, Progress, Result> implements Observer {
+
     private static final String TAG = "CommonAsyncTask";
 
     private static final int CORE_POOL_SIZE = 5;

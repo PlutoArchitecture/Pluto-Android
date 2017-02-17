@@ -24,7 +24,10 @@ import android.text.TextUtils;
 import android.util.Log;
 
 
+import com.minggo.pluto.Pluto;
 import com.minggo.pluto.Pluto.DBConfig;
+import com.minggo.pluto.common.AppContext;
+import com.minggo.pluto.common.AppManager;
 import com.minggo.pluto.util.LogUtils;
 
 import java.io.File;
@@ -234,6 +237,7 @@ public class FinalDb {
 	 * @param entity
 	 */
 	public void save(Object entity) {
+		LogUtils.info("finalDb",">>>>>>save data");
 		checkTableExist(entity.getClass());
 		exeSqlInfo(SqlBuilder.buildInsertSql(entity));
 	}
@@ -833,7 +837,7 @@ public class FinalDb {
 	}
 
 	public static class DaoConfig {
-		private Context mContext = null; // android上下文
+		private Context mContext = AppContext.getInstance().context; // android上下文
 		private String mDbName = DBConfig.NAME; // 数据库名字
 		private int dbVersion = DBConfig.VERSION; // 数据库版本
 		private boolean debug = true; // 是否是调试模式（调试模式 增删改查的时候显示SQL语句）
