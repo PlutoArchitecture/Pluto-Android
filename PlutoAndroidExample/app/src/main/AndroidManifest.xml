@@ -93,7 +93,7 @@
             android:name=".activity.PlutoORMDBFrameworkExample"
             android:label="PlutoORMDBFrameworkExample">
         </activity>
-        <activity android:name=".activity.PlutoExceptionExample">
+        <activity android:name=".activity.PlutoUtilsActivity">
         </activity>
     </application>
 

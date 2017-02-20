@@ -21,7 +21,7 @@ public class EncryptUtils {
 
 	public static final String ALGORITHM_DES = "DES/CBC/PKCS5Padding";
 	
-	public static final String PARSE_RULE_KEY = "BiBiRule";
+	public static final String PARSE_RULE_KEY = "pluto";
 	
 	/**
 	 * md5加密

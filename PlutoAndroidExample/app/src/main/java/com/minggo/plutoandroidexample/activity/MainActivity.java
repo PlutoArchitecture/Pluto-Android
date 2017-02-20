@@ -147,6 +147,8 @@ public class MainActivity extends PlutoActivity
             startActivity(new Intent(this,PlutoFileCacheExample.class));
         } else if (id == R.id.nav_pluto_db_cache){
             startActivity(new Intent(this,PlutoORMDBFrameworkExample.class));
+        } else if (id == R.id.nav_pluto_utils){
+            startActivity(new Intent(this,PlutoUtilsActivity.class));
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

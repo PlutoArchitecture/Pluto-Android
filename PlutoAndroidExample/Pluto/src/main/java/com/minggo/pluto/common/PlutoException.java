@@ -1,14 +1,20 @@
 package com.minggo.pluto.common;
 
+import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.os.Environment;
+import android.os.Looper;
 import android.widget.Toast;
 
 
 import com.minggo.pluto.Pluto;
 import com.minggo.pluto.R;
 import com.minggo.pluto.util.FileUtils;
+import com.minggo.pluto.util.LogUtils;
 
 import org.apache.commons.httpclient.HttpException;
 
@@ -243,6 +249,7 @@ public class PlutoException extends Exception implements UncaughtExceptionHandle
      * @return true:处理了该异常信息;否则返回false
      */
     private boolean handleException(Throwable ex) {
+        LogUtils.info("plutoexception",">>>>>handle exception");
         if (ex == null) {
             return false;
         }
@@ -250,19 +257,73 @@ public class PlutoException extends Exception implements UncaughtExceptionHandle
         final Context context = AppManager.getAppManager().currentActivity();
 
         if (context == null) {
+            LogUtils.info("plutoexception",">>>>>context is null");
             return false;
         }
 
         final String crashReport = getCrashReport(ex);
         ex.printStackTrace();
-        FileUtils.WriterTxtFile(filepath, filename, crashReport, true);//写到本地
-        FileUtils.WriterTxtFile(crashfilepath, filename, crashReport, true);//写到本地
-//		AppManager.getAppManager().App_Exit(context);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                FileUtils.WriterTxtFile(filepath, filename, crashReport, true);//写到本地
+                FileUtils.WriterTxtFile(crashfilepath, filename, crashReport, true);//写到本地
+            }
+        }).start();
+        //FileUtils.WriterTxtFile(filepath, filename, crashReport, true);//写到本地
+        //FileUtils.WriterTxtFile(crashfilepath, filename, crashReport, true);//写到本地
+		//AppManager.getAppManager().App_Exit(context);
         //显示异常信息&发送报告
-//		System.out.println("<<<handleException:"+ex.getMessage());
-
+		System.out.println("<<<handleException:"+ex.getMessage());
+//        new Thread() {
+//            public void run() {
+//                Looper.prepare();
+//                sendAppCrashReport(context, crashReport);
+//                Looper.loop();
+//            }
+//        }.start();
         return true;
     }
+
+    /**
+     * 发送App异常崩溃报告
+     * @param cont
+     * @param crashReport
+     */
+    public static void sendAppCrashReport(final Context cont, final String crashReport)
+    {
+        AlertDialog.Builder builder = new AlertDialog.Builder(cont);
+        builder.setIcon(android.R.drawable.ic_dialog_info);
+        builder.setTitle(R.string.app_error);
+        builder.setMessage(R.string.app_error_message);
+        builder.setPositiveButton("取消", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+                LogUtils.debug("AppException UIHelper", "有异常日志，下次打开提交");
+                System.exit(0);//这个地方最好根据自己实际情况先finish所有的activity先
+
+            }
+        });
+        builder.setNegativeButton("发送", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+                try {
+                    File file = new File(PlutoException.filepath);
+                    if (file.exists()) {
+                        file = new File(PlutoException.filepath+PlutoException.filename);
+                        if (file.exists()) {
+                            file.delete();
+                        }
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                System.exit(0);//这个地方最好根据自己实际情况先finish所有的activity先
+            }
+        });
+        builder.show();
+    }
+
 
     /**
      * 获取APP崩溃异常报告

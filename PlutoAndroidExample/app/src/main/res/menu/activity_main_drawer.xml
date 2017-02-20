@@ -26,9 +26,6 @@
         android:id="@+id/nav_pluto_db_cache"
         android:title="PlutoORMDBFramework"/>
     <item
-        android:id="@+id/nav_pluto_exception"
-        android:title="PlutoException"/>
-    <item
         android:id="@+id/nav_pluto_utils"
         android:title="PlutoSomeUtils"/>
 

@@ -70,6 +70,18 @@
         "4.Following under usage example.\n"
     </string>
 
+    <string name="util_text">
+        "Flexiable general utils for many kinds of function dealing.following is a simple introduction.\n\n"
+        "1.BitmapUtil is for bitmap clipping ,such as scale,resize,type and so on.\n"
+        "2.DateUtil is for varies da
+        te formate.\n"
+        "3.EncryptUtil is for MD5 and DES ecnryption and decryption.\n"
+        "4.DisplayUtil is for android unit conversion,for example, px converses dp.\n"
+        "5.NetworkUtil is for charge netowrk and found out network type.\n"
+        "...\n"
+        "more util you can find in package com.minggo.pluto.util".
+    </string>
+
 
     <string name="title_activity_pluto_example">PlutoActivityExample</string>
     <string name="title_activity_pluto_fragment_example">PlutoFragmentExample</string>
