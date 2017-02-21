@@ -8,7 +8,8 @@ import android.widget.Button;
 
 import com.baidu.mobstat.StatService;
 import com.minggo.pluto.activity.PlutoActivity;
-import com.minggo.pluto.db.orm.FinalDb;
+import com.minggo.pluto.db.manager.DataManagerProxy;
+import com.minggo.pluto.db.manager.DataManagerProxy.DataType;
 import com.minggo.pluto.util.LogUtils;
 import com.minggo.pluto.util.PlutoFileCache;
 import com.minggo.plutoandroidexample.R;
@@ -33,19 +34,19 @@ public class PlutoORMDBFrameworkExample extends PlutoActivity implements OnClick
     @BindView(R.id.bt_delete_db)
     public Button deletet;
 
-    private FinalDb finalDb;
+    private DataManagerProxy dataManagerProxy;
     private User user;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pluto_ormdbframework_example);
         ButterKnife.bind(this);
-        finalDb = FinalDb.create(this);
+        dataManagerProxy = DataManagerProxy.getInstance(DataType.SQLITE);
         user = new User();
         user.userId = 1000;
         user.username = "minggo";
         user.email = "minggo8en@gmail.com";
-        finalDb.saveOrUpdate(user);
+        dataManagerProxy.saveOrUpdate(user);
     }
 
 
@@ -70,12 +71,12 @@ public class PlutoORMDBFrameworkExample extends PlutoActivity implements OnClick
                 if (user==null){
                     LogUtils.info("finalDb","user instance is not null");
                 }
-                finalDb.saveOrUpdate(user);
+                dataManagerProxy.saveOrUpdate(user);
                 showToast("Data has been saved");
                 break;
             case R.id.bt_acquire_db:
+                User user1 = dataManagerProxy.queryData(1000,User.class);
 
-                User user1 = finalDb.findById(1000,User.class);
                 if (user1!=null){
                     showToast("Query username = "+user1.username);
                 }else {
@@ -85,11 +86,11 @@ public class PlutoORMDBFrameworkExample extends PlutoActivity implements OnClick
                 break;
             case R.id.bt_modify_db:
                 user.username = "minggo8en";
-                finalDb.update(user);
+                dataManagerProxy.saveOrUpdate(user);
                 showToast("Data has been modified");
                 break;
             case R.id.bt_delete_db:
-                finalDb.delete(user);
+                dataManagerProxy.deleteData(1000,User.class);
                 showToast("Data has been deleted");
                 break;
             default:

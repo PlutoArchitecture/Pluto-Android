@@ -8,11 +8,9 @@ import android.widget.Button;
 
 import com.baidu.mobstat.StatService;
 import com.minggo.pluto.activity.PlutoActivity;
-import com.minggo.pluto.util.PlutoFileCache;
+import com.minggo.pluto.db.manager.DataManagerProxy;
+import com.minggo.pluto.db.manager.DataManagerProxy.DataType;
 import com.minggo.plutoandroidexample.R;
-
-import java.io.IOException;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -32,11 +30,15 @@ public class PlutoFileCacheExample extends PlutoActivity implements OnClickListe
     private String data;
     private String key;
 
+    private DataManagerProxy dataManagerProxy;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pluto_file_cache_example);
         ButterKnife.bind(this);
+        dataManagerProxy = DataManagerProxy.getInstance(DataType.FILECACHE);
+
         data = "This is String data";
         key = "plutokey";
     }
@@ -58,18 +60,15 @@ public class PlutoFileCacheExample extends PlutoActivity implements OnClickListe
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.bt_charge_expired:
-                showToast("File is expired = "+ PlutoFileCache.getInstance().isCacheDataFailure(key,1));
+                showToast("File is expired = "+ dataManagerProxy.isExpiredFile(key,1));
                 break;
             case R.id.bt_save:
-                try {
-                    PlutoFileCache.getInstance().setDiskCache(key,data);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                dataManagerProxy.saveData(key,data);
+
                 showToast("Data is saved");
                 break;
             case R.id.bt_get:
-                showToast(PlutoFileCache.getInstance().getDiskCache(key));
+                showToast(dataManagerProxy.queryData(key,String.class));
                 break;
             default:
                 break;

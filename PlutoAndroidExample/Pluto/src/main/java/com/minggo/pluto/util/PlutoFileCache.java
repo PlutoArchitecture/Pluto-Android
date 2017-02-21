@@ -1,6 +1,8 @@
 package com.minggo.pluto.util;
 
 import com.minggo.pluto.Pluto;
+import com.minggo.pluto.db.manager.DataManager;
+import com.minggo.pluto.db.manager.DataManagerStub;
 
 import java.io.File;
 import java.io.IOException;
@@ -13,7 +15,7 @@ import java.util.List;
  * @author minggo
  * @time 2014-12-2下午1:58:22
  */
-public class PlutoFileCache {
+public class PlutoFileCache extends DataManagerStub{
 	static PlutoFileCache cacheUtils;
 
 	private PlutoFileCache() {
@@ -153,5 +155,32 @@ public class PlutoFileCache {
 
 	public File getDiskCacheFile(String key) {
 		return new File(Pluto.SDPATH + "cache/" + "cache_" + key + ".data");
+	}
+
+	@Override
+	public void saveData(Object key, Object object) {
+		super.saveData(key, object);
+		try {
+			setDiskCache(key.toString(),object.toString());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public <T> T queryData(Object key, Class<T> clazz) {
+		 return (T)getDiskCache(key.toString());
+	}
+
+	@Override
+	public <T> void deleteData(Object key, Class<T> clazz) {
+		super.deleteData(key, clazz);
+		removeDiskCache(key.toString());
+	}
+
+	@Override
+	public void updateData(Object key, Object object) {
+		super.updateData(key, object);
+		saveData(key,object);
 	}
 }
