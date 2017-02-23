@@ -23,7 +23,7 @@ import static com.minggo.pluto.logic.LogicManager.ReturnDataType.*;
  * Created by minggo on 2017/2/21.
  */
 
-public class LogicManager extends CommonAsyncTask {
+public class LogicManager extends CommonAsyncTask<Object, Void, Object> {
 
     public static final String TAG = "LOGICMANAGER";
 

@@ -1,0 +1,110 @@
+@startuml
+ title \npluto框架的构架图
+ package NetworkFramework <<Cloud>> {
+   class ApiClient
+   class StringUtil
+   class HttpClient
+   class ApiUrl
+ }
+package DataFramework <<Database>> {
+  interface DataManager{
+    -saveData(...);
+    -T queryData(...);
+    -void deleteData(...);
+    -void updateData(..);
+  }
+  class DataManagerStub
+  class DataManagerProxy{
+    +dataManagerStub;
+    +getInstance(Emu stubType);
+  }
+
+  class FinalDb{
+
+  }
+  class SharePreferenceUtil
+  class PlutoFileCache
+}
+
+package UIFramework <<Folder>> {
+  class PlutoActivity{
+    Integrate function
+    ~handleUiMessage();
+  }
+  class ButterKnife
+  interface IActivity
+  class PlutoDialog
+  class UiHandler
+  class Gson
+  class Toast
+  class AppCompatActivity
+  class ChildActivity
+  class FinalBitmap
+}
+
+package ServiceManager <<Folder>> {
+  class LogicChild{
+    -doInBackground();
+    -postExcute();
+  }
+  class CommonAsyncTask{
+    +ThreadFactory
+    +ThreadPoolExecutor
+    +InternalHandler
+    -doInBackground();
+    -update(Observable o, Object arg);
+  }
+  class PlutoApiEngine{
+    +addRequiredParam();
+    +<T> T get..(...)
+    +<T> T post...(...)
+    +<T> List<T> ...(...)
+  }
+  interface Observer
+  class Observable
+  class AsyncTaskManager{
+    -cancelAll();
+    -addTask(Observer task);
+  }
+  class LogicManager{
+    -<T> LogicManager(...);
+    -splitEnum(...)
+    -<T> T startEngine(...);
+  }
+  class LogicParam
+}
+
+ "AppCompatActivity"<|-left-"PlutoActivity"
+ "PlutoActivity" .left.|>"IActivity"
+ "PlutoActivity" -up->"UiHandler"
+ "PlutoActivity" -up->"Gson"
+ "ChildActivity" -up-|>"PlutoActivity"
+ "ChildActivity" -right->"ButterKnife"
+ "ChildActivity" .left->"FinalBitmap"
+ "PlutoActivity" -up->"Toast"
+ "PlutoActivity" -up->"PlutoDialog"
+
+
+ "ChildActivity"  "1" o.. "0.*" "LogicManager"
+ "LogicChild"-up-|>"LogicManager"
+ "LogicManager"-left->"LogicParam"
+ "LogicManager"-right-|>"CommonAsyncTask"
+ "CommonAsyncTask".down.|>"Observer"
+ "LogicChild".down.>"PlutoApiEngine"
+ "CommonAsyncTask" "0..*".left.o "1" "AsyncTaskManager"
+ "AsyncTaskManager" -down-|> "Observable"
+
+ "PlutoApiEngine"..down.>"DataManagerProxy"
+ "PlutoApiEngine"..left.>"ApiClient"
+
+ "ApiClient"-left->"HttpClient"
+ "HttpClient"-up->"ApiUrl"
+ "HttpClient"-up->"StringUtil"
+
+ "DataManagerStub".right.|>"DataManager"
+ "FinalDb"-up-|>"DataManagerStub"
+ "SharePreferenceUtil"-up-|>"DataManagerStub"
+ "PlutoFileCache"-up-|>"DataManagerStub"
+ "DataManagerProxy"-->"DataManagerStub"
+
+@enduml
