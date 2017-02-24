@@ -40,6 +40,7 @@ package UIFramework <<Folder>> {
   class AppCompatActivity
   class ChildActivity
   class FinalBitmap
+  class PlutoFragment
 }
 
 package ServiceManager <<Folder>> {
@@ -83,6 +84,7 @@ package ServiceManager <<Folder>> {
  "ChildActivity" .left->"FinalBitmap"
  "PlutoActivity" -up->"Toast"
  "PlutoActivity" -up->"PlutoDialog"
+ "PlutoActivity" "1" o.up."0.*" "PlutoFragment"
 
 
  "ChildActivity"  "1" o.. "0.*" "LogicManager"

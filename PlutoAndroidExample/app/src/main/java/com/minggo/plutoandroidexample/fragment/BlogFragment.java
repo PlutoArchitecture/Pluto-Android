@@ -113,5 +113,4 @@ public class BlogFragment extends PlutoFragment {
         setContentShown(true);
     }
 
-
 }
