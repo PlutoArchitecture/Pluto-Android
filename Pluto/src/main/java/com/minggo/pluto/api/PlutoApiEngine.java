@@ -5,14 +5,15 @@ import android.text.TextUtils;
 
 import com.google.gson.Gson;
 import com.minggo.pluto.common.AppContext;
-import com.minggo.pluto.common.AppException;
-import com.minggo.pluto.common.CacheUtils;
-import com.minggo.pluto.common.SharePreferenceUtils;
+import com.minggo.pluto.common.PlutoException;
+import com.minggo.pluto.db.manager.DataManager;
+import com.minggo.pluto.db.manager.DataManagerProxy;
+import com.minggo.pluto.db.manager.DataManagerProxy.DataType;
+import com.minggo.pluto.util.SharePreferenceUtils;
 import com.minggo.pluto.model.Result;
 import com.minggo.pluto.util.EncryptUtils;
 import com.minggo.pluto.util.LogUtils;
 import com.minggo.pluto.util.StringUtils;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 
@@ -32,7 +33,7 @@ import java.util.Map;
  * @author minggo
  * @time 2014-12-2下午1:41:52
  */
-public class ApiEngine {
+public class PlutoApiEngine {
 
     /**
      * /**
@@ -45,7 +46,7 @@ public class ApiEngine {
      * s_ver 系统版本号
      * versionName   包的版本名称
      * versionCode   包的版本号
-     * pass 参数验证码  (pid+imei+versionCode+timestamp+"9kus")
+     * pass 参数验证码  认证签名md5(pid+imei+versionCode+timestamp+ApiUrl.MD5KEY)
      *
      * @return params
      */
@@ -69,9 +70,11 @@ public class ApiEngine {
         }
 
         String imeiTime;
-        if (TextUtils.isEmpty(imeiTime = SharePreferenceUtils.getString(AppContext.getInstance().context, SharePreferenceUtils.USER_CONFING, ApiUrl.IMEI_TIME))) {
+        DataManagerProxy dataManagerProxy = DataManagerProxy.getInstance(DataType.SHAREPREFERENCE);
+
+        if (TextUtils.isEmpty(imeiTime = dataManagerProxy.queryByNameAndKey(SharePreferenceUtils.USER_CONFING, ApiUrl.IMEI_TIME))) {
             imeiTime = timestamp;
-            SharePreferenceUtils.putStringByDefaultSP(AppContext.getInstance().context, ApiUrl.IMEI_TIME, imeiTime);
+            dataManagerProxy.saveByNameAndKey(SharePreferenceUtils.USER_CONFING, ApiUrl.IMEI_TIME,imeiTime);
         }
         LogUtils.info("imeiTime-->" + imeiTime);
         try {
@@ -119,9 +122,10 @@ public class ApiEngine {
         String timestamp = String.valueOf(System.currentTimeMillis()).substring(0, 10);
 
         String imeiTime;
-        if (TextUtils.isEmpty(imeiTime = SharePreferenceUtils.getString(AppContext.getInstance().context, SharePreferenceUtils.USER_CONFING, ApiUrl.IMEI_TIME))) {
+        DataManagerProxy dataManagerProxy = DataManagerProxy.getInstance(DataType.SHAREPREFERENCE);
+        if (TextUtils.isEmpty(imeiTime = dataManagerProxy.queryByNameAndKey(SharePreferenceUtils.USER_CONFING, ApiUrl.IMEI_TIME))) {
             imeiTime = timestamp;
-            SharePreferenceUtils.putStringByDefaultSP(AppContext.getInstance().context, ApiUrl.IMEI_TIME, imeiTime);
+            dataManagerProxy.saveByNameAndKey(SharePreferenceUtils.USER_CONFING, ApiUrl.IMEI_TIME,imeiTime);
         }
         LogUtils.info("imeiTime-->" + imeiTime);
         try {
@@ -154,13 +158,15 @@ public class ApiEngine {
      */
     public static <T> List<T> getListByCacheAdvance(String url, Map<String, Object> params, String key, Handler handler, int msgWhat, Class<T> clazz) {
 
-        CacheUtils cacheUtils = CacheUtils.getInstance();
+        DataManagerProxy dataManagerProxy = DataManagerProxy.getInstance(DataType.FILECACHE);
+
+        //PlutoFileCache cacheUtils = PlutoFileCache.getInstance();
         Gson gson = new Gson();
         String cacheContent = null;
         List<T> list = new ArrayList<T>();
 
         try {
-            cacheContent = cacheUtils.getDiskCache(key);
+            cacheContent = dataManagerProxy.queryData(key,String.class);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -191,7 +197,7 @@ public class ApiEngine {
         Result<List<T>> result = null;
         try {
             result = ApiClient.httpGetList(url, params);
-        } catch (AppException e) {
+        } catch (PlutoException e) {
             e.printStackTrace();
         }
 
@@ -233,8 +239,9 @@ public class ApiEngine {
         }
         // 添加SD卡缓存开始
         try {
-            cacheUtils.setDiskCache(key, gson.toJson(result.content));
-        } catch (IOException e) {
+            dataManagerProxy.saveData(key,gson.toJson(result.content));
+            //cacheUtils.setDiskCache(key, gson.toJson(result.content));
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return list;
@@ -251,14 +258,17 @@ public class ApiEngine {
      * @return
      */
     public static <T> List<T> getListByLimitTime(String url, Map<String, Object> params, String key, Handler handler, int msgWhat, int hour, Class<T> clazz) {
-        CacheUtils cacheUtils = CacheUtils.getInstance();
+        DataManagerProxy dataManagerProxy = DataManagerProxy.getInstance(DataType.FILECACHE);
+
+        //PlutoFileCache cacheUtils = PlutoFileCache.getInstance();
         Gson gson = new Gson();
         String cacheContent = null;
         List<T> list = new ArrayList<>();
 
         try {
             //获取缓存
-            cacheContent = cacheUtils.getDiskCache(key);
+            //cacheContent = cacheUtils.getDiskCache(key);
+            cacheContent = dataManagerProxy.queryData(key,String.class);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -277,7 +287,7 @@ public class ApiEngine {
                 }
                 //缓存不是空数组
                 if (!list.isEmpty()) {
-                    if (!cacheUtils.isCacheDataFailure(key, 60 * hour)) {
+                    if (!dataManagerProxy.isExpiredFile(key, 60 * hour)) {
                         handler.obtainMessage(msgWhat, list).sendToTarget();
                     }
                 }
@@ -294,7 +304,7 @@ public class ApiEngine {
         try {
             //网络请求
             result = ApiClient.httpGetList(url, params);
-        } catch (AppException e) {
+        } catch (PlutoException e) {
             e.printStackTrace();
         }
 
@@ -335,8 +345,9 @@ public class ApiEngine {
         }
         // 添加SD卡缓存开始
         try {
-            cacheUtils.setDiskCache(key, gson.toJson(result.content));
-        } catch (IOException e) {
+            dataManagerProxy.saveData(key,gson.toJson(result.content));
+            //cacheUtils.setDiskCache(key, gson.toJson(result.content));
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return list;
@@ -361,7 +372,7 @@ public class ApiEngine {
         Result<List<T>> result = null;
         try {
             result = ApiClient.httpGetList(url, params);
-        } catch (AppException e) {
+        } catch (PlutoException e) {
             e.printStackTrace();
         }
         //返回空列表
@@ -417,14 +428,16 @@ public class ApiEngine {
      */
     public static <T> T getModelByCacheAdvance(String url, Map<String, Object> params, String key, Handler handler, int msgWhat, Class<T> clazz) {
 
-        CacheUtils cacheUtils = CacheUtils.getInstance();
+        DataManagerProxy dataManagerProxy = DataManagerProxy.getInstance(DataType.FILECACHE);
+
+        //PlutoFileCache cacheUtils = PlutoFileCache.getInstance();
         Gson gson = new Gson();
         String cacheContent = null;
         T t = null;
 
         try {
-
-            cacheContent = cacheUtils.getDiskCache(key);
+            cacheContent = dataManagerProxy.queryData(key,String.class);
+            //cacheContent = cacheUtils.getDiskCache(key);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -449,7 +462,7 @@ public class ApiEngine {
         Result<T> result = null;
         try {
             result = ApiClient.httpGetModel(url, params, true);
-        } catch (AppException e) {
+        } catch (PlutoException e) {
             e.printStackTrace();
         }
 
@@ -466,8 +479,9 @@ public class ApiEngine {
         }
         // 添加SD卡缓存开始
         try {
-            cacheUtils.setDiskCache(key, gson.toJson(result.content));
-        } catch (IOException e) {
+            dataManagerProxy.saveData(key,gson.toJson(result.content));
+            //cacheUtils.setDiskCache(key, gson.toJson(result.content));
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return t;
@@ -488,14 +502,15 @@ public class ApiEngine {
      * @return
      */
     public static <T> T getModelByGetLimitTime(String url, Map<String, Object> params, String key, Handler handler, int msgWhat, int hour, Class<T> clazz) {
-        CacheUtils cacheUtils = CacheUtils.getInstance();
+        //PlutoFileCache cacheUtils = PlutoFileCache.getInstance();
+        DataManagerProxy dataManagerProxy = DataManagerProxy.getInstance(DataType.FILECACHE);
         Gson gson = new Gson();
         String cacheContent = null;
         T t = null;
 
         try {
-
-            cacheContent = cacheUtils.getDiskCache(key);
+            //cacheContent = cacheUtils.getDiskCache(key);
+            cacheContent = dataManagerProxy.queryData(key,String.class);
             t = StringUtils.isEmpty(cacheContent) ? null : gson.fromJson(cacheContent, clazz);
 
         } catch (Exception e) {
@@ -503,7 +518,7 @@ public class ApiEngine {
         }
 
         if (t != null) {
-            if (!cacheUtils.isCacheDataFailure(key, hour * 60)) {
+            if (!dataManagerProxy.isExpiredFile(key, hour * 60)) {
                 handler.obtainMessage(msgWhat, t).sendToTarget();
             }
         }
@@ -515,7 +530,7 @@ public class ApiEngine {
         Result<T> result = null;
         try {
             result = (Result<T>) ApiClient.httpGetModel(url, params, true);
-        } catch (AppException e) {
+        } catch (PlutoException e) {
             e.printStackTrace();
         }
 
@@ -532,8 +547,9 @@ public class ApiEngine {
         }
         // 添加SD卡缓存开始
         try {
-            cacheUtils.setDiskCache(key, gson.toJson(result.content));
-        } catch (IOException e) {
+            dataManagerProxy.saveData(key,gson.toJson(result.content));
+            //cacheUtils.setDiskCache(key, gson.toJson(result.content));
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return t;
@@ -559,7 +575,7 @@ public class ApiEngine {
         Result<T> result = null;
         try {
             result = (Result<T>) ApiClient.httpGetModel(url, params, true);
-        } catch (AppException e) {
+        } catch (PlutoException e) {
             e.printStackTrace();
         }
 
@@ -594,7 +610,7 @@ public class ApiEngine {
         try {
             result = ApiClient.httpGetModel(url, params, true);
             params = null;
-        } catch (AppException e) {
+        } catch (PlutoException e) {
             e.printStackTrace();
         }
         if (result == null) {
@@ -622,7 +638,7 @@ public class ApiEngine {
             result = ApiClient.httpPostModel(url, params, files, false);
             params = null;
             files = null;
-        } catch (AppException e) {
+        } catch (PlutoException e) {
             e.printStackTrace();
         }
         if (result == null) {
@@ -652,7 +668,7 @@ public class ApiEngine {
         try {
             result = ApiClient.httpPostModel(url, params, null, false);
             params = null;
-        } catch (AppException e) {
+        } catch (PlutoException e) {
             e.printStackTrace();
         }
         if (result == null) {
@@ -685,7 +701,7 @@ public class ApiEngine {
         Result<T> result = null;
         try {
             result = (Result<T>) ApiClient.httpPostModel(url, params,null, false);
-        } catch (AppException e) {
+        } catch (PlutoException e) {
             e.printStackTrace();
         }
 

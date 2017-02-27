@@ -12,6 +12,8 @@ import android.widget.Toast;
 import com.minggo.pluto.bitmap.BitmapDisplayConfig;
 import com.minggo.pluto.bitmap.FinalBitmap;
 import com.minggo.pluto.common.CommonAsyncTask;
+import com.minggo.pluto.dialog.PlutoDialog;
+import com.minggo.pluto.util.NetworkUtils;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -35,6 +37,7 @@ public abstract class PlutoFragment extends ProgressFragment implements IFragmen
 	protected Handler mUiHandler = new UiHandler(this);
 	protected FinalBitmap finalBitmap;
 	protected BitmapDisplayConfig bitmapDisplayConfig;
+	protected PlutoDialog loadingDialog;
 
 	private static class UiHandler extends Handler {
 		private final WeakReference<PlutoFragment> mFragmentReference;
@@ -59,6 +62,7 @@ public abstract class PlutoFragment extends ProgressFragment implements IFragmen
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		isCreated = true;
+		initLoadingDialog();
 	}
 	
 	@Override
@@ -137,7 +141,8 @@ public abstract class PlutoFragment extends ProgressFragment implements IFragmen
 	}
 
 	protected abstract void showData();
-	
+
+
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
@@ -283,5 +288,14 @@ public abstract class PlutoFragment extends ProgressFragment implements IFragmen
 	public void onVisibleToUserChanged(boolean isVisibleToUser, boolean invokeInResumeOrPause) {
 
 	}
-	
+
+	/**
+	 * 检测网络是否可用
+	 */
+	public boolean isNetworkConnected() {
+		return NetworkUtils.isNetworkConnected(this.getContext());
+	}
+	private void initLoadingDialog(){
+		loadingDialog = new PlutoDialog(this.getContext(),PlutoDialog.LOADING);
+	}
 }

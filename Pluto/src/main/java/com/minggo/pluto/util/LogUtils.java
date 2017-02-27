@@ -5,7 +5,7 @@ import android.os.Environment;
 import android.text.TextUtils;
 import android.util.Log;
 
-import com.minggo.pluto.PlutoConfig;
+import com.minggo.pluto.Pluto;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -21,7 +21,7 @@ import java.util.Date;
  */
 public class LogUtils {
 
-	public static boolean DISP = PlutoConfig.LOG_SHOW;
+	public static boolean DISP = Pluto.LOG_SHOW;
 
 	public static String DEFAULT_TAG = "9kus";
 	private final static String UMENG_PAGE_TAG = "UmengPageTrack";
@@ -47,7 +47,7 @@ public class LogUtils {
 
 	private static File getIsDispLogFile() {
 		String isDispLog_FileName = "show";
-		return new File(PlutoConfig.SDPATH, isDispLog_FileName);
+		return new File(Pluto.SDPATH, isDispLog_FileName);
 	}
 
 	public static void removeIsDISPLogFile() {
@@ -178,7 +178,7 @@ public class LogUtils {
 	public static void fileWrite(String filename, String message) {
 		if (DISP) {
 			if (message != null) {
-				FileUtils.WriterTxtFile(PlutoConfig.SDPATH, "/sdcard/"+PlutoConfig.APP_CACHE_FILE+"/" + filename + ".txt", message, false);
+				FileUtils.WriterTxtFile(Pluto.SDPATH, "/sdcard/"+ Pluto.APP_CACHE_FILE+"/" + filename + ".txt", message, false);
 			}
 		}
 	}
@@ -202,7 +202,7 @@ public class LogUtils {
 				// 判断是否挂载了SD卡
 				String storageState = Environment.getExternalStorageState();
 				if (storageState.equals(Environment.MEDIA_MOUNTED)) {
-					savePath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/"+PlutoConfig.APP_CACHE_FILE+"/Log/";
+					savePath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/"+ Pluto.APP_CACHE_FILE+"/Log/";
 					File file = new File(savePath);
 					if (!file.exists()) {
 						file.mkdirs();
@@ -261,7 +261,7 @@ public class LogUtils {
 				// 判断是否挂载了SD卡
 				String storageState = Environment.getExternalStorageState();
 				if (storageState.equals(Environment.MEDIA_MOUNTED)) {
-					savePath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/"+PlutoConfig.APP_CACHE_FILE+"/Log/";
+					savePath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/"+ Pluto.APP_CACHE_FILE+"/Log/";
 					File file = new File(savePath);
 					if (!file.exists()) {
 						file.mkdirs();
@@ -318,7 +318,7 @@ public class LogUtils {
 				// 判断是否挂载了SD卡
 				String storageState = Environment.getExternalStorageState();
 				if (storageState.equals(Environment.MEDIA_MOUNTED)) {
-					savePath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/"+PlutoConfig.APP_CACHE_FILE+"/Log/";
+					savePath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/"+ Pluto.APP_CACHE_FILE+"/Log/";
 					File file = new File(savePath);
 					if (!file.exists()) {
 						file.mkdirs();
@@ -375,7 +375,7 @@ public class LogUtils {
 				// 判断是否挂载了SD卡
 				String storageState = Environment.getExternalStorageState();
 				if (storageState.equals(Environment.MEDIA_MOUNTED)) {
-					savePath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/"+PlutoConfig.APP_CACHE_FILE+"/Log/";
+					savePath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/"+ Pluto.APP_CACHE_FILE+"/Log/";
 					File file = new File(savePath);
 					if (!file.exists()) {
 						file.mkdirs();

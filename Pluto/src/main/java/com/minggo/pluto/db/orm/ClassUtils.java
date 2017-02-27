@@ -15,6 +15,8 @@
  */
 package com.minggo.pluto.db.orm;
 
+import com.minggo.pluto.util.LogUtils;
+
 import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
@@ -97,6 +99,7 @@ public class ClassUtils {
 			
 			for(Field field : fields){ //获取ID注解
 				if(field.getAnnotation(Id_A.class) != null){
+					LogUtils.info("finalDb",">>>>>idFeild is not null");
 					primaryKeyField = field;
 					break;
 				}

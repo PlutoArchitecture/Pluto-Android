@@ -22,7 +22,7 @@ import com.minggo.pluto.util.NetworkUtils;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Timer;
-
+import static com.minggo.pluto.logic.LogicManager.LogicManagerType.*;
 /**
  * Activity的基类添加到应用管理堆栈和异步任务统一管理取消 添加handle处理统一使用[2015-1-27]
  * 
@@ -258,7 +258,6 @@ public abstract class PlutoActivity extends AppCompatActivity implements IActivi
 		onBackPressed();
 	}
 
-
 	/**
 	 * 停止定时器
 	 */
@@ -268,4 +267,5 @@ public abstract class PlutoActivity extends AppCompatActivity implements IActivi
 			timer = null;
 		}
 	}
+
 }

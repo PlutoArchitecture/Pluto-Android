@@ -23,8 +23,6 @@ import com.minggo.pluto.util.StringUtils;
 public class AppContext {
 	private static AppContext appContext;
 
-	public static final String PREFERENCE_BIBI = "com.mengmengda.bibi";
-	public static final String APPEXCEPTION = "appexception";
 	private String mPlatformId;
 	public Context context;
 

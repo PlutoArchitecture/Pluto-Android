@@ -17,6 +17,8 @@ package com.minggo.pluto.db.orm;
 
 import android.text.TextUtils;
 
+import com.minggo.pluto.util.LogUtils;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -28,7 +30,7 @@ public class SqlBuilder {
 	 * @return
 	 */
 	public static SqlInfo buildInsertSql(Object entity){
-		
+		LogUtils.info("finalDb",">>>>entity=="+entity);
 		List<KeyValue> keyValueList = getSaveKeyValueListByEntity(entity);
 		
 		StringBuffer strSQL=new StringBuffer();
@@ -56,7 +58,7 @@ public class SqlBuilder {
 			
 			sqlInfo.setSql(strSQL.toString());
 		}
-		
+		LogUtils.info("finalDb",">>>>sqlInfo=="+sqlInfo);
 		return sqlInfo;
 	}
 	
@@ -65,7 +67,9 @@ public class SqlBuilder {
 		List<KeyValue> keyValueList = new ArrayList<KeyValue>();
 		
 		TableInfo table=TableInfo.get(entity.getClass());
+		LogUtils.info("finalDb",">>>>>table-"+table);
 		Object idvalue = table.getId().getValue(entity);
+		LogUtils.info("finalDb",">>>>>idvalue-"+idvalue);
 		//任意类型的@Id都是用，不考虑自增问题，更好使用更新，查找，删除中的ById操作，否则找不到column或不能赋值于@Id字段。
 		if (idvalue != null) {
 			KeyValue kv = new KeyValue(table.getId().getColumn(),idvalue);

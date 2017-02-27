@@ -26,8 +26,7 @@ import android.util.DisplayMetrics;
 import android.widget.ImageView;
 
 
-import com.minggo.pluto.PlutoConfig;
-import com.minggo.pluto.util.FileUtils;
+import com.minggo.pluto.Pluto;
 import com.minggo.pluto.util.LogUtils;
 import com.minggo.pluto.util.PhotoUtil;
 
@@ -60,7 +59,7 @@ public class FinalBitmap {
 		mContext = context;
 		mConfig = new FinalBitmapConfig(context);
 
-		configDiskCachePath(BitmapCommonUtils.getDiskCacheDir(context,PlutoConfig.FINAL_BIMAP_SAVE_PATH).getAbsolutePath());// 配置缓存路径
+		configDiskCachePath(BitmapCommonUtils.getDiskCacheDir(context, Pluto.FINAL_BIMAP_SAVE_PATH).getAbsolutePath());// 配置缓存路径
 		configDisplayer(new SimpleDisplayer());// 配置显示器
 		configDownlader(new SimpleHttpDownloader());// 配置下载器
 	}
@@ -418,21 +417,11 @@ public class FinalBitmap {
 
 	public void display(ImageView imageView, String uri) {
 		// Log.i("fb", "原来图片地址-->" + uri);
-		/*
-		 * http://gocache.3g.cn/bookimage/bookpic/39/170339/
-		 * 170339_120_160.jpg[书的封面是这样的格式]
-		 * http://gocache.3g.cn/bookimage/hadpic/201405/1400134757.jpg[推荐页面的焦点图]
-		 */
+
 		if (uri != null) {
 
-			/*if (uri.contains("_") && uri.contains("http")) {// 判断是否带大小格式的
-				int i = uri.indexOf("_");
-				// Log.i("fb", "替换成大图片地址-->" + uri.replace(uri.substring(i), "_"
-				// + ReaderApplication.bigPicSize.size));
-				display(imageView, uri, uri.replace(uri.substring(i), "_" + BibiApplication.bigPicSize.size));
-			} else {*/
-				doDisplay(imageView, uri, null, false, false);
-			//}
+			doDisplay(imageView, uri, null, false, false);
+
 		}
 
 	}
@@ -450,7 +439,7 @@ public class FinalBitmap {
 	 */
 	public void display(ImageView imageView, String uri, String bigUrl) {
 
-		String path = BitmapCommonUtils.getDiskCacheDir(mContext, PlutoConfig.FINAL_BIMAP_SAVE_PATH).getAbsolutePath() + "/" + FileNameGenerator.generator(bigUrl) + ".0";
+		String path = BitmapCommonUtils.getDiskCacheDir(mContext, Pluto.FINAL_BIMAP_SAVE_PATH).getAbsolutePath() + "/" + FileNameGenerator.generator(bigUrl) + ".0";
 
 		doDisplay(imageView, uri, null, false, false);
 
