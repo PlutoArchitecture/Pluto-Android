@@ -17,7 +17,7 @@ Features
 
 Architecture diagram
 ================
-![Pluto架构图](http://upload-images.jianshu.io/upload_images/1252638-594c275b66a53e9b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/800)
+![Pluto架构图](http://upload-images.jianshu.io/upload_images/1252638-594c275b66a53e9b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 Usage
 ==============
