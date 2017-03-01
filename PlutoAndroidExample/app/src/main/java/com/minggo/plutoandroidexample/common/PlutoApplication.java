@@ -21,7 +21,7 @@ public class PlutoApplication extends Application {
     private void bindPluto(){
         Pluto.initPluto(this);
 
-        //一下配置为可选
+        //以下配置为可选
         Pluto.APP_CACHE_FILE = "com.pluto.example";
         Pluto.LOG_SHOW = true;
         Pluto.URL_DOMAIN = "https://m8en.com";

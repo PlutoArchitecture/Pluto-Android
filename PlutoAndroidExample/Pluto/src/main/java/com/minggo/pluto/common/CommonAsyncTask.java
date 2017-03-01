@@ -5,7 +5,6 @@ import android.os.Message;
 import android.os.Process;
 
 import com.google.gson.Gson;
-import com.minggo.pluto.bitmap.AsyncTask;
 import com.minggo.pluto.util.LogUtils;
 
 import java.util.Observable;
