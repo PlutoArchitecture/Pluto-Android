@@ -1,15 +1,20 @@
 package com.minggo.pluto.common;
 
+import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.os.Environment;
 import android.os.Looper;
 import android.widget.Toast;
 
 
-import com.minggo.pluto.PlutoConfig;
+import com.minggo.pluto.Pluto;
 import com.minggo.pluto.R;
 import com.minggo.pluto.util.FileUtils;
+import com.minggo.pluto.util.LogUtils;
 
 import org.apache.commons.httpclient.HttpException;
 
@@ -26,18 +31,17 @@ import java.util.Date;
 /**
  * 应用程序异常类：用于捕获异常和提示错误信息
  *
- * @author liux (http://my.oschina.net/liux)
- * @version 1.0
+ * @author minggo
  * @created 2012-3-21
  */
-public class AppException extends Exception implements UncaughtExceptionHandler {
+public class PlutoException extends Exception implements UncaughtExceptionHandler {
 
     private static final long serialVersionUID = -2802147109149812598L;
     private final static boolean Debug = true;//是否保存错误日志
-    public static String filepath = PlutoConfig.SDPATH + "/errlog/"; //保存到SD卡的目录 ,用于上传,上传后删除
-    private static String crashfilepath = PlutoConfig.SDPATH + "/crashlog/";//本地日志文件目录
+    public static String filepath = Pluto.SDPATH + "/errlog/"; //保存到SD卡的目录 ,用于上传,上传后删除
+    private static String crashfilepath = Pluto.SDPATH + "/crashlog/";//本地日志文件目录
     public static String filename = "err_log.txt"; //保存到SD卡的文件名
-    private static AppException appException;
+    private static PlutoException appException;
 
     /**
      * 定义异常类型
@@ -58,12 +62,12 @@ public class AppException extends Exception implements UncaughtExceptionHandler 
      */
     private UncaughtExceptionHandler mDefaultHandler;
 
-    private AppException(Context context) {
+    private PlutoException(Context context) {
         this.mDefaultHandler = Thread.getDefaultUncaughtExceptionHandler();
         Thread.setDefaultUncaughtExceptionHandler(this);
     }
 
-    private AppException(byte type, int code, Exception excp) {
+    private PlutoException(byte type, int code, Exception excp) {
         super(excp);
         this.type = type;
         this.code = code;
@@ -176,34 +180,34 @@ public class AppException extends Exception implements UncaughtExceptionHandler 
 
     }
 
-    public static AppException http(int code) {
-        return new AppException(TYPE_HTTP_CODE, code, null);
+    public static PlutoException http(int code) {
+        return new PlutoException(TYPE_HTTP_CODE, code, null);
     }
 
-    public static AppException http(Exception e) {
-        return new AppException(TYPE_HTTP_ERROR, 0, e);
+    public static PlutoException http(Exception e) {
+        return new PlutoException(TYPE_HTTP_ERROR, 0, e);
     }
 
-    public static AppException socket(Exception e) {
-        return new AppException(TYPE_SOCKET, 0, e);
+    public static PlutoException socket(Exception e) {
+        return new PlutoException(TYPE_SOCKET, 0, e);
     }
 
-    public static AppException io(Exception e) {
+    public static PlutoException io(Exception e) {
         if (e instanceof UnknownHostException || e instanceof ConnectException) {
-            return new AppException(TYPE_NETWORK, 0, e);
+            return new PlutoException(TYPE_NETWORK, 0, e);
         } else if (e instanceof IOException) {
-            return new AppException(TYPE_IO, 0, e);
+            return new PlutoException(TYPE_IO, 0, e);
         }
         return run(e);
     }
 
-    public static AppException xml(Exception e) {
-        return new AppException(TYPE_XML, 0, e);
+    public static PlutoException xml(Exception e) {
+        return new PlutoException(TYPE_XML, 0, e);
     }
 
-    public static AppException network(Exception e) {
+    public static PlutoException network(Exception e) {
         if (e instanceof UnknownHostException || e instanceof ConnectException) {
-            return new AppException(TYPE_NETWORK, 0, e);
+            return new PlutoException(TYPE_NETWORK, 0, e);
         } else if (e instanceof HttpException) {
             return http(e);
         } else if (e instanceof SocketException) {
@@ -212,8 +216,8 @@ public class AppException extends Exception implements UncaughtExceptionHandler 
         return http(e);
     }
 
-    public static AppException run(Exception e) {
-        return new AppException(TYPE_RUN, 0, e);
+    public static PlutoException run(Exception e) {
+        return new PlutoException(TYPE_RUN, 0, e);
     }
 
     /**
@@ -222,9 +226,9 @@ public class AppException extends Exception implements UncaughtExceptionHandler 
      * @param context
      * @return
      */
-    public static AppException getAppExceptionHandler(Context context) {
+    public static PlutoException getAppExceptionHandler(Context context) {
         if (appException == null) {
-            appException = new AppException(context);
+            appException = new PlutoException(context);
         }
         return appException;
     }
@@ -245,6 +249,7 @@ public class AppException extends Exception implements UncaughtExceptionHandler 
      * @return true:处理了该异常信息;否则返回false
      */
     private boolean handleException(Throwable ex) {
+        LogUtils.info("plutoexception",">>>>>handle exception");
         if (ex == null) {
             return false;
         }
@@ -252,19 +257,73 @@ public class AppException extends Exception implements UncaughtExceptionHandler 
         final Context context = AppManager.getAppManager().currentActivity();
 
         if (context == null) {
+            LogUtils.info("plutoexception",">>>>>context is null");
             return false;
         }
 
         final String crashReport = getCrashReport(ex);
         ex.printStackTrace();
-        FileUtils.WriterTxtFile(filepath, filename, crashReport, true);//写到本地
-        FileUtils.WriterTxtFile(crashfilepath, filename, crashReport, true);//写到本地
-//		AppManager.getAppManager().App_Exit(context);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                FileUtils.WriterTxtFile(filepath, filename, crashReport, true);//写到本地
+                FileUtils.WriterTxtFile(crashfilepath, filename, crashReport, true);//写到本地
+            }
+        }).start();
+        //FileUtils.WriterTxtFile(filepath, filename, crashReport, true);//写到本地
+        //FileUtils.WriterTxtFile(crashfilepath, filename, crashReport, true);//写到本地
+		//AppManager.getAppManager().App_Exit(context);
         //显示异常信息&发送报告
-//		System.out.println("<<<handleException:"+ex.getMessage());
-
+		System.out.println("<<<handleException:"+ex.getMessage());
+//        new Thread() {
+//            public void run() {
+//                Looper.prepare();
+//                sendAppCrashReport(context, crashReport);
+//                Looper.loop();
+//            }
+//        }.start();
         return true;
     }
+
+    /**
+     * 发送App异常崩溃报告
+     * @param cont
+     * @param crashReport
+     */
+    public static void sendAppCrashReport(final Context cont, final String crashReport)
+    {
+        AlertDialog.Builder builder = new AlertDialog.Builder(cont);
+        builder.setIcon(android.R.drawable.ic_dialog_info);
+        builder.setTitle(R.string.app_error);
+        builder.setMessage(R.string.app_error_message);
+        builder.setPositiveButton("取消", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+                LogUtils.debug("AppException UIHelper", "有异常日志，下次打开提交");
+                System.exit(0);//这个地方最好根据自己实际情况先finish所有的activity先
+
+            }
+        });
+        builder.setNegativeButton("发送", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+                try {
+                    File file = new File(PlutoException.filepath);
+                    if (file.exists()) {
+                        file = new File(PlutoException.filepath+PlutoException.filename);
+                        if (file.exists()) {
+                            file.delete();
+                        }
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                System.exit(0);//这个地方最好根据自己实际情况先finish所有的activity先
+            }
+        });
+        builder.show();
+    }
+
 
     /**
      * 获取APP崩溃异常报告

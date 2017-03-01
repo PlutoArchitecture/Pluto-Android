@@ -1,4 +1,4 @@
-package com.minggo.pluto.dao;
+package com.minggo.pluto.db.orm;
 
 import com.minggo.pluto.annotation.AutoIncrement;
 import com.minggo.pluto.annotation.Exclude;

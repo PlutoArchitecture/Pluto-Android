@@ -7,7 +7,7 @@ import android.text.TextUtils;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
-import com.minggo.pluto.common.AppException;
+import com.minggo.pluto.common.PlutoException;
 import com.minggo.pluto.model.Result;
 import com.minggo.pluto.util.LogUtils;
 
@@ -115,15 +115,15 @@ public class ApiClient {
 	}
 	
 
-	public static <T> Result<T> httpGetModel(String url,Map<String, Object> params) throws AppException {
+	public static <T> Result<T> httpGetModel(String url,Map<String, Object> params) throws PlutoException {
 		return httpGetModel(url,params,true);
 	}
 
-	public static <T> Result<List<T>> httpGetList(String url,Map<String, Object> params) throws AppException{
+	public static <T> Result<List<T>> httpGetList(String url,Map<String, Object> params) throws PlutoException {
 		return  httpGetList(url,params,true);
 	}
 
-	public static <T> Result<T> httpGetModel(String url,Map<String, Object> params,boolean keepChangeLine) throws AppException {
+	public static <T> Result<T> httpGetModel(String url,Map<String, Object> params,boolean keepChangeLine) throws PlutoException {
 
 		int requestId = new Random().nextInt(10000);
 		String urlTemp = url;
@@ -164,7 +164,7 @@ public class ApiClient {
 					continue;
 				}
 				e.printStackTrace();
-				throw AppException.http(e);
+				throw PlutoException.http(e);
 			} catch (IOException e) {
 				time++;
 				if (time < RETRY_TIME) {
@@ -176,7 +176,7 @@ public class ApiClient {
 					continue;
 				}
 				e.printStackTrace();
-				throw AppException.network(e);
+				throw PlutoException.network(e);
 			} finally {
 				if(httpGet!=null){
 					httpGet.releaseConnection();
@@ -205,7 +205,7 @@ public class ApiClient {
 		return result;
 	}
 
-	public static <T> Result<List<T>> httpGetList(String url,Map<String, Object> params,boolean keepChangeLine) throws AppException{
+	public static <T> Result<List<T>> httpGetList(String url,Map<String, Object> params,boolean keepChangeLine) throws PlutoException {
 
 		int requestId = new Random().nextInt(10000);
 		String urlTemp = url;
@@ -247,7 +247,7 @@ public class ApiClient {
 					continue;
 				}
 				e.printStackTrace();
-				throw AppException.http(e);
+				throw PlutoException.http(e);
 			} catch (IOException e) {
 				time++;
 				if (time < RETRY_TIME) {
@@ -259,7 +259,7 @@ public class ApiClient {
 					continue;
 				}
 				e.printStackTrace();
-				throw AppException.network(e);
+				throw PlutoException.network(e);
 			} finally {
 				if(httpGet!=null){
 					httpGet.releaseConnection();
@@ -299,9 +299,9 @@ public class ApiClient {
 	 * @param url    不完整url地址
 	 * @param params 参数
 	 * @return 请求失败返回""
-	 * @throws AppException
+	 * @throws PlutoException
 	 */
-	public static String http_getString(String url, Map<String, Object> params, boolean keepChangeLine) throws AppException {
+	public static String http_getString(String url, Map<String, Object> params, boolean keepChangeLine) throws PlutoException {
 		int requestId = new Random().nextInt(10000);
 		String urlTemp = url;
 
@@ -342,10 +342,10 @@ public class ApiClient {
 	 * @param url
 	 * @param params
 	 * @param files
-	 * @throws AppException
+	 * @throws PlutoException
 	 */
 	public static <T> Result<T> httpPostModel(String url, Map<String, Object> params,Map<String, File> files,
-			boolean keepChangeLine) throws AppException {
+			boolean keepChangeLine) throws PlutoException {
 		return httpPostModel(url,params,files,false,keepChangeLine);
 	}
 	
@@ -355,10 +355,10 @@ public class ApiClient {
 	 * @param url
 	 * @param params
 	 * @param files
-	 * @throws AppException
+	 * @throws PlutoException
 	 */
 	public static <T> Result<T> httpPostModel(String url, Map<String, Object> params,
-			Map<String, File> files, boolean isphp,boolean keepChangeLine) throws AppException {
+			Map<String, File> files, boolean isphp,boolean keepChangeLine) throws PlutoException {
 		int requestId = new Random().nextInt(10000);
 
 		String urlTemp = url;
@@ -426,7 +426,7 @@ public class ApiClient {
 					continue;
 				}
 				e.printStackTrace();
-				throw AppException.http(e);
+				throw PlutoException.http(e);
 			} catch (IOException e) {
 				time++;
 				if (time < RETRY_TIME) {
@@ -438,7 +438,7 @@ public class ApiClient {
 					continue;
 				}
 				e.printStackTrace();
-				throw AppException.network(e);
+				throw PlutoException.network(e);
 			} catch (Exception e) {
 				time++;
 				if (time < RETRY_TIME) {
@@ -450,7 +450,7 @@ public class ApiClient {
 					continue;
 				}
 				e.printStackTrace();
-				throw AppException.network(e);
+				throw PlutoException.network(e);
 			} finally {
 				httpPost.releaseConnection();
 				httpClient = null;
@@ -477,7 +477,7 @@ public class ApiClient {
 	 * @param url
 	 * @return
 	 */
-	public static Bitmap getNetBitmap(String url) throws AppException {
+	public static Bitmap getNetBitmap(String url) throws PlutoException {
 		// System.out.println("image_url==> "+url);
 		
 		String urlTemp = url;
@@ -512,7 +512,7 @@ public class ApiClient {
 					continue;
 				}
 				e.printStackTrace();
-				throw AppException.http(e);
+				throw PlutoException.http(e);
 			} catch (IOException e) {
 				time++;
 				if (time < RETRY_TIME) {
@@ -524,7 +524,7 @@ public class ApiClient {
 					continue;
 				}
 				e.printStackTrace();
-				throw AppException.network(e);
+				throw PlutoException.network(e);
 			} finally {
 				httpGet.releaseConnection();
 				httpClient = null;

@@ -1,4 +1,4 @@
-package com.minggo.pluto.dao;
+package com.minggo.pluto.db.orm;
 
 import android.content.ContentValues;
 import android.database.Cursor;

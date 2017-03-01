@@ -1,8 +1,8 @@
-package com.minggo.pluto.common;
+package com.minggo.pluto.util;
 
-import com.minggo.pluto.PlutoConfig;
-import com.minggo.pluto.util.FileUtils;
-import com.minggo.pluto.util.LogUtils;
+import com.minggo.pluto.Pluto;
+import com.minggo.pluto.db.manager.DataManager;
+import com.minggo.pluto.db.manager.DataManagerStub;
 
 import java.io.File;
 import java.io.IOException;
@@ -15,10 +15,10 @@ import java.util.List;
  * @author minggo
  * @time 2014-12-2下午1:58:22
  */
-public class CacheUtils {
-	static CacheUtils cacheUtils;
+public class PlutoFileCache extends DataManagerStub{
+	static PlutoFileCache cacheUtils;
 
-	private CacheUtils() {
+	private PlutoFileCache() {
 
 	}
 
@@ -27,9 +27,9 @@ public class CacheUtils {
 	 * 
 	 * @return
 	 */
-	public static CacheUtils getInstance() {
+	public static PlutoFileCache getInstance() {
 		if (null == cacheUtils) {
-			cacheUtils = new CacheUtils();
+			cacheUtils = new PlutoFileCache();
 		}
 		return cacheUtils;
 	}
@@ -39,18 +39,18 @@ public class CacheUtils {
 	 * 
 	 * @param key
 	 *            主键
-	 * @param cache_time_millis
+	 * @param cache_time_min
 	 *            分钟
 	 * @return
 	 */
-	public boolean isCacheDataFailure(String key, int cache_time_millis) {
-		cache_time_millis = cache_time_millis * 60000; // 把分钟转换为毫秒
+	public boolean isCacheDataFailure(String key, int cache_time_min) {
+		cache_time_min = cache_time_min * 60000; // 把分钟转换为毫秒
 		boolean failure = false;
-		File data = new File(PlutoConfig.SDPATH + "cache/" + "cache_" + key
+		File data = new File(Pluto.SDPATH + "cache/" + "cache_" + key
 				+ ".data");
 
 		if (data.exists()
-				&& (System.currentTimeMillis() - data.lastModified()) > cache_time_millis) {
+				&& (System.currentTimeMillis() - data.lastModified()) > cache_time_min) {
 			failure = true;
 		} else if (!data.exists()) {
 			failure = true;
@@ -64,17 +64,17 @@ public class CacheUtils {
 	 * 
 	 * @param path
 	 *            主键
-	 * @param cache_time_millis
+	 * @param cache_time_min
 	 *            分钟
 	 * @return
 	 */
-	public boolean isCacheDataFailurePath(String path, int cache_time_millis) {
-		cache_time_millis = cache_time_millis * 60000; // 把分钟转换为毫秒
+	public boolean isCacheDataFailurePath(String path, int cache_time_min) {
+		cache_time_min = cache_time_min * 60000; // 把分钟转换为毫秒
 		boolean failure = false;
 		File data = new File(path);
 
 		if (data.exists()
-				&& (System.currentTimeMillis() - data.lastModified()) > cache_time_millis) {
+				&& (System.currentTimeMillis() - data.lastModified()) > cache_time_min) {
 			failure = true;
 		} else if (!data.exists()) {
 			failure = true;
@@ -91,7 +91,7 @@ public class CacheUtils {
 	 * @throws IOException
 	 */
 	public void setDiskCache(String key, String value) throws IOException {
-		FileUtils.WriterTxtFile(PlutoConfig.SDPATH + "cache/", "cache_" + key
+		FileUtils.WriterTxtFile(Pluto.SDPATH + "cache/", "cache_" + key
 				+ ".data", value, false);
 	}
 
@@ -105,7 +105,7 @@ public class CacheUtils {
 	public String getDiskCache(String key) {
 		String content = null;
 		try {
-			content = FileUtils.ReadTxtFile(PlutoConfig.SDPATH + "cache/"
+			content = FileUtils.ReadTxtFile(Pluto.SDPATH + "cache/"
 					+ "cache_" + key + ".data");
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -123,7 +123,7 @@ public class CacheUtils {
 	public String removeDiskCache(String key) {
 		String content = null;
 		try {
-			content = FileUtils.RemoveTxtFile(PlutoConfig.SDPATH + "cache/"
+			content = FileUtils.RemoveTxtFile(Pluto.SDPATH + "cache/"
 					+ "cache_" + key + ".data");
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -138,7 +138,7 @@ public class CacheUtils {
 	 */
 	public List<File> getAllDiskCacheFile() {
 		List<File> allFiles = new ArrayList<>();
-		File cacheDir = new File(PlutoConfig.SDPATH + "cache/");
+		File cacheDir = new File(Pluto.SDPATH + "cache/");
 
 		if (cacheDir.exists()) {
 			File[] files = cacheDir.listFiles();
@@ -154,6 +154,33 @@ public class CacheUtils {
 	}
 
 	public File getDiskCacheFile(String key) {
-		return new File(PlutoConfig.SDPATH + "cache/" + "cache_" + key + ".data");
+		return new File(Pluto.SDPATH + "cache/" + "cache_" + key + ".data");
+	}
+
+	@Override
+	public void saveData(Object key, Object object) {
+		super.saveData(key, object);
+		try {
+			setDiskCache(key.toString(),object.toString());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public <T> T queryData(Object key, Class<T> clazz) {
+		 return (T)getDiskCache(key.toString());
+	}
+
+	@Override
+	public <T> void deleteData(Object key, Class<T> clazz) {
+		super.deleteData(key, clazz);
+		removeDiskCache(key.toString());
+	}
+
+	@Override
+	public void updateData(Object key, Object object) {
+		super.updateData(key, object);
+		saveData(key,object);
 	}
 }

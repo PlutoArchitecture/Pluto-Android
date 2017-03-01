@@ -20,12 +20,9 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.CompressFormat;
 import android.graphics.BitmapFactory;
-import android.text.TextUtils;
 import android.util.Log;
-import android.webkit.MimeTypeMap;
 
 
-import com.minggo.pluto.PlutoConfig;
 import com.minggo.pluto.util.LogUtils;
 
 import java.io.File;
