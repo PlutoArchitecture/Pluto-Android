@@ -20,3 +20,11 @@
 -keep class com.baidu.bottom.** { *; }
 -keep class com.baidu.kirin.** { *; }
 -keep class com.baidu.mobstat.** { *; }
+
+#排除指定LogicParam混淆
+-keep class com.minggo.plutoandroidexample.logic.MyParam { *; }
+-keep class com.minggo.plutoandroidexample.logic.MyParam* { *; }
+
+#排除指定model混淆
+-keep class com.minggo.plutoandroidexample.model.** { *; }
+

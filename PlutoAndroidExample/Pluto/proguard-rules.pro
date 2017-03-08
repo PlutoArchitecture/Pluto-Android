@@ -58,6 +58,12 @@
 -keep class sun.misc.Unsafe { *; }
 -keep class com.google.gson.** { *; }
 
+#排除指定Pluto的LogicParam混淆
+-keep class com.minggo.pluto.logic.LogicParam { *; }
+-keep class com.minggo.pluto.logic.LogicParam$* { *; }
+-keep class com.minggo.pluto.logic.model.** { *; }
+
+
 #WebView
 -keepclassmembers class fqcn.of.javascript.interface.for.webview {
    public *;

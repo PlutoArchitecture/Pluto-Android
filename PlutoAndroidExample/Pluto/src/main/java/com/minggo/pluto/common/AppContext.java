@@ -21,8 +21,11 @@ import com.minggo.pluto.util.StringUtils;
  * @time 2014-12-2下午2:09:33
  */
 public class AppContext {
+
 	private static AppContext appContext;
 
+
+	private AsyncTaskManager asyncTaskManager;
 	private String mPlatformId;
 	public Context context;
 
@@ -35,8 +38,19 @@ public class AppContext {
 	public static AppContext getInstance() {
 		if (null == appContext) {
 			appContext = new AppContext();
+
+
 		}
 		return appContext;
+	}
+
+	public AsyncTaskManager getAsyncTaskManager() {
+
+		if (asyncTaskManager == null) {
+			asyncTaskManager = new AsyncTaskManager();
+		}
+
+		return asyncTaskManager;
 	}
 
 	/**

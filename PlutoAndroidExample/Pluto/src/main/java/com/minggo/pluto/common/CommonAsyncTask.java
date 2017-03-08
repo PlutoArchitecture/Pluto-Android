@@ -179,7 +179,7 @@ public abstract class CommonAsyncTask<Params, Progress, Result> implements Obser
      * @see #isCancelled()
      */
     protected void onCancelled() {
-
+        AppContext.getInstance().getAsyncTaskManager().deleteObserver(this);
     }
 
     /**
@@ -241,7 +241,7 @@ public abstract class CommonAsyncTask<Params, Progress, Result> implements Obser
         onPreExecute(params);
 
         mWorker.mParams = params;
-
+        AppContext.getInstance().getAsyncTaskManager().addTask(this);
         sExecutor.execute(mFuture);
         return this;
     }
@@ -262,6 +262,7 @@ public abstract class CommonAsyncTask<Params, Progress, Result> implements Obser
 
         onPostExecute(result);
         mStatus = Status.FINISHED;
+        AppContext.getInstance().getAsyncTaskManager().deleteObserver(this);
     }
 
     private static class InternalHandler extends Handler {
