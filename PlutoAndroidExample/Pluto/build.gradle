@@ -1,6 +1,12 @@
 apply plugin: 'com.android.library'
 apply plugin: 'android-apt'
 apply from: "dependencies.gradle"
+apply plugin: 'com.jfrog.bintray'
+
+def siteUrl = 'https://github.com/minggo620/Pluto-Android'   // 项目的主页
+def gitUrl = 'https://github.com/minggo620/Pluto-Android.git'   // Git仓库的url
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
 
 android {
     compileSdkVersion 23
@@ -50,5 +56,28 @@ dependencies {
     compile thirdDependencies.materialprogressbar
     compile supportDependencies.supportAnnotation
 
+
+}
+
+bintray {
+    user = properties.getProperty("bintray.user")
+    key = properties.getProperty("bintray.apikey")
+    pkg {
+        repo = 'maven'
+        name = 'pluto'
+        vcsUrl = 'https://github.com/minggo620/Pluto-Android.git'
+        licenses = ['MIT License']
+        userOrg = 'bintray_user' //可选项，如果作者属于一个组织，填写组织的名字；否则默认为‘BINTRAY_USER’
+
+        version {
+            name = '1.0'
+            desc = 'High integrated development framework for Android applications.'
+            released  = new Date()
+            vcsTag = 'v1.0'
+            attributes = ['gradle-plugin': 'com.use.less:com.use.less.gradle:gradle-useless-plugin']
+        }
+    }
+
+    configurations = ['archives']
 
 }
