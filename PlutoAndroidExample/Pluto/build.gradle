@@ -2,11 +2,15 @@ apply plugin: 'com.android.library'
 apply plugin: 'android-apt'
 apply from: "dependencies.gradle"
 apply plugin: 'com.jfrog.bintray'
+apply plugin: 'com.github.dcendents.android-maven'
 
 def siteUrl = 'https://github.com/minggo620/Pluto-Android'   // 项目的主页
 def gitUrl = 'https://github.com/minggo620/Pluto-Android.git'   // Git仓库的url
 Properties properties = new Properties()
 properties.load(project.rootProject.file('local.properties').newDataInputStream())
+
+version = "1.0"
+group = "com.minggo"
 
 android {
     compileSdkVersion 23
@@ -63,11 +67,13 @@ bintray {
     user = properties.getProperty("bintray.user")
     key = properties.getProperty("bintray.apikey")
     pkg {
-        repo = 'maven'
-        name = 'pluto'
-        vcsUrl = 'https://github.com/minggo620/Pluto-Android.git'
-        licenses = ['MIT License']
-        userOrg = 'bintray_user' //可选项，如果作者属于一个组织，填写组织的名字；否则默认为‘BINTRAY_USER’
+        repo = 'pluto'
+        name = 'Pluto'
+        websiteUrl = siteUrl
+        vcsUrl = gitUrl
+        licenses = ['MIT']
+        userOrg = 'minggoopen' //可选项，如果作者属于一个组织，填写组织的名字；否则默认为‘BINTRAY_USER’
+        publish = true // 是否是公开项目。
 
         version {
             name = '1.0'
@@ -80,4 +86,55 @@ bintray {
 
     configurations = ['archives']
 
+}
+
+install {
+    repositories.mavenInstaller {
+        // This generates POM.xml with proper parameters
+        pom {
+            project {
+                packaging 'aar'
+                // Add your description here
+                name 'Pluto Android'
+                description 'High integrated development framework for Android applications.'
+                url siteUrl
+                // Set your license
+                licenses {
+                    license {
+                        name 'MIT'
+                        url 'https://raw.githubusercontent.com/minggo620/Pluto-Android/master/LICENSE'
+                    }
+                }
+                developers {
+                    developer {
+                        id 'minggo620'        //填写bintray或者github的用户名
+                        name 'minggo'         //姓名，可以是中文
+                        email 'minggo8en@gmail.com'
+                    }
+                }
+                scm {
+                    connection gitUrl
+                    developerConnection gitUrl
+                    url siteUrl
+                }
+            }
+        }
+    }
+}
+task sourcesJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    classifier = 'sources'
+}
+task javadoc(type: Javadoc) {
+    failOnError false
+    source = android.sourceSets.main.java.srcDirs
+    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+}
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+artifacts {
+    archives javadocJar
+    archives sourcesJar
 }
