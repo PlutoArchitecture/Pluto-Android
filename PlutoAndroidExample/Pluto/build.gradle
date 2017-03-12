@@ -67,12 +67,12 @@ bintray {
     user = properties.getProperty("bintray.user")
     key = properties.getProperty("bintray.apikey")
     pkg {
-        repo = 'pluto'
-        name = 'Pluto'
+        repo = 'pluto'//自己bintray创建仓库名字
+        name = 'Pluto'//Library的名字
         websiteUrl = siteUrl
         vcsUrl = gitUrl
-        licenses = ['MIT']
-        userOrg = 'minggoopen' //可选项，如果作者属于一个组织，填写组织的名字；否则默认为‘BINTRAY_USER’
+        licenses = ['MIT']//不能随便写，只能是仓库创建时选择的license type
+        userOrg = 'minggoopen' //自己bintray创建的organization名称
         publish = true // 是否是公开项目。
 
         version {
