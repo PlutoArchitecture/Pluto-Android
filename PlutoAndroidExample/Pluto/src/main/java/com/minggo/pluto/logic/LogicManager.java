@@ -145,6 +145,11 @@ public class LogicManager extends CommonAsyncTask<Object, Void, Object> {
         return this;
     }
 
+    public LogicManager setParam(Map<String,Object> param){
+        requestParam.putAll(param);
+        return this;
+    }
+
     @Override
     protected Object doInBackground(Object[] params) {
 
