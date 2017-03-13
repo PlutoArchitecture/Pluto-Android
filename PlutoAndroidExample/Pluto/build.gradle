@@ -23,11 +23,6 @@ android {
         consumerProguardFiles 'proguard-rules.pro'
 
     }
-    buildTypes {
-        release {
-            minifyEnabled false
-        }
-    }
 
 }
 

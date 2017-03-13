@@ -61,7 +61,7 @@
 #排除指定Pluto的LogicParam混淆
 -keep class com.minggo.pluto.logic.LogicParam { *; }
 -keep class com.minggo.pluto.logic.LogicParam$* { *; }
--keep class com.minggo.pluto.logic.model.** { *; }
+-keep class com.minggo.pluto.model.** { *; }
 
 
 #WebView
