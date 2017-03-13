@@ -23,7 +23,9 @@ Usage
 ==============
 
 ###Initial Pluto 
+In app Bulid.gradle file dependencies add under sentence
 
+`compile 'com.minggo:Pluto:1.0'`
 ```
 public class MyApplication extends Application {
 	 @Override
@@ -238,6 +240,10 @@ Sometimes, you need to extend ApiClient class to fix `Result<Map>` or other need
 ==============
 
 ###初始化Pluto 
+
+在app Module Build.gradle中的dependencies加上一下这句
+
+`compile 'com.minggo:Pluto:1.0'`
 
 ```
 public class MyApplication extends Application {
