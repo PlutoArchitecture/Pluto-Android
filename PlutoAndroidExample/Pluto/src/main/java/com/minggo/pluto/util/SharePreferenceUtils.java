@@ -51,7 +51,7 @@ public class SharePreferenceUtils extends DataManagerStub{
 
 
 	public boolean contains(String key) {
-		return context.getSharedPreferences(USER_CONFING, Context.MODE_WORLD_READABLE).contains(key);
+		return context.getSharedPreferences(USER_CONFING, Context.MODE_PRIVATE).contains(key);
 	}
 
 	/**
@@ -76,7 +76,7 @@ public class SharePreferenceUtils extends DataManagerStub{
 	public boolean putStringSetByDefaultSP(String key, Set<String> values) {
 		if (values != null && values.size() != 0 && context != null) {
 			if (TextUtils.isEmpty(key)) {
-				return context.getSharedPreferences(USER_CONFING, Context.MODE_WORLD_WRITEABLE)
+				return context.getSharedPreferences(USER_CONFING, Context.MODE_PRIVATE)
 						.edit()
 						.putStringSet(key, values)
 						.commit();
@@ -96,7 +96,7 @@ public class SharePreferenceUtils extends DataManagerStub{
 				try {
 					valuesJSON = gson.toJson(values, new TypeToken<List<String>>() {
 					}.getType());
-					return context.getSharedPreferences(USER_CONFING, Context.MODE_WORLD_WRITEABLE).edit().putString(key, valuesJSON).commit();
+					return context.getSharedPreferences(USER_CONFING, Context.MODE_PRIVATE).edit().putString(key, valuesJSON).commit();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -126,7 +126,7 @@ public class SharePreferenceUtils extends DataManagerStub{
 	 */
 	public boolean putString(String name,String key,String content){
 		if(content != null && name != null && context != null){
-			return context.getSharedPreferences(name, Context.MODE_WORLD_WRITEABLE)
+			return context.getSharedPreferences(name, Context.MODE_PRIVATE)
 			.edit()
 			.putString(key, content)
 			.commit();
@@ -155,7 +155,7 @@ public class SharePreferenceUtils extends DataManagerStub{
 	 */
 	public boolean putInt(String name,String key,int content){
 		if(name != null && context != null){
-			return context.getSharedPreferences(name, Context.MODE_WORLD_WRITEABLE).edit().putInt(key, content).commit();
+			return context.getSharedPreferences(name, Context.MODE_PRIVATE).edit().putInt(key, content).commit();
 		}
 		return false;
 	}
@@ -178,7 +178,7 @@ public class SharePreferenceUtils extends DataManagerStub{
 	 */
 	public boolean putBoolean(String name,String key,boolean content){
 		if(context != null){
-			return context.getSharedPreferences(name, Context.MODE_WORLD_WRITEABLE)
+			return context.getSharedPreferences(name, Context.MODE_PRIVATE)
 			.edit()
 			.putBoolean(key, content)
 			.commit();
@@ -198,7 +198,7 @@ public class SharePreferenceUtils extends DataManagerStub{
 	 */
 	public boolean getBoolean(String name,String key){
 		if(context != null && name != null){
-			return context.getSharedPreferences(name, Context.MODE_WORLD_READABLE).getBoolean(key, false);
+			return context.getSharedPreferences(name, Context.MODE_PRIVATE).getBoolean(key, false);
 		}
 		return false;
 	}
@@ -206,7 +206,7 @@ public class SharePreferenceUtils extends DataManagerStub{
 	public boolean getBooleanByDefaultSP( String key, boolean defaultValue) {
 		boolean result = defaultValue;
 		if (context != null && !TextUtils.isEmpty(key)) {
-			result = context.getSharedPreferences(USER_CONFING, Context.MODE_WORLD_READABLE).getBoolean(key, defaultValue);
+			result = context.getSharedPreferences(USER_CONFING, Context.MODE_PRIVATE).getBoolean(key, defaultValue);
 		}
 		return result;
 	}
@@ -218,7 +218,7 @@ public class SharePreferenceUtils extends DataManagerStub{
 	public Set<String> getStringSetByDefaultSP( String key) {
 		Set<String> result = new HashSet<>();
 		if (context != null && !TextUtils.isEmpty(key)) {
-			result = context.getSharedPreferences(USER_CONFING, Context.MODE_WORLD_READABLE).getStringSet(key, result);
+			result = context.getSharedPreferences(USER_CONFING, Context.MODE_PRIVATE).getStringSet(key, result);
 		}
 		return result;
 	}
@@ -229,7 +229,7 @@ public class SharePreferenceUtils extends DataManagerStub{
 	public List<String> getOrderStringListByDefaultSP( String key) {
 		List<String> result = new ArrayList<>();
 		if (context != null && !TextUtils.isEmpty(key)) {
-			String json = context.getSharedPreferences(USER_CONFING, Context.MODE_WORLD_READABLE).getString(key, "");
+			String json = context.getSharedPreferences(USER_CONFING, Context.MODE_PRIVATE).getString(key, "");
 			if (!TextUtils.isEmpty(json)) {
 				Gson gson = new Gson();
 				result = gson.fromJson(json, new TypeToken<List<String>>() {
@@ -249,7 +249,7 @@ public class SharePreferenceUtils extends DataManagerStub{
      */
     public String getStringByName( String name, String defaultStr, boolean nothing){
         if (context!=null&&name!=null){
-            return context.getSharedPreferences(name,Context.MODE_WORLD_READABLE).getString(name,defaultStr);
+            return context.getSharedPreferences(name,Context.MODE_PRIVATE).getString(name,defaultStr);
         }
         return defaultStr;
     }
@@ -270,7 +270,7 @@ public class SharePreferenceUtils extends DataManagerStub{
 	 */
 	public String getString(String name,String key){
 		if(context != null && name != null){
-			return context.getSharedPreferences(name, Context.MODE_WORLD_READABLE).getString(key,null);
+			return context.getSharedPreferences(name, Context.MODE_PRIVATE).getString(key,null);
 		}
 		return null;
 	}
@@ -283,7 +283,7 @@ public class SharePreferenceUtils extends DataManagerStub{
 	public String getString( String name, String key, String defaultValue) {
 		String result = defaultValue;
 		if (context != null && !TextUtils.isEmpty(name) && !TextUtils.isEmpty(key)) {
-			result = context.getSharedPreferences(name, Context.MODE_WORLD_READABLE).getString(key, defaultValue);
+			result = context.getSharedPreferences(name, Context.MODE_PRIVATE).getString(key, defaultValue);
 		}
 		return result;
 	}
@@ -318,7 +318,7 @@ public class SharePreferenceUtils extends DataManagerStub{
 	 */
 	public  Map<String,?>  getAllString(String name){
 		if(context != null && name != null){
-			return context.getSharedPreferences(name, Context.MODE_WORLD_READABLE).getAll();
+			return context.getSharedPreferences(name, Context.MODE_PRIVATE).getAll();
 		}
 		return null;
 	}
@@ -329,7 +329,7 @@ public class SharePreferenceUtils extends DataManagerStub{
 	 * @param name
 	 */
 	public static void clearString(String name){
-		context.getSharedPreferences(name, Context.MODE_WORLD_WRITEABLE)
+		context.getSharedPreferences(name, Context.MODE_PRIVATE)
 		.edit()
 		.clear().commit();
 	}
@@ -346,7 +346,7 @@ public class SharePreferenceUtils extends DataManagerStub{
 		} 
 		
 		try {
-			Editor edit = context.getSharedPreferences(t.getClass().getSimpleName(), Context.MODE_WORLD_WRITEABLE).edit();
+			Editor edit = context.getSharedPreferences(t.getClass().getSimpleName(), Context.MODE_PRIVATE).edit();
 			Field[] fields = t.getClass().getDeclaredFields();
 			for(Field field:fields){
 				field.setAccessible(true);
@@ -389,7 +389,7 @@ public class SharePreferenceUtils extends DataManagerStub{
 		}
 		
 		try {
-			SharedPreferences sp = context.getSharedPreferences(clazz.getSimpleName(), Context.MODE_WORLD_READABLE);
+			SharedPreferences sp = context.getSharedPreferences(clazz.getSimpleName(), Context.MODE_PRIVATE);
 			Object instance = clazz.newInstance();
 			
 			Field[] fields = clazz.getDeclaredFields();
@@ -476,7 +476,7 @@ public class SharePreferenceUtils extends DataManagerStub{
 	public <T> boolean clear(Class<T> clazz){
 		if(clazz != null && context != null){
 			return context
-			.getSharedPreferences(clazz.getSimpleName(),Context.MODE_WORLD_WRITEABLE)
+			.getSharedPreferences(clazz.getSimpleName(),Context.MODE_PRIVATE)
 			.edit()
 			.clear()
 			.commit();
@@ -498,7 +498,7 @@ public class SharePreferenceUtils extends DataManagerStub{
 
 	public void remove( String... keys) {
 		if (context != null && keys != null && keys.length > 0) {
-			Editor editor = context.getSharedPreferences(USER_CONFING, Context.MODE_WORLD_WRITEABLE).edit();
+			Editor editor = context.getSharedPreferences(USER_CONFING, Context.MODE_PRIVATE).edit();
 
 			for (String keyItem : keys) {
 				editor.remove(keyItem);
