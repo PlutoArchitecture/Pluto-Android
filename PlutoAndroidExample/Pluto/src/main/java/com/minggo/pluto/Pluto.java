@@ -56,7 +56,7 @@ public class Pluto {
 
         if (!BuildConfig.DEBUG) {
             LogUtils.info("plutoexception", ">>>>>init");
-            PlutoException.getAppExceptionHandler(context);
+            //PlutoException.getAppExceptionHandler(context);
         }
     }
 }

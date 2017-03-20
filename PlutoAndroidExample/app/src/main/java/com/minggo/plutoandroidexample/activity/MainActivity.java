@@ -67,6 +67,7 @@ public class MainActivity extends PlutoActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         initUI();
+        //throw new NullPointerException();
     }
 
     private void initUI() {
