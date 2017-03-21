@@ -3,9 +3,11 @@
 [![Travis](https://img.shields.io/travis/rust-lang/rust.svg)]()
 [![Github All Releases](https://img.shields.io/badge/download-1.4M Total-green.svg)](https://codeload.github.com/minggo620/Pluto-Android/zip/master)  
 
-High integrated development framework for Android applications.<br/>
-###更多交流请加微信公众号：minggo_dev
+High integrated development framework for Android applications.
+
+### 更多交流请加微信公众号：minggo_dev
 ![微信公众号：minggo_dev](http://upload-images.jianshu.io/upload_images/1252638-7a68bcc2b2ec9939.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
 Features
 ==============
 - **Cache Data High Integrated**:The Data operation(Sqlite, SharePreference, File) is integrated as a DataFramework, and provide a DataManagerProxy to operating cache data .
