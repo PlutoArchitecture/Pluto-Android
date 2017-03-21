@@ -24,7 +24,7 @@ Architecture diagram
 Usage
 ==============
 
-###Initial Pluto 
+### Initial Pluto 
 In app Bulid.gradle file dependencies add under sentence
 
 `compile 'com.minggo:Pluto:1.1.2'`
@@ -49,7 +49,7 @@ public class MyApplication extends Application {
 
 Pluto has to be inited with `initPluto(Context context)` method, and it's better to be inited in child of Application class.
 
-###UIFramework
+### UIFramework
 - **PlutoActivity Usage**
 
 ```
@@ -114,7 +114,7 @@ finalBitmap.display(imageView2,"http://m8en.com:8877/content/charmword_thumbnail
 
 ```
 
-###ServiceFramework
+### ServiceFramework
 - **LogicManager Usage**
 
 Finally, all logic operation will be integrated in a sentence of chain programming 
@@ -144,7 +144,7 @@ public void onClick(View view) {
 	}
 	...
 ```
-####①LogicManager Construction Method
+#### ①LogicManager Construction Method
 It' most import to use construction method, `public <T> LogicManager(Handler handler, Class<T> clazz, LogicManagerType logicManagerType){}`, the param `Class<T> clazz` is PlutoApiEngine deal data and return this data of type, `LogicManagerType` is an enum that has 12 kind of network and cache logic.
 
 ```
@@ -241,7 +241,7 @@ Sometimes, you need to extend ApiClient class to fix `Result<Map>` or other need
 用法
 ==============
 
-###初始化Pluto 
+### 初始化Pluto 
 
 在app Module Build.gradle中的dependencies加上一下这句
 
@@ -268,7 +268,7 @@ public class MyApplication extends Application {
 ```
 
 Pluto 必须调用`initPluto(Context context)`来初始化, 最好在自定义的Application中初始化。
-###UIFramework
+### UIFramework
 - **PlutoActivity使用**
 
 ```
@@ -337,7 +337,7 @@ finalBitmap.display(imageView2,"http://m8en.com:8877/content/charmword_thumbnail
 
 ```
 
-###ServiceFramework
+### ServiceFramework
 - **LogicManager 用法**
 
 最终暴露出来的操作就是一句链式的方法调用。
@@ -446,5 +446,4 @@ ThreadPoolUtils.java
 
 - **NetworkFramework扩展**
 网络数据层级如需调整，比如增加`Result<Map>` 返回的类型值或者其他网络业务，可以找到ApiClient类进行扩展即可。
-
 
