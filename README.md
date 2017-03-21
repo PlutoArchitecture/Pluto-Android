@@ -1,7 +1,8 @@
 # Pluto
 [![License MIT](https://img.shields.io/badge/license-MIT-green.svg?style=flat)](https://raw.githubusercontent.com/minggo620/Pluto-Android/master/LICENSE)&nbsp;
 [![Travis](https://img.shields.io/travis/rust-lang/rust.svg)]()
-[![Github All Releases](https://img.shields.io/badge/download-1.4M Total-green.svg)](https://codeload.github.com/minggo620/Pluto-Android/zip/master)  
+[![Github Releases](https://img.shields.io/badge/release-1.1.4-blue.svg?maxAge=2592000)]()
+[![Github All Releases](https://img.shields.io/badge/download-6M-green.svg)](https://codeload.github.com/minggo620/Pluto-Android/zip/master)  
 
 High integrated development framework for Android applications.
 
@@ -367,7 +368,7 @@ public void onClick(View view) {
 	}
 	...
 ```
-####①LogicManager构造方法说明
+#### ①LogicManager构造方法说明
 构造方法 `public <T> LogicManager(Handler handler, Class<T> clazz, LogicManagerType logicManagerType){}`中的`Class<T> clazz` 参数是PlutoApiEngine处理数据后返回的指定数据类型, `LogicManagerType` 是一个有12种类型的枚举.每个枚举根据表意理解就行，枚举如下
 
 ```
