@@ -39,7 +39,7 @@ package UIFramework <<Folder>> {
   class Toast
   class AppCompatActivity
   class ChildActivity
-  class FinalBitmap
+  class Glide
   class PlutoFragment
 }
 
@@ -81,7 +81,7 @@ package ServiceManager <<Folder>> {
  "PlutoActivity" -up->"Gson"
  "ChildActivity" -up-|>"PlutoActivity"
  "ChildActivity" -right->"ButterKnife"
- "ChildActivity" .left->"FinalBitmap"
+ "ChildActivity" .left->"Glide"
  "PlutoActivity" -up->"Toast"
  "PlutoActivity" -up->"PlutoDialog"
  "PlutoActivity" "1" o.up."0.*" "PlutoFragment"

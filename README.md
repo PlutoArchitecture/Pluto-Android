@@ -28,7 +28,7 @@ Usage
 ### Initial Pluto 
 In app Bulid.gradle file dependencies add under sentence
 
-`compile 'com.minggo:Pluto:1.1.2'`
+`compile 'com.minggo:Pluto:1.2.0'`
 ```
 public class MyApplication extends Application {
 	 @Override
@@ -105,14 +105,12 @@ public class PlutoDialogExample extends PlutoActivity implements OnClickListener
 ```
 PlutoDialog has some defined constant, which are match difference dialog, such `PlutoDialog.DEFAULT_EXIT` is defined exit common dialog.More detail you can see them in demo.
 
-- **FinalBitmap Usage**
+- **Glide Usage**
 
 ```
-FinalBitmap finalBitmap = FinalBitmap.create(this); //this is Context type
-finalBitmap.configLoadingImage(R.drawable.pluto_corner);
-finalBitmap.configLoadfailImage(R.drawable.pluto_corner);
-finalBitmap.display(imageView2,"http://m8en.com:8877/content/charmword_thumbnail.png");
-
+Glide.with(this).load("http://m8en.com:8877/content/logo_battery_notification.png").placeholder(R.drawable.pluto_corner).into(imageView1);
+Glide.with(this).load("http://m8en.com:8877/content/charmword_thumbnail.png").placeholder(R.drawable.pluto_corner).into(imageView2);
+Glide.with(this).load("http://m8en.com:8877/content/logo_2048_thumbnail.png").placeholder(R.drawable.pluto_corner).into(imageView3);
 ```
 
 ### ServiceFramework
@@ -328,14 +326,12 @@ public class PlutoDialogExample extends PlutoActivity implements OnClickListener
 ```
 PlutoDialog 有几种常量对应不同Dialog样式，更多可以参考Demo项目，同时可以扩展样式.
 
-- **FinalBitmap 用法**
+- **Glide 用法**
 
 ```
-FinalBitmap finalBitmap = FinalBitmap.create(this); //this is Context type
-finalBitmap.configLoadingImage(R.drawable.pluto_corner);
-finalBitmap.configLoadfailImage(R.drawable.pluto_corner);
-finalBitmap.display(imageView2,"http://m8en.com:8877/content/charmword_thumbnail.png");
-
+Glide.with(this).load("http://m8en.com:8877/content/logo_battery_notification.png").placeholder(R.drawable.pluto_corner).into(imageView1);
+Glide.with(this).load("http://m8en.com:8877/content/charmword_thumbnail.png").placeholder(R.drawable.pluto_corner).into(imageView2);
+Glide.with(this).load("http://m8en.com:8877/content/logo_2048_thumbnail.png").placeholder(R.drawable.pluto_corner).into(imageView3);
 ```
 
 ### ServiceFramework
