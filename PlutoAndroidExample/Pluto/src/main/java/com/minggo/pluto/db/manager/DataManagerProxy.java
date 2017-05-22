@@ -9,6 +9,9 @@ import com.minggo.pluto.util.LogUtils;
 import com.minggo.pluto.util.PlutoFileCache;
 import com.minggo.pluto.util.SharePreferenceUtils;
 
+import java.util.List;
+import java.util.Objects;
+
 /**
  * Created by minggo on 2017/2/21.
  */
@@ -71,6 +74,38 @@ public class DataManagerProxy{
 
     public void updateData(Object key, Object object) {
         dataManagerStub.updateData(key,object);
+    }
+
+    /**
+     * 根据查询语句查询model 注意（"date='"+dateYMD+"'"）单引号隔开
+     * @param clazz
+     * @param selectArg
+     * @param <T>
+     * @return
+     */
+    public <T> T queryModelData(Class<T> clazz,String selectArg){
+        if (dataManagerStub instanceof FinalDb){
+            return ((FinalDb) dataManagerStub).findModelByWhere(clazz,selectArg);
+        }else {
+            LogUtils.info(TAG,"代理类型不是 FinalDb");
+            return null;
+        }
+    }
+
+    /**
+     * 根据查询语句查询列表注意（"date='"+dateYMD+"'"）单引号隔开
+     * @param clazz
+     * @param selectArg
+     * @param <T>
+     * @return
+     */
+    public <T> List<T> queryListData(Class<T> clazz,String selectArg){
+        if (dataManagerStub instanceof FinalDb){
+            return ((FinalDb) dataManagerStub).findAllByWhere(clazz,selectArg);
+        }else {
+            LogUtils.info(TAG,"代理类型不是 FinalDb");
+            return null;
+        }
     }
 
     /**

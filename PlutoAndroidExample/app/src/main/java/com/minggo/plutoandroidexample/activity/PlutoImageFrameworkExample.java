@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 import com.baidu.mobstat.StatService;
+import com.bumptech.glide.Glide;
 import com.minggo.pluto.activity.PlutoActivity;
 import com.minggo.pluto.bitmap.FinalBitmap;
 import com.minggo.plutoandroidexample.R;
@@ -30,6 +31,7 @@ public class PlutoImageFrameworkExample extends PlutoActivity implements OnClick
     @BindView(R.id.iv_2048)
     public ImageView imageView3;
     private FinalBitmap finalBitmap;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,11 +57,14 @@ public class PlutoImageFrameworkExample extends PlutoActivity implements OnClick
     @OnClick(R.id.bt_load_image)
     @Override
     public void onClick(View view) {
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.bt_load_image:
-                finalBitmap.display(imageView1,"http://m8en.com:8877/content/logo_battery_notification.png");
-                finalBitmap.display(imageView2,"http://m8en.com:8877/content/charmword_thumbnail.png");
-                finalBitmap.display(imageView3,"http://m8en.com:8877/content/logo_2048_thumbnail.png");
+                Glide.with(this).load("http://m8en.com:8877/content/logo_battery_notification.png").placeholder(R.drawable.pluto_corner).into(imageView1);
+                Glide.with(this).load("http://m8en.com:8877/content/charmword_thumbnail.png").placeholder(R.drawable.pluto_corner).into(imageView2);
+                Glide.with(this).load("http://m8en.com:8877/content/logo_2048_thumbnail.png").placeholder(R.drawable.pluto_corner).into(imageView3);
+                //finalBitmap.display(imageView1, "http://m8en.com:8877/content/logo_battery_notification.png");
+                //finalBitmap.display(imageView2, "http://m8en.com:8877/content/charmword_thumbnail.png");
+                //finalBitmap.display(imageView3, "http://m8en.com:8877/content/logo_2048_thumbnail.png");
                 break;
             default:
                 break;

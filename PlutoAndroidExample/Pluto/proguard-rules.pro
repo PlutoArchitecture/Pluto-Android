@@ -76,3 +76,10 @@
     public void *(android.widget.AdapterView,android.view.View,int,long);
     public boolean *(android.widget.AdapterView,android.view.View,int,long);
 }
+
+#混淆Glide
+-keep public class * implements com.bumptech.glide.module.GlideModule
+    -keep public enum com.bumptech.glide.load.resource.bitmap.ImageHeaderParser$** {
+      **[] $VALUES;
+      public *;
+    }

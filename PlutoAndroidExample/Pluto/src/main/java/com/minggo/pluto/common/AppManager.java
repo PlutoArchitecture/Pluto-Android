@@ -64,8 +64,18 @@ public class AppManager {
 	public void finishActivity(Activity activity) {
 		if (activity != null) {
 			activityStack.remove(activity);
-			activity.finish();
+			//activity.finish();
 			activity = null;
+		}
+	}
+
+	/**
+	 *  从栈中取出activity
+	 * @param activity
+	 */
+	public void removeActivity(Activity activity){
+		if (activity !=null){
+			activityStack.remove(activity);
 		}
 	}
 
