@@ -72,7 +72,7 @@ public class PlutoApiEngine {
         String imeiTime;
         DataManagerProxy dataManagerProxy = DataManagerProxy.getInstance(DataType.SHAREPREFERENCE);
 
-        if (TextUtils.isEmpty(imeiTime = dataManagerProxy.queryByNameAndKey(SharePreferenceUtils.USER_CONFING, ApiUrl.IMEI_TIME))) {
+        if (TextUtils.isEmpty(imeiTime = dataManagerProxy.queryByNameAndKey(SharePreferenceUtils.USER_CONFING, ApiUrl.IMEI_TIME,String.class))) {
             imeiTime = timestamp;
             dataManagerProxy.saveByNameAndKey(SharePreferenceUtils.USER_CONFING, ApiUrl.IMEI_TIME,imeiTime);
         }
@@ -123,7 +123,7 @@ public class PlutoApiEngine {
 
         String imeiTime;
         DataManagerProxy dataManagerProxy = DataManagerProxy.getInstance(DataType.SHAREPREFERENCE);
-        if (TextUtils.isEmpty(imeiTime = dataManagerProxy.queryByNameAndKey(SharePreferenceUtils.USER_CONFING, ApiUrl.IMEI_TIME))) {
+        if (TextUtils.isEmpty(imeiTime = dataManagerProxy.queryByNameAndKey(SharePreferenceUtils.USER_CONFING, ApiUrl.IMEI_TIME,String.class))) {
             imeiTime = timestamp;
             dataManagerProxy.saveByNameAndKey(SharePreferenceUtils.USER_CONFING, ApiUrl.IMEI_TIME,imeiTime);
         }

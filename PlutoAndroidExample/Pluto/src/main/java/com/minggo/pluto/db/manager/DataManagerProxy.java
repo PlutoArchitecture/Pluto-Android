@@ -169,16 +169,16 @@ public class DataManagerProxy{
      * @param <T> 查询类型
      * @return
      */
-    public <T> T queryByNameAndKey(String name,String key){
+    public <T> T queryByNameAndKey(String name,String key,Class<T> clazz){
 
         T t = null;
         if (dataManagerStub instanceof SharePreferenceUtils){
-            if (t instanceof Integer){
+            if (clazz.equals(Integer.class)||clazz.equals(int.class)){
 
                 t =  (T) Integer.valueOf (((SharePreferenceUtils) dataManagerStub).getInt(name,key,0));
-            }else if (t instanceof String){
+            }else if (clazz.equals(String.class)){
                 t = (T) ((SharePreferenceUtils) dataManagerStub).getString(name,key);
-            }else if (t instanceof Boolean){
+            }else if (clazz.equals(Boolean.class)||clazz.equals(boolean.class)){
                 t = (T) Boolean.valueOf(((SharePreferenceUtils) dataManagerStub).getBoolean(name,key));
             }
             return t;
