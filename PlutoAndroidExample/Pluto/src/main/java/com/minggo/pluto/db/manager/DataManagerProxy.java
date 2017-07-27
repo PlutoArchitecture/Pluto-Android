@@ -19,13 +19,13 @@ public class DataManagerProxy implements DataManager{
         SQLITE,FILECACHE,SHAREPREFERENCE
     }
 
-    private static DataManager dataManagerStub;
+    private DataManager dataManagerStub;
 
     public DataManagerProxy (DataType type){
         getDataManager(type);
     }
 
-    private static DataManager getDataManager(DataType type){
+    private DataManager getDataManager(DataType type){
         switch (type){
             case SQLITE:
                 dataManagerStub = FinalDb.create(AppContext.getInstance().context);
