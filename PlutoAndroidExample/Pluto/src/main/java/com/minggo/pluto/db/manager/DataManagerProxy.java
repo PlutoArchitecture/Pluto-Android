@@ -21,22 +21,8 @@ public class DataManagerProxy implements DataManager{
 
     private static DataManager dataManagerStub;
 
-    private static DataManagerProxy dataManagerProxy;
-
-    private DataManagerProxy(){
-
-    }
-    public static DataManagerProxy getMultipleInstance(DataType type){
-        if (dataManagerProxy == null){
-            synchronized (DataManagerProxy.class){
-                if (dataManagerProxy!=null){
-                    dataManagerProxy = null;
-                }
-                dataManagerProxy = new DataManagerProxy();
-            }
-        }
+    public DataManagerProxy (DataType type){
         getDataManager(type);
-        return dataManagerProxy;
     }
 
     private static DataManager getDataManager(DataType type){

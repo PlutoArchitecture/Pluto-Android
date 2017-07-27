@@ -67,7 +67,7 @@ public class PlutoApiEngine {
         }
 
         String imeiTime;
-        DataManagerProxy dataManagerProxy = DataManagerProxy.getMultipleInstance(DataType.SHAREPREFERENCE);
+        DataManagerProxy dataManagerProxy = new DataManagerProxy(DataType.SHAREPREFERENCE);
 
         if (TextUtils.isEmpty(imeiTime = dataManagerProxy.queryByNameAndKey(SharePreferenceUtils.USER_CONFING, ApiUrl.IMEI_TIME,String.class))) {
             imeiTime = timestamp;
@@ -119,7 +119,7 @@ public class PlutoApiEngine {
         String timestamp = String.valueOf(System.currentTimeMillis()).substring(0, 10);
 
         String imeiTime;
-        DataManagerProxy dataManagerProxy = DataManagerProxy.getMultipleInstance(DataType.SHAREPREFERENCE);
+        DataManagerProxy dataManagerProxy = new DataManagerProxy(DataType.SHAREPREFERENCE);
         if (TextUtils.isEmpty(imeiTime = dataManagerProxy.queryByNameAndKey(SharePreferenceUtils.USER_CONFING, ApiUrl.IMEI_TIME,String.class))) {
             imeiTime = timestamp;
             dataManagerProxy.saveByNameAndKey(SharePreferenceUtils.USER_CONFING, ApiUrl.IMEI_TIME,imeiTime);
@@ -155,7 +155,7 @@ public class PlutoApiEngine {
      */
     public static <T> List<T> getListByCacheAdvance(String url, Map<String, Object> params, String key, Handler handler, int msgWhat, Class<T> clazz) {
 
-        DataManagerProxy dataManagerProxy = DataManagerProxy.getMultipleInstance(DataType.FILECACHE);
+        DataManagerProxy dataManagerProxy = new DataManagerProxy(DataType.FILECACHE);
 
         //PlutoFileCache cacheUtils = PlutoFileCache.getInstance();
         Gson gson = new Gson();
@@ -255,7 +255,7 @@ public class PlutoApiEngine {
      * @return
      */
     public static <T> List<T> getListByLimitTime(String url, Map<String, Object> params, String key, Handler handler, int msgWhat, int hour, Class<T> clazz) {
-        DataManagerProxy dataManagerProxy = DataManagerProxy.getMultipleInstance(DataType.FILECACHE);
+        DataManagerProxy dataManagerProxy = new DataManagerProxy(DataType.FILECACHE);
 
         //PlutoFileCache cacheUtils = PlutoFileCache.getInstance();
         Gson gson = new Gson();
@@ -426,7 +426,7 @@ public class PlutoApiEngine {
      */
     public static <T> T getModelByCacheAdvance(String url, Map<String, Object> params, String key, Handler handler, int msgWhat, Class<T> clazz) {
 
-        DataManagerProxy dataManagerProxy = DataManagerProxy.getMultipleInstance(DataType.FILECACHE);
+        DataManagerProxy dataManagerProxy = new DataManagerProxy(DataType.FILECACHE);
 
         //PlutoFileCache cacheUtils = PlutoFileCache.getInstance();
         Gson gson = new Gson();
@@ -501,7 +501,7 @@ public class PlutoApiEngine {
      */
     public static <T> T getModelByGetLimitTime(String url, Map<String, Object> params, String key, Handler handler, int msgWhat, int hour, Class<T> clazz) {
         //PlutoFileCache cacheUtils = PlutoFileCache.getInstance();
-        DataManagerProxy dataManagerProxy = DataManagerProxy.getMultipleInstance(DataType.FILECACHE);
+        DataManagerProxy dataManagerProxy = new DataManagerProxy(DataType.FILECACHE);
         Gson gson = new Gson();
         String cacheContent = null;
         T t = null;
