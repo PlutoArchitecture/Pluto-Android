@@ -15,7 +15,6 @@ public class ApiUrl {
 	public final static String IMEI_TIME = "imeiTime";//app安装后首次打开时间
 
 	public final static String PASS = "pass"; // 参数加密结果
-	public final static String MD5KEY = "minggo"; // 加密key
 	public final static String VERSIONNAME = "versionName"; // 当前版本名称
 	public final static String VERSIONCODE = "versionCode"; // 当前版本id
 	public final static String TIMESTAMP = "timestamp"; // 请求时间戳
@@ -37,5 +36,6 @@ public class ApiUrl {
 	//endregion
 
 	public static String URL_DOMAIN = "";//正式服务器
+	public static String MD5KEY = ""; // 加密key
 
 }

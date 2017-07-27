@@ -1,22 +1,17 @@
 package com.minggo.pluto.db.manager;
 
-import android.content.Context;
-
-import com.minggo.pluto.Pluto;
 import com.minggo.pluto.common.AppContext;
 import com.minggo.pluto.db.orm.FinalDb;
 import com.minggo.pluto.util.LogUtils;
 import com.minggo.pluto.util.PlutoFileCache;
 import com.minggo.pluto.util.SharePreferenceUtils;
-
 import java.util.List;
-import java.util.Objects;
 
 /**
  * Created by minggo on 2017/2/21.
  */
 
-public class DataManagerProxy{
+public class DataManagerProxy implements DataManager{
 
     public static final String TAG = "DATA_MANAGER";
 
@@ -31,12 +26,13 @@ public class DataManagerProxy{
     private DataManagerProxy(){
 
     }
-    public static DataManagerProxy getInstance(DataType type){
+    public static DataManagerProxy getMultipleInstance(DataType type){
         if (dataManagerProxy == null){
             synchronized (DataManagerProxy.class){
-                if (dataManagerProxy == null){
-                    dataManagerProxy = new DataManagerProxy();
+                if (dataManagerProxy!=null){
+                    dataManagerProxy = null;
                 }
+                dataManagerProxy = new DataManagerProxy();
             }
         }
         getDataManager(type);
@@ -60,18 +56,22 @@ public class DataManagerProxy{
         return dataManagerStub;
     }
 
+    @Override
     public void saveData(Object key, Object object) {
         dataManagerStub.saveData(key,object);
     }
 
+    @Override
     public <T> T queryData(Object key,Class<T> clazz) {
         return dataManagerStub.queryData(key,clazz);
     }
 
+    @Override
     public <T> void deleteData(Object key,Class<T> clazz) {
         dataManagerStub.deleteData(key,clazz);
     }
 
+    @Override
     public void updateData(Object key, Object object) {
         dataManagerStub.updateData(key,object);
     }

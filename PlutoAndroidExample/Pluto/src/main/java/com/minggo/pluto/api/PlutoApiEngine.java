@@ -6,7 +6,6 @@ import android.text.TextUtils;
 import com.google.gson.Gson;
 import com.minggo.pluto.common.AppContext;
 import com.minggo.pluto.common.PlutoException;
-import com.minggo.pluto.db.manager.DataManager;
 import com.minggo.pluto.db.manager.DataManagerProxy;
 import com.minggo.pluto.db.manager.DataManagerProxy.DataType;
 import com.minggo.pluto.util.SharePreferenceUtils;
@@ -16,9 +15,7 @@ import com.minggo.pluto.util.LogUtils;
 import com.minggo.pluto.util.StringUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
-
 import java.io.File;
-import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
@@ -70,7 +67,7 @@ public class PlutoApiEngine {
         }
 
         String imeiTime;
-        DataManagerProxy dataManagerProxy = DataManagerProxy.getInstance(DataType.SHAREPREFERENCE);
+        DataManagerProxy dataManagerProxy = DataManagerProxy.getMultipleInstance(DataType.SHAREPREFERENCE);
 
         if (TextUtils.isEmpty(imeiTime = dataManagerProxy.queryByNameAndKey(SharePreferenceUtils.USER_CONFING, ApiUrl.IMEI_TIME,String.class))) {
             imeiTime = timestamp;
@@ -122,7 +119,7 @@ public class PlutoApiEngine {
         String timestamp = String.valueOf(System.currentTimeMillis()).substring(0, 10);
 
         String imeiTime;
-        DataManagerProxy dataManagerProxy = DataManagerProxy.getInstance(DataType.SHAREPREFERENCE);
+        DataManagerProxy dataManagerProxy = DataManagerProxy.getMultipleInstance(DataType.SHAREPREFERENCE);
         if (TextUtils.isEmpty(imeiTime = dataManagerProxy.queryByNameAndKey(SharePreferenceUtils.USER_CONFING, ApiUrl.IMEI_TIME,String.class))) {
             imeiTime = timestamp;
             dataManagerProxy.saveByNameAndKey(SharePreferenceUtils.USER_CONFING, ApiUrl.IMEI_TIME,imeiTime);
@@ -158,7 +155,7 @@ public class PlutoApiEngine {
      */
     public static <T> List<T> getListByCacheAdvance(String url, Map<String, Object> params, String key, Handler handler, int msgWhat, Class<T> clazz) {
 
-        DataManagerProxy dataManagerProxy = DataManagerProxy.getInstance(DataType.FILECACHE);
+        DataManagerProxy dataManagerProxy = DataManagerProxy.getMultipleInstance(DataType.FILECACHE);
 
         //PlutoFileCache cacheUtils = PlutoFileCache.getInstance();
         Gson gson = new Gson();
@@ -258,7 +255,7 @@ public class PlutoApiEngine {
      * @return
      */
     public static <T> List<T> getListByLimitTime(String url, Map<String, Object> params, String key, Handler handler, int msgWhat, int hour, Class<T> clazz) {
-        DataManagerProxy dataManagerProxy = DataManagerProxy.getInstance(DataType.FILECACHE);
+        DataManagerProxy dataManagerProxy = DataManagerProxy.getMultipleInstance(DataType.FILECACHE);
 
         //PlutoFileCache cacheUtils = PlutoFileCache.getInstance();
         Gson gson = new Gson();
@@ -294,62 +291,63 @@ public class PlutoApiEngine {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        }
+        }else if(StringUtils.isEmpty(cacheContent)||!cacheContent.contains("[") && !cacheContent.contains("]")||dataManagerProxy.isExpiredFile(key, 60 * hour)){
+            if (!AppContext.isNetworkConnected(AppContext.getInstance().context)) {
+                return null;
+            }
 
-        if (!AppContext.isNetworkConnected(AppContext.getInstance().context)) {
-            return null;
-        }
+            Result result = null;
+            try {
+                //网络请求
+                result = ApiClient.httpGetList(url, params);
+            } catch (PlutoException e) {
+                e.printStackTrace();
+            }
 
-        Result result = null;
-        try {
-            //网络请求
-            result = ApiClient.httpGetList(url, params);
-        } catch (PlutoException e) {
-            e.printStackTrace();
-        }
+            if (result == null) {
+                return null;
+            }
+            if (!result.success || result.content == null || result.content.equals("")) {
+                return null;
+            }
+            if (result.content != null) {
+                //这样TypeToken没有明确的指定类是没办法解析的
+                //Result<List<T>> result = gson.fromJson(json, new TypeToken<Result<List<T>>>(){}.getType());
+                if (clazz == String.class || clazz == int.class || clazz == float.class || clazz == long.class) {
+                    list = (List<T>) result.content;
+                } else {
 
-        if (result == null) {
-            return null;
-        }
-        if (!result.success || result.content == null || result.content.equals("")) {
-            return null;
-        }
-        if (result.content != null) {
-            //这样TypeToken没有明确的指定类是没办法解析的
-            //Result<List<T>> result = gson.fromJson(json, new TypeToken<Result<List<T>>>(){}.getType());
-            if (clazz == String.class || clazz == int.class || clazz == float.class || clazz == long.class) {
-                list = (List<T>) result.content;
-            } else {
-
-                String jsonlist = gson.toJson(result.content);
-                List<T> tList = new ArrayList<>();
-                if (!StringUtils.isEmpty(jsonlist) && jsonlist.contains("[") && jsonlist.contains("]")) {
-                    try {
-                        JSONArray jsonArray = null;
+                    String jsonlist = gson.toJson(result.content);
+                    List<T> tList = new ArrayList<>();
+                    if (!StringUtils.isEmpty(jsonlist) && jsonlist.contains("[") && jsonlist.contains("]")) {
                         try {
-                            jsonArray = new JSONArray(jsonlist);
-                            for (int i = 0; i < jsonArray.length(); i++) {
-                                tList.add(gson.fromJson(jsonArray.getString(i), clazz));
+                            JSONArray jsonArray = null;
+                            try {
+                                jsonArray = new JSONArray(jsonlist);
+                                for (int i = 0; i < jsonArray.length(); i++) {
+                                    tList.add(gson.fromJson(jsonArray.getString(i), clazz));
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
                             }
-                        } catch (JSONException e) {
+                            if (tList != null) {
+                                list = tList;
+                            }
+                        } catch (Exception e) {
                             e.printStackTrace();
                         }
-                        if (tList != null) {
-                            list = tList;
-                        }
-                    } catch (Exception e) {
-                        e.printStackTrace();
                     }
                 }
             }
+            // 添加SD卡缓存开始
+            try {
+                dataManagerProxy.saveData(key,gson.toJson(result.content));
+                //cacheUtils.setDiskCache(key, gson.toJson(result.content));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
-        // 添加SD卡缓存开始
-        try {
-            dataManagerProxy.saveData(key,gson.toJson(result.content));
-            //cacheUtils.setDiskCache(key, gson.toJson(result.content));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+
         return list;
     }
 
@@ -428,7 +426,7 @@ public class PlutoApiEngine {
      */
     public static <T> T getModelByCacheAdvance(String url, Map<String, Object> params, String key, Handler handler, int msgWhat, Class<T> clazz) {
 
-        DataManagerProxy dataManagerProxy = DataManagerProxy.getInstance(DataType.FILECACHE);
+        DataManagerProxy dataManagerProxy = DataManagerProxy.getMultipleInstance(DataType.FILECACHE);
 
         //PlutoFileCache cacheUtils = PlutoFileCache.getInstance();
         Gson gson = new Gson();
@@ -503,7 +501,7 @@ public class PlutoApiEngine {
      */
     public static <T> T getModelByGetLimitTime(String url, Map<String, Object> params, String key, Handler handler, int msgWhat, int hour, Class<T> clazz) {
         //PlutoFileCache cacheUtils = PlutoFileCache.getInstance();
-        DataManagerProxy dataManagerProxy = DataManagerProxy.getInstance(DataType.FILECACHE);
+        DataManagerProxy dataManagerProxy = DataManagerProxy.getMultipleInstance(DataType.FILECACHE);
         Gson gson = new Gson();
         String cacheContent = null;
         T t = null;
@@ -521,37 +519,38 @@ public class PlutoApiEngine {
             if (!dataManagerProxy.isExpiredFile(key, hour * 60)) {
                 handler.obtainMessage(msgWhat, t).sendToTarget();
             }
+        }else if(t == null||dataManagerProxy.isExpiredFile(key, hour * 60)){
+            if (!AppContext.isNetworkConnected(AppContext.getInstance().context)) {
+                return t;
+            }
+
+            Result<T> result = null;
+            try {
+                result = (Result<T>) ApiClient.httpGetModel(url, params, true);
+            } catch (PlutoException e) {
+                e.printStackTrace();
+            }
+
+            if (result == null) {
+                return t;
+            }
+            if (!result.success || result.content == null || result.content.equals("")) {
+                return t;
+            }
+            try {
+                t = gson.fromJson(gson.toJson(result.content), clazz);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            // 添加SD卡缓存开始
+            try {
+                dataManagerProxy.saveData(key,gson.toJson(result.content));
+                //cacheUtils.setDiskCache(key, gson.toJson(result.content));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
 
-        if (!AppContext.isNetworkConnected(AppContext.getInstance().context)) {
-            return t;
-        }
-
-        Result<T> result = null;
-        try {
-            result = (Result<T>) ApiClient.httpGetModel(url, params, true);
-        } catch (PlutoException e) {
-            e.printStackTrace();
-        }
-
-        if (result == null) {
-            return t;
-        }
-        if (!result.success || result.content == null || result.content.equals("")) {
-            return t;
-        }
-        try {
-            t = gson.fromJson(gson.toJson(result.content), clazz);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        // 添加SD卡缓存开始
-        try {
-            dataManagerProxy.saveData(key,gson.toJson(result.content));
-            //cacheUtils.setDiskCache(key, gson.toJson(result.content));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
         return t;
     }
 

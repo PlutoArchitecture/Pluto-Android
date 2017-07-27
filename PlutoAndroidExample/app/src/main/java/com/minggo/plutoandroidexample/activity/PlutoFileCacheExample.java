@@ -37,7 +37,7 @@ public class PlutoFileCacheExample extends PlutoActivity implements OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pluto_file_cache_example);
         ButterKnife.bind(this);
-        dataManagerProxy = DataManagerProxy.getInstance(DataType.FILECACHE);
+        dataManagerProxy = DataManagerProxy.getMultipleInstance(DataType.FILECACHE);
 
         data = "This is String data";
         key = "plutokey";

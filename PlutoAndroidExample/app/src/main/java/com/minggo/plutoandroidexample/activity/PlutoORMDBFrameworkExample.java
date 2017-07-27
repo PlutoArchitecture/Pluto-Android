@@ -41,7 +41,7 @@ public class PlutoORMDBFrameworkExample extends PlutoActivity implements OnClick
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pluto_ormdbframework_example);
         ButterKnife.bind(this);
-        dataManagerProxy = DataManagerProxy.getInstance(DataType.SQLITE);
+        dataManagerProxy = DataManagerProxy.getMultipleInstance(DataType.SQLITE);
         user = new User();
         user.userId = 1000;
         user.username = "minggo";

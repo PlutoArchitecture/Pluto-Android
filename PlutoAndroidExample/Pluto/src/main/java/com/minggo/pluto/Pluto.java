@@ -49,10 +49,17 @@ public class Pluto {
         public static int VERSION = 2;
     }
 
+    /**
+     *  加密key
+     */
+    public static String MD5KEY = "minggo";
+
     //必须在自己Application类中先初始化
     public static void initPluto(Context context) {
         AppContext.getInstance().context = context;
         ApiUrl.URL_DOMAIN = URL_DOMAIN;
+        ApiUrl.MD5KEY=MD5KEY;
+        SDPATH = Environment.getExternalStorageDirectory().getPath() + "/" + APP_CACHE_FILE + "/";
 
         if (!BuildConfig.DEBUG) {
             LogUtils.info("plutoexception", ">>>>>init");
