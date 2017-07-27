@@ -1,7 +1,7 @@
 # Pluto
 [![License MIT](https://img.shields.io/badge/license-MIT-green.svg?style=flat)](https://raw.githubusercontent.com/minggo620/Pluto-Android/master/LICENSE)&nbsp;
 [![Travis](https://img.shields.io/badge/build-passing-brightgreen.svg?maxAge=2592000)]()
-[![Github Releases](https://img.shields.io/badge/release-1.2.2-blue.svg?maxAge=2592000)](https://bintray.com/minggoopen/pluto)
+[![Github Releases](https://img.shields.io/badge/release-1.2.3-blue.svg?maxAge=2592000)](https://bintray.com/minggoopen/pluto)
 [![Github All Releases](https://img.shields.io/badge/download-1.0M-green.svg)](https://codeload.github.com/minggo620/Pluto-Android/zip/master)  
 
 High integrated development framework for Android applications.
@@ -28,7 +28,7 @@ Usage
 ### Initial Pluto 
 In app Bulid.gradle file dependencies add under sentence
 
-`compile 'com.minggo:Pluto:1.2.2'`
+`compile 'com.minggo:Pluto:1.2.3'`
 ```
 public class MyApplication extends Application {
 	 @Override
