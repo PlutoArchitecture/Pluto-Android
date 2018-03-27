@@ -53,7 +53,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="6dp"/>
     <TextView
-        android:text="Copyright (c) 2017 minggo "
+        android:text="Copyright (c) 2017-2018 minggo "
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"

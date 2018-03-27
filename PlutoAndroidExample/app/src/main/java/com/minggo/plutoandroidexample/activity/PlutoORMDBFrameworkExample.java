@@ -97,4 +97,9 @@ public class PlutoORMDBFrameworkExample extends PlutoActivity implements OnClick
                 break;
         }
     }
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.alpha_sllow_in, R.anim.push_right_out);
+    }
 }

@@ -76,24 +76,42 @@
         <activity
             android:name=".activity.PlutoAPIEngineExample"
             android:label="@string/title_activity_apiengine_example">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.minggo.plutoandroidexample.activity.MainActivity"/>
         </activity>
         <activity
             android:name=".activity.PlutoImageFrameworkExample"
             android:label="PlutoImageFrameworkExample">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.minggo.plutoandroidexample.activity.MainActivity"/>
         </activity>
         <activity
             android:name=".activity.PlutoNetworkExample"
             android:label="PlutoNetworkExample">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.minggo.plutoandroidexample.activity.MainActivity"/>
         </activity>
         <activity
             android:name=".activity.PlutoFileCacheExample"
             android:label="PlutoFileCacheExample">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.minggo.plutoandroidexample.activity.MainActivity"/>
         </activity>
         <activity
             android:name=".activity.PlutoORMDBFrameworkExample"
             android:label="PlutoORMDBFrameworkExample">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.minggo.plutoandroidexample.activity.MainActivity"/>
         </activity>
         <activity android:name=".activity.PlutoUtilsActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.minggo.plutoandroidexample.activity.MainActivity"/>
         </activity>
     </application>
 

@@ -79,15 +79,16 @@ public class AppContext {
 	 * @return
 	 */
 	public String getAndroidId(int bookid) {
-		String android_id = Secure.getString(context.getContentResolver(), Secure.ANDROID_ID);
-
-		if (android_id == null || android_id == "") {
-			android_id = android.os.Build.VERSION.RELEASE + android.os.Build.MODEL + bookid;
-		}
-		if (StringUtils.isEmpty(android_id)) {
-			android_id = "";
-		}
-		return android_id;
+//		String android_id = Secure.getString(context.getContentResolver(), Secure.ANDROID_ID);
+//
+//		if (android_id == null || android_id == "") {
+//			android_id = android.os.Build.VERSION.RELEASE + android.os.Build.MODEL + bookid;
+//		}
+//		if (StringUtils.isEmpty(android_id)) {
+//			android_id = "";
+//		}
+//		return android_id;
+		return "idonotneeddeviceid";
 	}
 
 	/**
@@ -96,13 +97,10 @@ public class AppContext {
 	 * @return
 	 */
 	public String getAndroidIMEI() {
-		TelephonyManager telephonyManager = (TelephonyManager) context.getSystemService(
-				Context.TELEPHONY_SERVICE);
-		String imei = telephonyManager.getDeviceId();
-		if (!StringUtils.isEmpty(imei)) {
-			return imei;
-		}
-		return "this_phone_has_no_imei";
+		//TelephonyManager telephonyManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+		//String imei = telephonyManager.getDeviceId();
+
+		return "idonotneedimei";
 	}
 
 	/**

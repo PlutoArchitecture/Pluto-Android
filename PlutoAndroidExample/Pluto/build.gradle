@@ -18,8 +18,8 @@ android {
     defaultConfig {
         minSdkVersion 14
         targetSdkVersion 23
-        versionCode 11
-        versionName "1.2.5"
+        versionCode 12
+        versionName "1.2.6"
         consumerProguardFiles 'proguard-rules.pro'
 
     }
@@ -57,7 +57,7 @@ dependencies {
 
 }
 
-version = "1.2.5"
+version = "1.2.6"
 group = "com.minggo"
 
 bintray {
@@ -73,10 +73,10 @@ bintray {
         publish = true // 是否是公开项目。
 
         version {
-            name = '1.2.5'
+            name = '1.2.6'
             desc = 'High integrated development framework for Android applications.'
             released  = new Date()
-            vcsTag = 'v1.2.5'
+            vcsTag = 'v1.2.6'
             attributes = ['gradle-plugin': 'com.use.less:com.use.less.gradle:gradle-useless-plugin']
         }
     }
