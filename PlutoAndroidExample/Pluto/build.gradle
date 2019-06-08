@@ -18,8 +18,8 @@ android {
     defaultConfig {
         minSdkVersion 14
         targetSdkVersion 23
-        versionCode 12
-        versionName "1.2.6"
+        versionCode 13
+        versionName "1.2.8"
         consumerProguardFiles 'proguard-rules.pro'
 
     }
@@ -57,7 +57,7 @@ dependencies {
 
 }
 
-version = "1.2.6"
+version = "1.2.8"
 group = "com.minggo"
 
 bintray {
@@ -73,10 +73,10 @@ bintray {
         publish = true // 是否是公开项目。
 
         version {
-            name = '1.2.6'
+            name = '1.2.8'
             desc = 'High integrated development framework for Android applications.'
             released  = new Date()
-            vcsTag = 'v1.2.6'
+            vcsTag = 'v1.2.8'
             attributes = ['gradle-plugin': 'com.use.less:com.use.less.gradle:gradle-useless-plugin']
         }
     }
@@ -104,9 +104,9 @@ install {
                 }
                 developers {
                     developer {
-                        id 'youngever'        //填写bintray或者github的用户名
-                        name 'yang'         //姓名，可以是中文
-                        email 'youngman6627@gmail.com'
+                        id 'minggo620'        //填写bintray或者github的用户名
+                        name 'minggo'         //姓名，可以是中文
+                        email 'minggo8en@gmail.com'
                     }
                 }
                 scm {
