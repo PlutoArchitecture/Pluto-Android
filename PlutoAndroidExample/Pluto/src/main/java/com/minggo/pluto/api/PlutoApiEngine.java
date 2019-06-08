@@ -652,6 +652,44 @@ public class PlutoApiEngine {
     }
 
     /**
+     * 紧紧获取网络实时对象
+     *
+     * @param url
+     * @param params
+     * @param clazz
+     * @return
+     */
+    public static <T> T postModelUploadFiles(String url, Map<String, Object> params,Map<String, File> files, Class<T> clazz) {
+        Gson gson = new Gson();
+        T t = null;
+
+        if (!AppContext.isNetworkConnected(AppContext.getInstance().context)) {
+            return t;
+        }
+
+        Result<T> result = null;
+        try {
+            result = (Result<T>) ApiClient.httpPostModel(url, params,files, false);
+        } catch (PlutoException e) {
+            e.printStackTrace();
+        }
+
+        if (result == null) {
+            return t;
+        }
+        if (!result.success || result.content == null) {
+            return t;
+        }
+        try {
+            t = gson.fromJson(gson.toJson(result.content), clazz);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return t;
+    }
+
+    /**
      * 发送纯粹post
      *
      * @param url
@@ -718,5 +756,7 @@ public class PlutoApiEngine {
 
         return t;
     }
+
+
 
 }

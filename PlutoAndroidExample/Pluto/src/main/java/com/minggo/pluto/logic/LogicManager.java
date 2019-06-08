@@ -8,6 +8,7 @@ import com.minggo.pluto.common.CommonAsyncTask;
 import com.minggo.pluto.model.Result;
 import com.minggo.pluto.util.LogUtils;
 
+import java.io.File;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -39,11 +40,12 @@ public class LogicManager extends CommonAsyncTask<Object, Void, Object> {
     private LogicType logicType;
     private NetworkRequestType networkRequestType;
     private Map<String,Object> requestParam;
+    private Map<String,File> files;
 
 
     //根据实际情况后续添加
     public enum LogicType{
-        CACHE_ADVANCE_AND_NETWORK_RETURN,CACHE_EXPIRED_AND_NETWORK_RETURN,ONLY_NETWORK;
+        CACHE_ADVANCE_AND_NETWORK_RETURN,CACHE_EXPIRED_AND_NETWORK_RETURN,ONLY_NETWORK,UPLOALD_FILE;
     }
     public enum NetworkRequestType{
         POST,GET;
@@ -62,6 +64,7 @@ public class LogicManager extends CommonAsyncTask<Object, Void, Object> {
         POST__MODEL__CACHE_ADVANCE_AND_NETWORK_RETURN,
         POST__MODEL__CACHE_EXPIRED_AND_NETWORK_RETURN,
         POST__MODEL__ONLY_NETWORK,
+        POST__MODEL__UPLOALD_FILE,
 
         GET__LIST__CACHE_ADVANCE_AND_NETWORK_RETURN,
         GET__LIST__CACHE_EXPIRED_AND_NETWORK_RETURN,
@@ -144,6 +147,10 @@ public class LogicManager extends CommonAsyncTask<Object, Void, Object> {
         requestParam.put(key,object);
         return this;
     }
+    public LogicManager setFiles(Map<String,File> files){
+        this.files = files;
+        return this;
+    }
 
     public LogicManager setParam(Map<String,Object> param){
         requestParam.putAll(param);
@@ -199,7 +206,11 @@ public class LogicManager extends CommonAsyncTask<Object, Void, Object> {
                 LogUtils.error(TAG,"通过post获取List暂不支持，可以自行扩展");
             }else if (returnDataType == MODEL){
                 if (clazz == Result.class){
-                    return (T) PlutoApiEngine.postResult(url,param);
+                    if (logicType == UPLOALD_FILE){
+                        return (T) PlutoApiEngine.postFilesResult(url,param,files);
+                    }else{
+                        return (T) PlutoApiEngine.postResult(url,param);
+                    }
                 }else {
                     if (logicType == CACHE_ADVANCE_AND_NETWORK_RETURN) {
                         //TODO:以后根据需求添加post
@@ -209,6 +220,8 @@ public class LogicManager extends CommonAsyncTask<Object, Void, Object> {
                     } else if (logicType == CACHE_EXPIRED_AND_NETWORK_RETURN) {
                         //TODO:以后根据需求添加post
                         LogUtils.error(TAG,"通过post获取CACHE_EXPIRED_AND_NETWORK_RETURN暂不支持，可以自行扩展");
+                    }else if (logicType == UPLOALD_FILE){
+                        return (T) PlutoApiEngine.postModelUploadFiles(url, param,files, clazz);
                     }
                 }
             }
