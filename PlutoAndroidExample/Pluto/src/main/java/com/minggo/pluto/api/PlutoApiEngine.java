@@ -644,10 +644,6 @@ public class PlutoApiEngine {
             return null;
         }
 
-        if (!result.success || result.content == null || result.content.equals("")) {
-            return null;
-        }
-
         return result;
     }
 

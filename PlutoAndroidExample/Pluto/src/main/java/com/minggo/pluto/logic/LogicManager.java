@@ -207,7 +207,8 @@ public class LogicManager extends CommonAsyncTask<Object, Void, Object> {
             }else if (returnDataType == MODEL){
                 if (clazz == Result.class){
                     if (logicType == UPLOALD_FILE){
-                        return (T) PlutoApiEngine.postFilesResult(url,param,files);
+                        Result result =PlutoApiEngine.postFilesResult(url,param,files);
+                        return (T) result;
                     }else{
                         return (T) PlutoApiEngine.postResult(url,param);
                     }

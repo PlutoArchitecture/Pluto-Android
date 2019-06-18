@@ -21,6 +21,7 @@ import com.minggo.plutoandroidexample.R;
 import com.minggo.plutoandroidexample.logic.MyParam.LoginParam;
 import com.minggo.plutoandroidexample.logic.MyParam.ServerUrlParam;
 import com.minggo.plutoandroidexample.logic.MyParam.UploadParam;
+import com.minggo.plutoandroidexample.logic.MyParam.UploadPayParam;
 import com.minggo.plutoandroidexample.model.ServerURL;
 import com.minggo.plutoandroidexample.model.User;
 import com.minggo.plutoandroidexample.util.FileUtil;
@@ -133,9 +134,9 @@ public class PlutoAPIEngineExample extends PlutoActivity implements OnClickListe
                     showToast("图文不存在");
                 }
                 files.put("file",file);
-                new LogicManager(mUiHandler, String.class, POST__MODEL__UPLOALD_FILE)
-                        .setParamClass(UploadParam.class)
-                        .setParam("userid", "123456")
+                new LogicManager(mUiHandler, Result.class, POST__MODEL__UPLOALD_FILE)
+                        .setParamClass(UploadPayParam.class)
+                        .setParam("userid", "128cbf8e")
                         .setParam("language", "bod")
                         .setFiles(files)
                         .execute();
@@ -168,6 +169,13 @@ public class PlutoAPIEngineExample extends PlutoActivity implements OnClickListe
                     LogUtils.info(TAG, ">>>>>>username=" + result.content);
                 }
 
+                break;
+            case UploadPayParam.WHAT:
+                if (msg.obj!=null){
+                    showToast("上传返回不为空");
+                }else {
+                    showToast("上传返回为空");
+                }
                 break;
             default:
                 break;
