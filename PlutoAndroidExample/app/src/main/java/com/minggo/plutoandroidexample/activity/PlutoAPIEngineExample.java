@@ -117,8 +117,8 @@ public class PlutoAPIEngineExample extends PlutoActivity implements OnClickListe
                 loadingDialog.show();
                 new LogicManager(mUiHandler, Result.class, GET__MODEL__ONLY_NETWORK)
                         .setParamClass(LoginParam.class)
-                        .setParam(ParamName.PASSWORD, 123456)
-                        .setParam(ParamName.EMAIL, "minggo8en@gmail.com")
+                        .setParam(ParamName.PASSWORD, "a fufw,ui")
+                        .setParam(ParamName.EMAIL, "@or-zjk@mGLTRIRP")
                         .setParam(ApiUrl.PASS, pass)
                         .setArg1(2)
                         .execute();
