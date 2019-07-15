@@ -18,6 +18,7 @@ public class ApiUrl {
 	public final static String VERSIONNAME = "versionName"; // 当前版本名称
 	public final static String VERSIONCODE = "versionCode"; // 当前版本id
 	public final static String TIMESTAMP = "timestamp"; // 请求时间戳
+	public final static String FROM = "from"; // 源于
 	//endregion
 
 	//region 常用参数

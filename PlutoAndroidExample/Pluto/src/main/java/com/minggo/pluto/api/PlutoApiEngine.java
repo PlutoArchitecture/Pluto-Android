@@ -86,6 +86,7 @@ public class PlutoApiEngine {
             params.put(ApiUrl.VERSIONNAME, versionName);
             params.put(ApiUrl.M_VER, URLEncoder.encode(m_ver, "utf-8"));
             params.put(ApiUrl.S_VER, URLEncoder.encode(s_ver, "utf-8"));
+            params.put(ApiUrl.FROM, "app");
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
@@ -137,6 +138,7 @@ public class PlutoApiEngine {
             params.put(ApiUrl.VERSIONNAME, versionName);
             params.put(ApiUrl.M_VER, URLEncoder.encode(m_ver, "utf-8"));
             params.put(ApiUrl.S_VER, URLEncoder.encode(s_ver, "utf-8"));
+            params.put(ApiUrl.FROM, "app");
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
