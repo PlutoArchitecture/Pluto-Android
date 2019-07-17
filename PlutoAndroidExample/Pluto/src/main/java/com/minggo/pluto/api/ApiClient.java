@@ -460,7 +460,13 @@ public class ApiClient {
 
 		GsonBuilder builder = new GsonBuilder();
 		Gson gson = builder.create();
- 		Result result = gson.fromJson(responseBody, Result.class);
+		Result result = null;
+		try {
+			result = gson.fromJson(responseBody, Result.class);
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+
 		return result;
 	}
 
