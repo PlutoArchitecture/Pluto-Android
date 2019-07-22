@@ -109,7 +109,7 @@ public class ApiClient {
 			url.append('&');
 			url.append(name);
 			url.append('=');
-			url.append(URLEncoder.encode(String.valueOf(params.get(name))));
+			url.append(params.get(name));
 		}
 
 		return url.toString().replace("?&", "?");
