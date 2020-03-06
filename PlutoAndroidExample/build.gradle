@@ -3,10 +3,11 @@
 buildscript {
     repositories {
         jcenter()
+        google()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.2.3'
-        classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
+        classpath 'com.android.tools.build:gradle:3.4.2'
+        //classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
         //Gradle Android Maven plugin
         classpath 'com.github.dcendents:android-maven-gradle-plugin:1.4.1'
         //Gradle Bintray Plugin
@@ -17,6 +18,8 @@ buildscript {
 allprojects {
     repositories {
         jcenter()
+        google()
+        maven { url 'https://jitpack.io' }
     }
 }
 

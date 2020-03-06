@@ -3,7 +3,10 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Pluto/Pluto.iml" filepath="$PROJECT_DIR$/Pluto/Pluto.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Pluto-Android1-PlutoAndroidExample.iml" filepath="$PROJECT_DIR$/Pluto-Android1-PlutoAndroidExample.iml" group="PlutoAndroidExample" />
       <module fileurl="file://$PROJECT_DIR$/PlutoAndroidExample.iml" filepath="$PROJECT_DIR$/PlutoAndroidExample.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Pluto/PlutoAndroidExample-Pluto.iml" filepath="$PROJECT_DIR$/Pluto/PlutoAndroidExample-Pluto.iml" group="PlutoAndroidExample/Pluto" />
+      <module fileurl="file://$PROJECT_DIR$/app/PlutoAndroidExample-app.iml" filepath="$PROJECT_DIR$/app/PlutoAndroidExample-app.iml" group="PlutoAndroidExample/app" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>

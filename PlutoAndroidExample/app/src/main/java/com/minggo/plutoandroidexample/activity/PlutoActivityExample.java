@@ -51,7 +51,7 @@ public class PlutoActivityExample extends PlutoActivity implements OnClickListen
         setContentView(R.layout.activity_pluto_example);
         ButterKnife.bind(this);
         calculator = new Calculator();
-        calculator.execute();
+        //calculator.execute();
     }
 
 
@@ -92,7 +92,7 @@ public class PlutoActivityExample extends PlutoActivity implements OnClickListen
 
             default:
 
-                learnTimeTv.setText("learning time "+msg.what+"s");
+                //learnTimeTv.setText("learning time "+msg.what+"s");
                 break;
         }
     }

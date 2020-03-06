@@ -48,8 +48,8 @@ public class ApiClient {
 	public static final String DESC = "descend";
 	public static final String ASC = "ascend";
 
-	private final static int TIMEOUT_CONNECTION = 15000;
-	private final static int TIMEOUT_SOCKET = 15000;
+	private final static int TIMEOUT_CONNECTION = 60000;
+	private final static int TIMEOUT_SOCKET = 60000;
 	private final static int RETRY_TIME = 0;
 
 	private static String appUserAgent;

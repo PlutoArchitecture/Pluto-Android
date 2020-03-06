@@ -23,8 +23,8 @@ ext {
             butterKnife  : "com.jakewharton:butterknife:8.4.0",
             butterknifeCompiler : "com.jakewharton:butterknife-compiler:8.4.0",
             //Bundle注解   代码地址-----> https://github.com/yatatsu/AutoBundle
-            autoBundle   : "com.github.yatatsu:autobundle:3.1.1",
-            autoBundleProcessor : "com.github.yatatsu:autobundle-processor:3.1.1",
+            //autoBundle   : "com.github.yatatsu:autobundle:3.1.1",
+            //autoBundleProcessor : "com.github.yatatsu:autobundle-processor:3.1.1",
             //API网络请求注解库    代码地址-----> https://github.com/square/retrofit
             retrofit     : "com.squareup.retrofit2:retrofit:2.0.1",
             converterGson: "com.squareup.retrofit2:converter-gson:2.0.1",
