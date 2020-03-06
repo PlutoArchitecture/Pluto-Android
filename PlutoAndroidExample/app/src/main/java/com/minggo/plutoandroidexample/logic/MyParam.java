@@ -35,7 +35,7 @@ public class MyParam extends LogicParam {
     public final class UploadPayParam{
 
         public static final int WHAT = 10003;
-        public static final String URL = "http://192.168.0.105:8080/"+"recognition/recognitionPay.action";
+        public static final String URL =  DOMAIN_UPLOAD+"languagerecognition/uploadImgHistory.action";
 
     }
 }

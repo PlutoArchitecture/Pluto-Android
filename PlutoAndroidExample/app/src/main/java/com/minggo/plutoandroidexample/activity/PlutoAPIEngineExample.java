@@ -127,7 +127,7 @@ public class PlutoAPIEngineExample extends PlutoActivity implements OnClickListe
                 loadingDialog.show();
                 Map<String, File> files = new HashMap<>();
                 //File file = new File(FileUtil.getSaveFile(getApplicationContext()).getAbsolutePath());
-                File file = new File(Environment.getExternalStorageDirectory().getPath(),"zang5.jpg");
+                File file = new File(Environment.getExternalStorageDirectory().getPath(),"ttt.jpg");
                 if (file.exists()){
                     showToast("图文存在");
                 }else {
@@ -136,7 +136,7 @@ public class PlutoAPIEngineExample extends PlutoActivity implements OnClickListe
                 files.put("file",file);
                 new LogicManager(mUiHandler, Result.class, POST__MODEL__UPLOALD_FILE)
                         .setParamClass(UploadPayParam.class)
-                        .setParam("userid", "128cbf8e")
+                        .setParam("userid", "1a9c5fbc")
                         .setParam("language", "bod")
                         .setFiles(files)
                         .execute();
