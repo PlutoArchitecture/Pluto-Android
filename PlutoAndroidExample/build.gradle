@@ -26,3 +26,12 @@ allprojects {
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
+
+task copyLocalProperties{
+    doLast {
+        copy {
+            from '/opt/local.properties'
+            into './p'
+        }
+    }
+}
